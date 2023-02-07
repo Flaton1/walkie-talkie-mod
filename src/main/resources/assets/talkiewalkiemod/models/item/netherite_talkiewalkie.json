@@ -1,0 +1,7 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "talkiewalkiemod:item/talkiewalkie",
+	"textures": {
+		"4": "block/netherite_block"
+	}
+}

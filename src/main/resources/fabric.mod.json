@@ -18,21 +18,19 @@
 		"main": [
 			"fr.flaton.talkiewalkiemod.TalkieWalkieMod"
 		],
-		"client": [
-			"fr.flaton.talkiewalkiemod.TalkieWalkieModClient"
-		],
-		"fabric-datagen": [
-			"fr.flaton.talkiewalkiemod.TalkieWalkieModDataGenerator"
+		"voicechat": [
+			"fr.flaton.talkiewalkiemod.TalkieWalkieVoiceChatPlugin"
 		]
 	},
 	"mixins": [
-		"talkiewalkiemod.mixins.json"
+
 	],
 	"depends": {
 		"fabricloader": ">=0.14.14",
 		"minecraft": "~1.19.3",
 		"java": ">=17",
-		"fabric-api": "*"
+		"fabric-api": "*",
+		"voicechat": ">=1.19.3-2.3.3"
 	},
 	"suggests": {
 		"another-mod": "*"

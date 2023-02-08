@@ -12,11 +12,12 @@ import net.minecraft.util.Identifier;
 
 public class ModItems {
 
-    public static final Item WOODEN_TALKIEWALKIE = registerItem("wooden_talkiewalkie", new TalkieWalkieItem(new FabricItemSettings().maxCount(1), 128));
-    public static final Item STONE_TALKIEWALKIE = registerItem("stone_talkiewalkie", new TalkieWalkieItem(new FabricItemSettings().maxCount(1), 256));
-    public static final Item IRON_TALKIEWALKIE = registerItem("iron_talkiewalkie", new TalkieWalkieItem(new FabricItemSettings().maxCount(1), 512));
-    public static final Item DIAMOND_TALKIEWALKIE = registerItem("diamond_talkiewalkie", new TalkieWalkieItem(new FabricItemSettings().maxCount(1), 1024));
-    public static final Item NETHERITE_TALKIEWALKIE = registerItem("netherite_talkiewalkie", new TalkieWalkieItem(new FabricItemSettings().maxCount(1).fireproof(), 2048));
+    public static final Item WOODEN_TALKIEWALKIE = registerItem("wooden_talkiewalkie", new TalkieWalkieItem(new FabricItemSettings().maxCount(1)));
+    public static final Item STONE_TALKIEWALKIE = registerItem("stone_talkiewalkie", new TalkieWalkieItem(new FabricItemSettings().maxCount(1)));
+    public static final Item IRON_TALKIEWALKIE = registerItem("iron_talkiewalkie", new TalkieWalkieItem(new FabricItemSettings().maxCount(1)));
+    public static final Item DIAMOND_TALKIEWALKIE = registerItem("diamond_talkiewalkie", new TalkieWalkieItem(new FabricItemSettings().maxCount(1)));
+    public static final Item NETHERITE_TALKIEWALKIE = registerItem("netherite_talkiewalkie", new TalkieWalkieItem(new FabricItemSettings().maxCount(1).fireproof()));
+
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(TalkieWalkieMod.MOD_ID, name), item);

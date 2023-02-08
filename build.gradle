@@ -17,6 +17,27 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
+
+	// SimpleVoiceChat repositories
+	maven { url = 'https://maven.maxhenkel.de/repository/public' }
+
+
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = "Modrinth"
+				url = "https://api.modrinth.com/maven"
+			}
+		}
+		filter {
+			includeGroup "maven.modrinth"
+		}
+
+		maven {
+			name = "CottonMC"
+			url = "https://server.bbkr.space/artifactory/libs-release"
+		}
+	}
 }
 
 loom {
@@ -57,6 +78,14 @@ dependencies {
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
 
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
+
+	// SimpleVoiceChat dependencies
+	implementation "de.maxhenkel.voicechat:voicechat-api:${voicechat_api_version}"
+
+	modRuntimeOnly "maven.modrinth:simple-voice-chat:fabric-${voicechat_version}"
+
+	// LibGui
+	modImplementation include("io.github.cottonmc:LibGui:${libgui_version}")
 }
 
 processResources {

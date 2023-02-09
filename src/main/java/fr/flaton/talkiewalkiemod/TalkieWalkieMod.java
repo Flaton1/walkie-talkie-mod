@@ -1,6 +1,7 @@
 package fr.flaton.talkiewalkiemod;
 
 import fr.flaton.talkiewalkiemod.item.ModItems;
+import fr.flaton.talkiewalkiemod.networking.ModMessages;
 import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.item.Item;
@@ -30,6 +31,7 @@ public class TalkieWalkieMod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ModItems.registerModItems();
+		ModMessages.registerC2SPackets();
 
 
 	}

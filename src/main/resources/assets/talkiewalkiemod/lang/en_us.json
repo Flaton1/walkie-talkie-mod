@@ -3,5 +3,7 @@
   "item.talkiewalkiemod.stone_talkiewalkie": "Stone Talkie Walkie",
   "item.talkiewalkiemod.iron_talkiewalkie": "Iron Talkie Walkie",
   "item.talkiewalkiemod.diamond_talkiewalkie": "Diamond Talkie Walkie",
-  "item.talkiewalkiemod.netherite_talkiewalkie": "Netherite Talkie Walkie"
+  "item.talkiewalkiemod.netherite_talkiewalkie": "Netherite Talkie Walkie",
+
+  "gui.talkiewalkiemod.label": "Talkie Walkie"
 }

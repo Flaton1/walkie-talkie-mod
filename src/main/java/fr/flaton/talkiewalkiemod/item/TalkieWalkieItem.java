@@ -24,36 +24,22 @@ public class TalkieWalkieItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
 
         if (world.isClient()) {
-            MinecraftClient.getInstance().setScreen(new TalkieWalkieScreen(Text.translatable(""),new TalkieWalkieGui()));
+            if (user.getStackInHand(hand).hasNbt() && user.isSneaking()) {
+                MinecraftClient.getInstance().setScreen(new TalkieWalkieScreen(Text.translatable(""),new TalkieWalkieGui(user.getStackInHand(hand))));
+            }
+
         }
-
-
-
 
         if (!world.isClient()) {
 
-
-            if (user.getStackInHand(hand).hasNbt()) {
+            if (user.getStackInHand(hand).hasNbt() && !user.isSneaking()) {
 
                 NbtCompound nbtCompound = new NbtCompound();
                 nbtCompound.copyFrom(user.getStackInHand(hand).getNbt());
 
-                if (!user.isSneaking()) {
-                    nbtCompound.putBoolean("talkiewalkiemod.activate", !(nbtCompound.getBoolean("talkiewalkiemod.activate")));
-                } else {
-                    int canal = nbtCompound.getInt("talkiewalkiemod.canal");
+                nbtCompound.putBoolean("talkiewalkiemod.mute", !(nbtCompound.getBoolean("talkiewalkiemod.mute")));
 
-                    if (canal >= 16) {
-                        canal = 1;
-                    } else {
-                        canal ++;
-                    }
-
-                    nbtCompound.putInt("talkiewalkiemod.canal", canal);
-
-                }
-
-                user.sendMessage(Text.literal(nbtCompound.toString()), true);
+                user.sendMessage(Text.literal("Mute : "+ nbtCompound.getBoolean("talkiewalkiemod.mute")), true);
 
                 user.getStackInHand(hand).setNbt(nbtCompound);
 
@@ -72,6 +58,7 @@ public class TalkieWalkieItem extends Item {
         if (!stack.hasNbt()) {
             NbtCompound nbtCompound = new NbtCompound();
             nbtCompound.putBoolean("talkiewalkiemod.activate", false);
+            nbtCompound.putBoolean("talkiewalkiemod.mute", false);
             nbtCompound.putInt("talkiewalkiemod.canal", 1);
             stack.setNbt(nbtCompound);
         }

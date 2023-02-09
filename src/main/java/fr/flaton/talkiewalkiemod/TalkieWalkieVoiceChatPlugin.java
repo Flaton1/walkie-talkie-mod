@@ -34,7 +34,11 @@ public class TalkieWalkieVoiceChatPlugin implements VoicechatPlugin {
             return;
         }
 
-        if (!hasTalkieWalkieActivate(senderPlayer)) {
+        if (!hasTalkieWalkieNotActivate(senderPlayer)) {
+            return;
+        }
+
+        if (hasTalkieWalkieMute(senderPlayer)) {
             return;
         }
 
@@ -51,7 +55,7 @@ public class TalkieWalkieVoiceChatPlugin implements VoicechatPlugin {
                 continue;
             }
 
-            if (!hasTalkieWalkieActivate(receiverPlayer)) {
+            if (hasTalkieWalkieNotActivate(receiverPlayer)) {
                 continue;
             }
 
@@ -99,7 +103,7 @@ public class TalkieWalkieVoiceChatPlugin implements VoicechatPlugin {
         return canal;
     }
 
-    private boolean hasTalkieWalkieActivate(PlayerEntity player) {
+    private boolean hasTalkieWalkieNotActivate(PlayerEntity player) {
 
         Map<Item, Integer> rangeMap = TalkieWalkieMod.RANGE_MAP;
 
@@ -109,9 +113,25 @@ public class TalkieWalkieVoiceChatPlugin implements VoicechatPlugin {
             if (!rangeMap.containsKey(item) || !itemStack.hasNbt() || !Objects.requireNonNull(itemStack.getNbt()).getBoolean("talkiewalkiemod.activate")) {
                 continue;
             }
-            return true;
+            return false;
 
             }
+        return true;
+    }
+
+    private boolean hasTalkieWalkieMute(PlayerEntity player) {
+
+        Map<Item, Integer> rangeMap = TalkieWalkieMod.RANGE_MAP;
+
+        for (ItemStack itemStack : player.getInventory().main) {
+            Item item = itemStack.getItem();
+
+            if (!rangeMap.containsKey(item) || !itemStack.hasNbt() || !Objects.requireNonNull(itemStack.getNbt()).getBoolean("talkiewalkiemod.mute")) {
+                continue;
+            }
+            return true;
+
+        }
         return false;
     }
 
@@ -124,7 +144,7 @@ public class TalkieWalkieVoiceChatPlugin implements VoicechatPlugin {
         for (ItemStack itemStack : player.getInventory().main) {
             Item item = itemStack.getItem();
 
-            if (!rangeMap.containsKey(item) || !itemStack.hasNbt() || !Objects.requireNonNull(itemStack.getNbt()).getBoolean("talkiewalkiemod.activate")) {
+            if (!rangeMap.containsKey(item) || !itemStack.hasNbt() || !Objects.requireNonNull(itemStack.getNbt()).getBoolean("talkiewalkiemod.activate") || Objects.requireNonNull(itemStack.getNbt()).getBoolean("talkiewalkiemod.mute")) {
                 continue;
             }
             int itemRange = rangeMap.get(item);

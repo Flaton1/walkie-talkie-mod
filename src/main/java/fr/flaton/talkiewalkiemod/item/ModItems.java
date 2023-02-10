@@ -18,7 +18,6 @@ public class ModItems {
     public static final Item DIAMOND_TALKIEWALKIE = registerItem("diamond_talkiewalkie", new TalkieWalkieItem(new FabricItemSettings().maxCount(1)));
     public static final Item NETHERITE_TALKIEWALKIE = registerItem("netherite_talkiewalkie", new TalkieWalkieItem(new FabricItemSettings().maxCount(1).fireproof()));
 
-
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(TalkieWalkieMod.MOD_ID, name), item);
     }

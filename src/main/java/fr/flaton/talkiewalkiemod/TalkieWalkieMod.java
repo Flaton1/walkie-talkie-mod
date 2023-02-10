@@ -17,10 +17,6 @@ public class TalkieWalkieMod implements ModInitializer {
 
 	public static  Map<Item, Integer> RANGE_MAP = new HashMap<>();
 
-
-
-
-
 	@Override
 	public void onInitialize() {
 		ModItems.registerModItems();

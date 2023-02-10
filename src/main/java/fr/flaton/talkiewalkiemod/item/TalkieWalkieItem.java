@@ -17,7 +17,6 @@ public class TalkieWalkieItem extends Item {
         super(settings);
     }
 
-
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
 

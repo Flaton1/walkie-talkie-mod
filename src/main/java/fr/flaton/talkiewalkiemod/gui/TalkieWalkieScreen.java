@@ -12,9 +12,6 @@ public class TalkieWalkieScreen extends CottonClientScreen {
     }
 
     public TalkieWalkieScreen(GuiDescription description) {
-
-
-
         super(description);
     }
 }

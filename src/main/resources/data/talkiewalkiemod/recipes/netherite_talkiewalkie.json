@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "talkiewalkiemod:diamond_talkiewalkie"
+  },
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "result": {
+    "item": "talkiewalkiemod:netherite_talkiewalkie"
+  }
+}

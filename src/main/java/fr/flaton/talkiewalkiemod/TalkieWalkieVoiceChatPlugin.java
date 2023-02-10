@@ -5,6 +5,7 @@ import de.maxhenkel.voicechat.api.VoicechatPlugin;
 import de.maxhenkel.voicechat.api.VoicechatServerApi;
 import de.maxhenkel.voicechat.api.events.EventRegistration;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
+import de.maxhenkel.voicechat.api.packets.StaticSoundPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,6 +14,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class TalkieWalkieVoiceChatPlugin implements VoicechatPlugin {
+
     @Override
     public String getPluginId() {
         return TalkieWalkieMod.MOD_ID;
@@ -34,7 +36,7 @@ public class TalkieWalkieVoiceChatPlugin implements VoicechatPlugin {
             return;
         }
 
-        if (!hasTalkieWalkieNotActivate(senderPlayer)) {
+        if (hasTalkieWalkieNotActivate(senderPlayer)) {
             return;
         }
 
@@ -73,7 +75,10 @@ public class TalkieWalkieVoiceChatPlugin implements VoicechatPlugin {
             if (connection == null) {
                 continue;
             }
-            api.sendStaticSoundPacketTo(connection, event.getPacket().toStaticSoundPacket());
+
+            StaticSoundPacket packet = event.getPacket().toStaticSoundPacket();
+
+            api.sendStaticSoundPacketTo(connection, packet);
 
 
         }
@@ -113,6 +118,7 @@ public class TalkieWalkieVoiceChatPlugin implements VoicechatPlugin {
             if (!rangeMap.containsKey(item) || !itemStack.hasNbt() || !Objects.requireNonNull(itemStack.getNbt()).getBoolean("talkiewalkiemod.activate")) {
                 continue;
             }
+
             return false;
 
             }

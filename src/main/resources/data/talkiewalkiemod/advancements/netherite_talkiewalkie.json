@@ -1,0 +1,34 @@
+{
+  "display": {
+    "icon": {
+      "item": "talkiewalkiemod:netherite_talkiewalkie"
+    },
+    "title": {
+      "translate": "advancement.talkiewalkiemod.netherite_talkiewalkie.title"
+    },
+    "description": {
+      "translate": "advancement.talkiewalkiemod.netherite_talkiewalkie.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "talkiewalkiemod:diamond_talkiewalkie",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "talkiewalkiemod:netherite_talkiewalkie"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 100
+  }
+}

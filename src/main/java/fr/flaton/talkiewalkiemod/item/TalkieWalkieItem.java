@@ -1,8 +1,6 @@
 package fr.flaton.talkiewalkiemod.item;
 
-import fr.flaton.talkiewalkiemod.gui.TalkieWalkieGui;
 import fr.flaton.talkiewalkiemod.gui.TalkieWalkieScreen;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -25,7 +23,7 @@ public class TalkieWalkieItem extends Item {
 
         if (world.isClient()) {
             if (user.getStackInHand(hand).hasNbt() && user.isSneaking()) {
-                MinecraftClient.getInstance().setScreen(new TalkieWalkieScreen(Text.translatable(""),new TalkieWalkieGui(user.getStackInHand(hand))));
+                TalkieWalkieScreen.setScreen(user.getStackInHand(hand));
             }
 
         }

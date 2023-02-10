@@ -16,13 +16,6 @@ public class TalkieWalkieMod implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	public static  Map<Item, Integer> RANGE_MAP = new HashMap<>();
-	static {
-		RANGE_MAP.put(ModItems.WOODEN_TALKIEWALKIE, 128);
-		RANGE_MAP.put(ModItems.STONE_TALKIEWALKIE, 256);
-		RANGE_MAP.put(ModItems.IRON_TALKIEWALKIE, 512);
-		RANGE_MAP.put(ModItems.DIAMOND_TALKIEWALKIE, 1024);
-		RANGE_MAP.put(ModItems.NETHERITE_TALKIEWALKIE, 2048);
-	}
 
 
 
@@ -33,6 +26,12 @@ public class TalkieWalkieMod implements ModInitializer {
 		ModItems.registerModItems();
 		ModMessages.registerC2SPackets();
 
+
+		RANGE_MAP.put(ModItems.WOODEN_TALKIEWALKIE, 128);
+		RANGE_MAP.put(ModItems.STONE_TALKIEWALKIE, 256);
+		RANGE_MAP.put(ModItems.IRON_TALKIEWALKIE, 512);
+		RANGE_MAP.put(ModItems.DIAMOND_TALKIEWALKIE, 1024);
+		RANGE_MAP.put(ModItems.NETHERITE_TALKIEWALKIE, 2048);
 
 	}
 }

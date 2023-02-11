@@ -1,0 +1,27 @@
+{
+  "item.walkietalkiemod.wooden_walkietalkie": "Talkie-Walkie en bois",
+  "item.walkietalkiemod.stone_walkietalkie": "Talkie-Walkie en pierre",
+  "item.walkietalkiemod.iron_walkietalkie": "Talkie-Walkie en fer",
+  "item.walkietalkiemod.diamond_walkietalkie": "Talkie-Walkie en diamant",
+  "item.walkietalkiemod.netherite_walkietalkie": "Talkie-Walkie en Netherite",
+
+  "gui.walkietalkiemod.label": "Talkie-Walkie",
+
+  "advancement.walkietalkiemod.root.title": "Talkie-Walkie",
+  "advancement.walkietalkiemod.root.description": "Découvrez la puissance de la communication grâce au talkie-walkie.",
+
+  "advancement.walkietalkiemod.wooden_walkietalkie.title": "Communication basique",
+  "advancement.walkietalkiemod.wooden_walkietalkie.description": "Obtenez un talkie-walkie en bois, permettant de communiquer à courte distance.",
+
+  "advancement.walkietalkiemod.stone_walkietalkie.title": "Communication améliorée",
+  "advancement.walkietalkiemod.stone_walkietalkie.description": "Obtenez un talkie-walkie en pierre, permettant une meilleure portée de communication.",
+
+  "advancement.walkietalkiemod.iron_walkietalkie.title": "Communication avancée",
+  "advancement.walkietalkiemod.iron_walkietalkie.description": "Obtenez un talkie-walkie en fer, augmentant encore plus la portée de communication.",
+
+  "advancement.walkietalkiemod.diamond_walkietalkie.title": "Communication élite",
+  "advancement.walkietalkiemod.diamond_walkietalkie.description": "Obtenez un talkie-walkie haut de gamme en diamant, permettant une communication fluide à distance.",
+
+  "advancement.walkietalkiemod.netherite_walkietalkie.title": "Communication ultime",
+  "advancement.walkietalkiemod.netherite_walkietalkie.description": "Obtenez un talkie-walkie de pointe en Netherite, offrant une portée de communication sans précédent."
+}

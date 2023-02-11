@@ -48,7 +48,7 @@ loom {
             name "Data Generation"
             vmArg "-Dfabric-api.datagen"
             vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
-            vmArg "-Dfabric-api.datagen.modid=talkiewalkiemod"
+            vmArg "-Dfabric-api.datagen.modid=walkietalkiemod"
  
             runDir "build/datagen"
         }

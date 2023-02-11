@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "blu",
+    "bru",
+    "buu"
+  ],
+  "key": {
+    "u": {
+      "item": "minecraft:diamond"
+    },
+    "r": {
+      "item": "minecraft:redstone_block"
+    },
+    "l": {
+      "item": "minecraft:lightning_rod"
+    },
+    "b":{
+      "item": "minecraft:stone_button"
+    }
+  },
+  "result": {
+    "item": "walkietalkiemod:diamond_walkietalkie"
+  }
+}

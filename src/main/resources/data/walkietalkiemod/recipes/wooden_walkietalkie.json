@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "blu",
+    "bru",
+    "buu"
+  ],
+  "key": {
+    "u": {
+      "tag": "minecraft:planks"
+    },
+    "r": {
+      "item": "minecraft:redstone_block"
+    },
+    "l": {
+      "item": "minecraft:lightning_rod"
+    },
+    "b":{
+      "tag": "minecraft:wooden_buttons"
+    }
+  },
+  "result": {
+    "item": "walkietalkiemod:wooden_walkietalkie"
+  }
+}

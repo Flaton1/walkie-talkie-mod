@@ -1,4 +1,4 @@
-# walkie-talkie-mod
+# Walkie Talkie Mod Minecraft
 This mod adds walkie-talkies with different upgrades.
 
 This mod requires [Simple Voice Chat](https://modrinth.com/plugin/simple-voice-chat) on both the client and the server.

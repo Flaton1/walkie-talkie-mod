@@ -12,8 +12,16 @@ import net.minecraft.world.World;
 
 public class WalkieTalkieItem extends Item {
 
-    public WalkieTalkieItem(Settings settings) {
+
+    public int getRange() {
+        return RANGE;
+    }
+
+    private final int RANGE;
+
+    public WalkieTalkieItem(Settings settings, int range) {
         super(settings);
+        RANGE = range;
     }
 
     @Override

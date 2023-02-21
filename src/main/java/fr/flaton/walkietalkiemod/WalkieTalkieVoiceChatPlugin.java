@@ -7,11 +7,10 @@ import de.maxhenkel.voicechat.api.events.EventRegistration;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import de.maxhenkel.voicechat.api.packets.StaticSoundPacket;
 import fr.flaton.walkietalkiemod.item.ModItems;
+import fr.flaton.walkietalkiemod.item.WalkieTalkieItem;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import java.util.Map;
 import java.util.Objects;
 
 public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
@@ -85,86 +84,49 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
         }
     }
 
-    private int getCanal(PlayerEntity player) {
+    private ItemStack getWalkieTalkieItemStack(PlayerEntity player) {
 
-        Map<Item, Integer> rangeMap = WalkieTalkieMod.RANGE_MAP;
+        ItemStack itemStack = null;
 
         int range = 0;
-        int canal = 1;
 
-        for (ItemStack itemStack : player.getInventory().main) {
-            Item item = itemStack.getItem();
+        for (ItemStack item : player.getInventory().main) {
 
-            if (!rangeMap.containsKey(item) || !itemStack.hasNbt() || !Objects.requireNonNull(itemStack.getNbt()).getBoolean(ModItems.NBT_KEY_WALKIETALKIE_ACTIVATE)) {
-                continue;
+            if (item.getItem().getClass().equals(WalkieTalkieItem.class) && item.hasNbt()) {
+
+                WalkieTalkieItem walkieTalkieItem = (WalkieTalkieItem) Objects.requireNonNull(getWalkieTalkieItemStack(player)).getItem();
+
+                if (walkieTalkieItem.getRange() > range) {
+                    itemStack = item;
+                    range = walkieTalkieItem.getRange();
+                }
             }
-            int itemRange = rangeMap.get(item);
-            if (itemRange > range) {
-                range = itemRange;
-                canal = itemStack.getNbt().getInt(ModItems.NBT_KEY_WALKIETALKIE_CANAL);
-            }
-
+            
         }
 
-        return canal;
+        return itemStack;
+
     }
 
     private boolean hasWalkieTalkieNotActivate(PlayerEntity player) {
 
-        Map<Item, Integer> rangeMap = WalkieTalkieMod.RANGE_MAP;
+        if (getWalkieTalkieItemStack(player) == null) {
+            return true;
+        }
 
-        for (ItemStack itemStack : player.getInventory().main) {
-            Item item = itemStack.getItem();
-
-            if (!rangeMap.containsKey(item) || !itemStack.hasNbt() ||
-                    !Objects.requireNonNull(itemStack.getNbt()).getBoolean(ModItems.NBT_KEY_WALKIETALKIE_ACTIVATE)) {
-                continue;
-            }
-
-            return false;
-
-            }
-        return true;
+        return !Objects.requireNonNull(Objects.requireNonNull(getWalkieTalkieItemStack(player)).getNbt()).getBoolean(ModItems.NBT_KEY_WALKIETALKIE_ACTIVATE);
     }
 
-    private boolean hasWalkieTalkieMute(PlayerEntity player) {
-
-        Map<Item, Integer> rangeMap = WalkieTalkieMod.RANGE_MAP;
-
-        for (ItemStack itemStack : player.getInventory().main) {
-            Item item = itemStack.getItem();
-
-            if (!rangeMap.containsKey(item) || !itemStack.hasNbt() ||
-                    !Objects.requireNonNull(itemStack.getNbt()).getBoolean(ModItems.NBT_KEY_WALKIETALKIE_MUTE)) {
-                continue;
-            }
-            return true;
-
-        }
-        return false;
+    private int getCanal(PlayerEntity player) {
+        return Objects.requireNonNull(Objects.requireNonNull(getWalkieTalkieItemStack(player)).getNbt()).getInt(ModItems.NBT_KEY_WALKIETALKIE_CANAL);
     }
 
     private int getRange(PlayerEntity player) {
+        WalkieTalkieItem item = (WalkieTalkieItem) Objects.requireNonNull(getWalkieTalkieItemStack(player)).getItem();
+        return item.getRange();
+    }
 
-        Map<Item, Integer> rangeMap = WalkieTalkieMod.RANGE_MAP;
-
-        int range = 0;
-
-        for (ItemStack itemStack : player.getInventory().main) {
-            Item item = itemStack.getItem();
-
-            if (!rangeMap.containsKey(item) || !itemStack.hasNbt() ||
-                    !Objects.requireNonNull(itemStack.getNbt()).getBoolean(ModItems.NBT_KEY_WALKIETALKIE_ACTIVATE) ||
-                    Objects.requireNonNull(itemStack.getNbt()).getBoolean(ModItems.NBT_KEY_WALKIETALKIE_MUTE)) {
-                continue;
-            }
-            int itemRange = rangeMap.get(item);
-            if (itemRange > range) {
-                range = itemRange;
-            }
-
-        }
-
-        return range;
+    private boolean hasWalkieTalkieMute(PlayerEntity player) {
+        return Objects.requireNonNull(Objects.requireNonNull(getWalkieTalkieItemStack(player)).getNbt()).getBoolean(ModItems.NBT_KEY_WALKIETALKIE_MUTE);
     }
 }

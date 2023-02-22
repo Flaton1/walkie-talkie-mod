@@ -39,6 +39,7 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
             return;
         }
 
+
         if (hasWalkieTalkieMute(senderPlayer)) {
             return;
         }
@@ -48,9 +49,9 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
         VoicechatServerApi api = event.getVoicechat();
 
-        for (PlayerEntity receiverPlayer : Objects.requireNonNull(senderPlayer.getServer()).getPlayerManager().getPlayerList()) {
 
-            int receiverCanal = getCanal(receiverPlayer);
+
+        for (PlayerEntity receiverPlayer : Objects.requireNonNull(senderPlayer.getServer()).getPlayerManager().getPlayerList()) {
 
             if (receiverPlayer.getUuid().equals(senderPlayer.getUuid())) {
                 continue;
@@ -63,6 +64,9 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
             if (!receiverPlayer.getPos().isInRange(senderPlayer.getPos(), senderRange)) {
                 continue;
             }
+
+            int receiverCanal = getCanal(receiverPlayer);
+
 
             if (receiverCanal != senderCanal) {
                 continue;
@@ -93,7 +97,11 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
             if (item.getItem().getClass().equals(WalkieTalkieItem.class) && item.hasNbt()) {
 
-                WalkieTalkieItem walkieTalkieItem = (WalkieTalkieItem) Objects.requireNonNull(getWalkieTalkieItemStack(player)).getItem();
+                WalkieTalkieItem walkieTalkieItem = (WalkieTalkieItem) Objects.requireNonNull(item.getItem());
+
+                if (!Objects.requireNonNull(item.getNbt()).getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE)) {
+                    continue;
+                }
 
                 if (walkieTalkieItem.getRange() > range) {
                     itemStack = item;

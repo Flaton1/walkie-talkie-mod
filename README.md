@@ -7,6 +7,13 @@
 > for support.** I'll try to provide support as soon as possible but there is no guarantee for how long it will take.
 <!-- prettier-ignore-end -->
 
+<!-- prettier-ignore-start -->
+> **Note**
+>
+> This is not an official addon. **Please don't go to the Simple Voice Chat discord server for support! Instead, please use [GitHub issues](https://github.com/Flaton1/walkie-talkie-mod/issues)
+> for support.** I'll try to provide support as soon as possible but there is no guarantee for how long it will take.
+<!-- prettier-ignore-end -->
+
 This mod adds walkie-talkies with different upgrades.
 
 This mod requires [Simple Voice Chat](https://modrinth.com/plugin/simple-voice-chat) on both the client and the server.

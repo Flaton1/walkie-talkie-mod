@@ -10,8 +10,8 @@ import fr.flaton.walkietalkiemod.item.WalkieTalkieItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.collection.DefaultedList;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
@@ -95,7 +95,10 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
         PlayerInventory playerInventory = player.getInventory();
 
-        DefaultedList<ItemStack> inventory = playerInventory.main;
+
+
+        ArrayList<ItemStack> inventory = new ArrayList<>();
+        inventory.addAll(playerInventory.main);
         inventory.addAll(playerInventory.armor);
         inventory.addAll(playerInventory.offHand);
 

@@ -12,12 +12,15 @@ import net.minecraft.world.World;
 
 public class WalkieTalkieItem extends Item {
 
-
     public int getRange() {
         return RANGE;
     }
-
     private final int RANGE;
+
+    public static final String NBT_KEY_CANAL = "walkietalkiemod.canal";
+    public static final String NBT_KEY_MUTE = "walkietalkiemod.mute";
+    public static final String NBT_KEY_ACTIVATE = "walkietalkiemod.activate";
+
 
     public WalkieTalkieItem(Settings settings, int range) {
         super(settings);
@@ -45,9 +48,9 @@ public class WalkieTalkieItem extends Item {
 
         if (!stack.hasNbt()) {
             NbtCompound nbtCompound = new NbtCompound();
-            nbtCompound.putBoolean(ModItems.NBT_KEY_WALKIETALKIE_ACTIVATE, false);
-            nbtCompound.putBoolean(ModItems.NBT_KEY_WALKIETALKIE_MUTE, false);
-            nbtCompound.putInt(ModItems.NBT_KEY_WALKIETALKIE_CANAL, 1);
+            nbtCompound.putBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE, false);
+            nbtCompound.putBoolean(WalkieTalkieItem.NBT_KEY_MUTE, false);
+            nbtCompound.putInt(WalkieTalkieItem.NBT_KEY_CANAL, 1);
             stack.setNbt(nbtCompound);
         }
 

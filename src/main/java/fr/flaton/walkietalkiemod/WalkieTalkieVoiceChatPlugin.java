@@ -6,7 +6,6 @@ import de.maxhenkel.voicechat.api.VoicechatServerApi;
 import de.maxhenkel.voicechat.api.events.EventRegistration;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import de.maxhenkel.voicechat.api.packets.StaticSoundPacket;
-import fr.flaton.walkietalkiemod.item.ModItems;
 import fr.flaton.walkietalkiemod.item.WalkieTalkieItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -114,11 +113,11 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
             return true;
         }
 
-        return !Objects.requireNonNull(Objects.requireNonNull(getWalkieTalkieItemStack(player)).getNbt()).getBoolean(ModItems.NBT_KEY_WALKIETALKIE_ACTIVATE);
+        return !Objects.requireNonNull(Objects.requireNonNull(getWalkieTalkieItemStack(player)).getNbt()).getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE);
     }
 
     private int getCanal(PlayerEntity player) {
-        return Objects.requireNonNull(Objects.requireNonNull(getWalkieTalkieItemStack(player)).getNbt()).getInt(ModItems.NBT_KEY_WALKIETALKIE_CANAL);
+        return Objects.requireNonNull(Objects.requireNonNull(getWalkieTalkieItemStack(player)).getNbt()).getInt(WalkieTalkieItem.NBT_KEY_CANAL);
     }
 
     private int getRange(PlayerEntity player) {
@@ -127,6 +126,6 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
     }
 
     private boolean hasWalkieTalkieMute(PlayerEntity player) {
-        return Objects.requireNonNull(Objects.requireNonNull(getWalkieTalkieItemStack(player)).getNbt()).getBoolean(ModItems.NBT_KEY_WALKIETALKIE_MUTE);
+        return Objects.requireNonNull(Objects.requireNonNull(getWalkieTalkieItemStack(player)).getNbt()).getBoolean(WalkieTalkieItem.NBT_KEY_MUTE);
     }
 }

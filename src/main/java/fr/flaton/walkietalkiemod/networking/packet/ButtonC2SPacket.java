@@ -1,6 +1,5 @@
 package fr.flaton.walkietalkiemod.networking.packet;
 
-import fr.flaton.walkietalkiemod.item.ModItems;
 import fr.flaton.walkietalkiemod.item.WalkieTalkieItem;
 import fr.flaton.walkietalkiemod.networking.ModMessages;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -33,24 +32,24 @@ public class ButtonC2SPacket {
 
         switch (buttonId) {
             case 1 -> {
-                int canal = Objects.requireNonNull(itemStack.getNbt()).getInt(ModItems.NBT_KEY_WALKIETALKIE_CANAL);
+                int canal = Objects.requireNonNull(itemStack.getNbt()).getInt(WalkieTalkieItem.NBT_KEY_CANAL);
                 if (canal <= 1) {
-                    nbtCompound.putInt(ModItems.NBT_KEY_WALKIETALKIE_CANAL, 16);
+                    nbtCompound.putInt(WalkieTalkieItem.NBT_KEY_CANAL, 16);
                 } else {
-                    nbtCompound.putInt(ModItems.NBT_KEY_WALKIETALKIE_CANAL, canal -1);
+                    nbtCompound.putInt(WalkieTalkieItem.NBT_KEY_CANAL, canal -1);
                 }
             }
             case 2 -> {
-                int canal = Objects.requireNonNull(itemStack.getNbt()).getInt(ModItems.NBT_KEY_WALKIETALKIE_CANAL);
+                int canal = Objects.requireNonNull(itemStack.getNbt()).getInt(WalkieTalkieItem.NBT_KEY_CANAL);
                 if (canal >= 16) {
-                    nbtCompound.putInt(ModItems.NBT_KEY_WALKIETALKIE_CANAL, 1);
+                    nbtCompound.putInt(WalkieTalkieItem.NBT_KEY_CANAL, 1);
                 } else {
-                    nbtCompound.putInt(ModItems.NBT_KEY_WALKIETALKIE_CANAL, canal + 1);
+                    nbtCompound.putInt(WalkieTalkieItem.NBT_KEY_CANAL, canal + 1);
                 }
             }
 
-            case 3 -> nbtCompound.putBoolean(ModItems.NBT_KEY_WALKIETALKIE_MUTE, !(nbtCompound.getBoolean(ModItems.NBT_KEY_WALKIETALKIE_MUTE)));
-            case 4 -> nbtCompound.putBoolean(ModItems.NBT_KEY_WALKIETALKIE_ACTIVATE, !(nbtCompound.getBoolean(ModItems.NBT_KEY_WALKIETALKIE_ACTIVATE)));
+            case 3 -> nbtCompound.putBoolean(WalkieTalkieItem.NBT_KEY_MUTE, !(nbtCompound.getBoolean(WalkieTalkieItem.NBT_KEY_MUTE)));
+            case 4 -> nbtCompound.putBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE, !(nbtCompound.getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE)));
 
             default -> throw new IllegalStateException("Unexpected value: " + buttonId);
         }
@@ -59,9 +58,9 @@ public class ButtonC2SPacket {
 
 
         PacketByteBuf packet = PacketByteBufs.create();
-        packet.writeInt(nbtCompound.getInt(ModItems.NBT_KEY_WALKIETALKIE_CANAL));
-        packet.writeBoolean(nbtCompound.getBoolean(ModItems.NBT_KEY_WALKIETALKIE_MUTE));
-        packet.writeBoolean(nbtCompound.getBoolean(ModItems.NBT_KEY_WALKIETALKIE_ACTIVATE));
+        packet.writeInt(nbtCompound.getInt(WalkieTalkieItem.NBT_KEY_CANAL));
+        packet.writeBoolean(nbtCompound.getBoolean(WalkieTalkieItem.NBT_KEY_MUTE));
+        packet.writeBoolean(nbtCompound.getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE));
 
         responseSender.sendPacket(ModMessages.BUTTON_PRESSED_RESPONSE, packet);
 

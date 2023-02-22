@@ -19,9 +19,6 @@ public class ModItems {
     public static final Item NETHERITE_WALKIETALKIE = registerItem("netherite_walkietalkie", new WalkieTalkieItem(new FabricItemSettings().maxCount(1).fireproof(), 2048));
 
 
-    public static final String NBT_KEY_WALKIETALKIE_CANAL = "walkietalkiemod.canal";
-    public static final String NBT_KEY_WALKIETALKIE_MUTE = "walkietalkiemod.mute";
-    public static final String NBT_KEY_WALKIETALKIE_ACTIVATE = "walkietalkiemod.activate";
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(WalkieTalkieMod.MOD_ID, name), item);

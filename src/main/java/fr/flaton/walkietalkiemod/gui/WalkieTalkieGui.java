@@ -1,6 +1,6 @@
 package fr.flaton.walkietalkiemod.gui;
 
-import fr.flaton.walkietalkiemod.item.ModItems;
+import fr.flaton.walkietalkiemod.item.WalkieTalkieItem;
 import fr.flaton.walkietalkiemod.widget.TButton;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.*;
@@ -36,7 +36,7 @@ public class WalkieTalkieGui extends LightweightGuiDescription {
         // 2 column
 
         canalText = new WText(Text.literal(""));
-        setCanalText(Objects.requireNonNull(stack.getNbt()).getInt(ModItems.NBT_KEY_WALKIETALKIE_CANAL));
+        setCanalText(Objects.requireNonNull(stack.getNbt()).getInt(WalkieTalkieItem.NBT_KEY_CANAL));
         canalText.setHorizontalAlignment(HorizontalAlignment.CENTER);
         canalText.setVerticalAlignment(VerticalAlignment.CENTER);
         gridPanel.add(canalText, 4 , 1);
@@ -55,11 +55,11 @@ public class WalkieTalkieGui extends LightweightGuiDescription {
 
         muteButton = new TButton(3);
         column3.add(muteButton, 0, 0);
-        muteButton.updateIcon(stack.getNbt().getBoolean(ModItems.NBT_KEY_WALKIETALKIE_MUTE));
+        muteButton.updateIcon(stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_MUTE));
 
         onOffButton = new TButton(4);
         column3.add(onOffButton, 1, 0);
-        onOffButton.updateIcon(stack.getNbt().getBoolean(ModItems.NBT_KEY_WALKIETALKIE_ACTIVATE));
+        onOffButton.updateIcon(stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE));
 
     }
 

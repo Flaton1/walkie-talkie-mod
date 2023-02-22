@@ -8,7 +8,9 @@ import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import de.maxhenkel.voicechat.api.packets.StaticSoundPacket;
 import fr.flaton.walkietalkiemod.item.WalkieTalkieItem;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.collection.DefaultedList;
 
 import java.util.Objects;
 
@@ -35,7 +37,7 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
             return;
         }
 
-        if (hasWalkieTalkieNotActivate(senderPlayer)) {
+        if (getWalkieTalkieActivate(senderPlayer) == null) {
             return;
         }
 
@@ -57,7 +59,7 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
                 continue;
             }
 
-            if (hasWalkieTalkieNotActivate(receiverPlayer)) {
+            if (getWalkieTalkieActivate(receiverPlayer) == null) {
                 continue;
             }
 
@@ -67,11 +69,9 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
             int receiverCanal = getCanal(receiverPlayer);
 
-
             if (receiverCanal != senderCanal) {
                 continue;
             }
-
 
             // Send audio
             VoicechatConnection connection = api.getConnectionOf(receiverPlayer.getUuid());
@@ -87,13 +87,19 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
         }
     }
 
-    private ItemStack getWalkieTalkieItemStack(PlayerEntity player) {
+    private ItemStack getWalkieTalkieActivate(PlayerEntity player) {
 
         ItemStack itemStack = null;
 
         int range = 0;
 
-        for (ItemStack item : player.getInventory().main) {
+        PlayerInventory playerInventory = player.getInventory();
+
+        DefaultedList<ItemStack> inventory = playerInventory.main;
+        inventory.addAll(playerInventory.armor);
+        inventory.addAll(playerInventory.offHand);
+
+        for (ItemStack item : inventory) {
 
             if (item.getItem().getClass().equals(WalkieTalkieItem.class) && item.hasNbt()) {
 
@@ -115,25 +121,16 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
     }
 
-    private boolean hasWalkieTalkieNotActivate(PlayerEntity player) {
-
-        if (getWalkieTalkieItemStack(player) == null) {
-            return true;
-        }
-
-        return !Objects.requireNonNull(Objects.requireNonNull(getWalkieTalkieItemStack(player)).getNbt()).getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE);
-    }
-
     private int getCanal(PlayerEntity player) {
-        return Objects.requireNonNull(Objects.requireNonNull(getWalkieTalkieItemStack(player)).getNbt()).getInt(WalkieTalkieItem.NBT_KEY_CANAL);
+        return Objects.requireNonNull(Objects.requireNonNull(getWalkieTalkieActivate(player)).getNbt()).getInt(WalkieTalkieItem.NBT_KEY_CANAL);
     }
 
     private int getRange(PlayerEntity player) {
-        WalkieTalkieItem item = (WalkieTalkieItem) Objects.requireNonNull(getWalkieTalkieItemStack(player)).getItem();
+        WalkieTalkieItem item = (WalkieTalkieItem) Objects.requireNonNull(getWalkieTalkieActivate(player)).getItem();
         return item.getRange();
     }
 
     private boolean hasWalkieTalkieMute(PlayerEntity player) {
-        return Objects.requireNonNull(Objects.requireNonNull(getWalkieTalkieItemStack(player)).getNbt()).getBoolean(WalkieTalkieItem.NBT_KEY_MUTE);
+        return Objects.requireNonNull(Objects.requireNonNull(getWalkieTalkieActivate(player)).getNbt()).getBoolean(WalkieTalkieItem.NBT_KEY_MUTE);
     }
 }

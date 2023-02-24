@@ -1,0 +1,31 @@
+{
+  "display": {
+    "icon": {
+      "item": "walkietalkie:stone_walkietalkie"
+    },
+    "title": {
+      "translate": "advancement.walkietalkie.stone_walkietalkie.title"
+    },
+    "description": {
+      "translate": "advancement.walkietalkie.stone_walkietalkie.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "walkietalkie:wooden_walkietalkie",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "walkietalkie:stone_walkietalkie"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

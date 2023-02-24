@@ -1,0 +1,27 @@
+{
+  "item.walkietalkie.wooden_walkietalkie": "Деревянная переносная рация",
+  "item.walkietalkie.stone_walkietalkie": "Каменная переносная рация",
+  "item.walkietalkie.iron_walkietalkie": "Железная переносная рация",
+  "item.walkietalkie.diamond_walkietalkie": "Алмазная переносная рация",
+  "item.walkietalkie.netherite_walkietalkie": "Незеритовая переносная рация",
+
+  "gui.walkietalkie.label": "Переносная рация",
+
+  "advancement.walkietalkie.root.title": "Переносная рация",
+  "advancement.walkietalkie.root.description": "При помощи переносной рации найди возможную связь.",
+
+  "advancement.walkietalkie.wooden_walkietalkie.title": "Основная связь",
+  "advancement.walkietalkie.wooden_walkietalkie.description": "Получи деревянную переносную рацию, позволяющая Вам связываться на коротких расстояниях.",
+
+  "advancement.walkietalkie.stone_walkietalkie.title": "Улучшенная связь",
+  "advancement.walkietalkie.stone_walkietalkie.description": "Получи каменную переносную рацию, предоставляющая большой диапазон связи.",
+
+  "advancement.walkietalkie.iron_walkietalkie.title": "Продвинутая связь",
+  "advancement.walkietalkie.iron_walkietalkie.description": "Получи железную переносную рацию, повышающая диапазон связи ещё дальше.",
+
+  "advancement.walkietalkie.diamond_walkietalkie.title": "Элитная связь",
+  "advancement.walkietalkie.diamond_walkietalkie.description": "Получи передовую алмазную переносную рацию, позволяющая непрерывно связываться на огромных расстояниях.",
+
+  "advancement.walkietalkie.netherite_walkietalkie.title": "Потрясающая связь",
+  "advancement.walkietalkie.netherite_walkietalkie.description": "Получи ультрасовременную незеритовую переносную рацию, предоставляющая феноменальную дальность связи."
+}

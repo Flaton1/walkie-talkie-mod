@@ -26,8 +26,6 @@ This mod adds walkie-talkies with different upgrades.
 + Netherite: 2048 block distance
 ## Credits
 ### Translators :
-+ English: **Flaton**
-+ French: **Flaton**
 + Russian: **Heimdallr-1**
 
 ### Mods and Lib

@@ -25,5 +25,11 @@ This mod adds walkie-talkies with different upgrades.
 + Diamond: 1024 block distance
 + Netherite: 2048 block distance
 ## Credits
-[Simple Voice Chat](https://modrinth.com/plugin/simple-voice-chat)\
+### Translators :
++ English: **Flaton**
++ French: **Flaton**
++ Russian: **Heimdallr-1**
+
+### Mods and Lib
+[Simple Voice Chat](https://github.com/henkelmax/simple-voice-chat)\
 [LibGui](https://github.com/CottonMC/LibGui)

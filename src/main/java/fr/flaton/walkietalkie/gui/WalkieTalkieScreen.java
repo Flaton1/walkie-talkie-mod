@@ -62,18 +62,17 @@ public class WalkieTalkieScreen extends Screen {
         }, stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE));
         this.addDrawableChild(activate);
 
-
-        this.addDrawableChild(ButtonWidget.builder(Text.literal(">"), button -> {
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 + 40, guiTop + 20, 20, 20, Text.literal(">"), button -> {
             PacketByteBuf packet = PacketByteBufs.create();
             packet.writeBoolean(true);
             ClientPlayNetworking.send(ModMessages.CANAL_PRESSED, packet);
-        }).dimensions(this.width / 2 - 10 + 40, guiTop + 20, 20, 20).build());
+        }));
 
-        this.addDrawableChild(ButtonWidget.builder(Text.literal("<"), button -> {
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 - 40, guiTop + 20, 20, 20, Text.literal(">"), button -> {
             PacketByteBuf packet = PacketByteBufs.create();
             packet.writeBoolean(false);
             ClientPlayNetworking.send(ModMessages.CANAL_PRESSED, packet);
-        }).dimensions(this.width / 2 - 10 - 40, guiTop + 20, 20, 20).build());
+        }));
 
         canal = Text.literal(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
 

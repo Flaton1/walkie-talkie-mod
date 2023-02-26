@@ -95,8 +95,6 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
         PlayerInventory playerInventory = player.getInventory();
 
-
-
         ArrayList<ItemStack> inventory = new ArrayList<>();
         inventory.addAll(playerInventory.main);
         inventory.addAll(playerInventory.armor);

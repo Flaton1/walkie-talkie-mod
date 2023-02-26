@@ -29,5 +29,4 @@ This mod adds walkie-talkies with different upgrades.
 + Russian: **Heimdallr-1**
 
 ### Mods and Lib
-[Simple Voice Chat](https://github.com/henkelmax/simple-voice-chat)\
-[LibGui](https://github.com/CottonMC/LibGui)
+[Simple Voice Chat](https://github.com/henkelmax/simple-voice-chat)

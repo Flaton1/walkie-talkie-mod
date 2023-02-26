@@ -1,9 +1,6 @@
 package fr.flaton.walkietalkie.item;
 
 import fr.flaton.walkietalkie.gui.WalkieTalkieScreen;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -30,17 +27,19 @@ public class WalkieTalkieItem extends Item {
         RANGE = range;
     }
 
-    @Environment(EnvType.CLIENT)
+
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 
-        if (player.getStackInHand(hand).hasNbt()) {
+        if (world.isClient()) {
+            if (player.getStackInHand(hand).hasNbt()) {
 
-            // ItemStack stack = player.getStackInHand(hand);
+                ItemStack stack = player.getStackInHand(hand);
 
-            MinecraftClient.getInstance().setScreen(new WalkieTalkieScreen());
+                new WalkieTalkieScreen(stack);
 
-            //MinecraftClient.getInstance().setScreen(new CottonClientScreen(new WalkieTalkieGui(stack)));
+
+            }
         }
 
         return super.use(world, player, hand);

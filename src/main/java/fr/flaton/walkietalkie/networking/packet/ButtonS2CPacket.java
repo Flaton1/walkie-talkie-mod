@@ -1,9 +1,10 @@
 package fr.flaton.walkietalkie.networking.packet;
 
-import fr.flaton.walkietalkie.gui.WalkieTalkieGui;
+import fr.flaton.walkietalkie.gui.WalkieTalkieScreen;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 
 public class ButtonS2CPacket {
@@ -12,14 +13,9 @@ public class ButtonS2CPacket {
 
     public static void receive(MinecraftClient minecraftClient, ClientPlayNetworkHandler clientPlayNetworkHandler, PacketByteBuf packet, PacketSender packetSender) {
 
-        int canal = packet.readInt();
-        boolean mute = packet.readBoolean();
-        boolean active = packet.readBoolean();
+        ItemStack stack = packet.readItemStack();
 
-        WalkieTalkieGui.setCanalText(canal);
-        WalkieTalkieGui.getMuteButton().updateIcon(mute);
-        WalkieTalkieGui.getOnOffButton().updateIcon(active);
-
+        WalkieTalkieScreen.getInstance().checkButtons(stack);
 
     }
 }

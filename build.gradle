@@ -32,11 +32,6 @@ repositories {
 		filter {
 			includeGroup "maven.modrinth"
 		}
-
-		maven {
-			name = "CottonMC"
-			url = "https://server.bbkr.space/artifactory/libs-release"
-		}
 	}
 }
 
@@ -83,9 +78,6 @@ dependencies {
 	implementation "de.maxhenkel.voicechat:voicechat-api:${voicechat_api_version}"
 
 	modRuntimeOnly "maven.modrinth:simple-voice-chat:fabric-${voicechat_version}"
-
-	// LibGui
-	modImplementation include("io.github.cottonmc:LibGui:${libgui_version}")
 }
 
 processResources {

@@ -1,8 +1,8 @@
 {
 	"schemaVersion": 1,
-	"id": "walkietalkiemod",
+	"id": "walkietalkie",
 	"version": "${version}",
-	"name": "Walkie-talkie Mod",
+	"name": "Walkie-Talkie",
 	"description": "Adds walkie-talkies with different upgrades",
 	"authors": [
 		"Flaton"
@@ -12,17 +12,17 @@
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "MIT",
-	"icon": "assets/walkietalkiemod/icon.png",
+	"icon": "assets/walkietalkie/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"fr.flaton.walkietalkiemod.WalkieTalkieMod"
+			"fr.flaton.walkietalkie.WalkieTalkie"
 		],
 		"client": [
-			"fr.flaton.walkietalkiemod.WalkieTalkieModClient"
+			"fr.flaton.walkietalkie.WalkieTalkieClient"
 		],
 		"voicechat": [
-			"fr.flaton.walkietalkiemod.WalkieTalkieVoiceChatPlugin"
+			"fr.flaton.walkietalkie.WalkieTalkieVoiceChatPlugin"
 		]
 	},
 	"mixins": [

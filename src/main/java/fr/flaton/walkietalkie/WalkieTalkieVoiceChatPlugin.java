@@ -123,16 +123,16 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
     }
 
-    public int getCanal(ItemStack stack) {
+    private int getCanal(ItemStack stack) {
         return Objects.requireNonNull(stack.getNbt()).getInt(WalkieTalkieItem.NBT_KEY_CANAL);
     }
 
-    public int getRange(ItemStack stack) {
+    private int getRange(ItemStack stack) {
         WalkieTalkieItem item = (WalkieTalkieItem) Objects.requireNonNull(stack.getItem());
         return item.getRange();
     }
 
-    public boolean isWalkieTalkieMute(ItemStack stack) {
+    private boolean isWalkieTalkieMute(ItemStack stack) {
         return Objects.requireNonNull(stack.getNbt()).getBoolean(WalkieTalkieItem.NBT_KEY_MUTE);
     }
 }

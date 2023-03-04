@@ -37,21 +37,19 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
             return;
         }
 
+        ItemStack senderStack = getWalkieTalkieActivate(senderPlayer);
+
         if (getWalkieTalkieActivate(senderPlayer) == null) {
             return;
         }
 
-
-        if (hasWalkieTalkieMute(senderPlayer)) {
+        if (isWalkieTalkieMute(senderStack)) {
             return;
         }
 
-        int senderCanal = getCanal(senderPlayer);
-        int senderRange = getRange(senderPlayer);
+        int senderCanal = getCanal(senderStack);
 
         VoicechatServerApi api = event.getVoicechat();
-
-
 
         for (PlayerEntity receiverPlayer : Objects.requireNonNull(senderPlayer.getServer()).getPlayerManager().getPlayerList()) {
 
@@ -59,15 +57,18 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
                 continue;
             }
 
-            if (getWalkieTalkieActivate(receiverPlayer) == null) {
+            ItemStack receiverStack = getWalkieTalkieActivate(receiverPlayer);
+
+            if (receiverStack == null) {
                 continue;
             }
 
-            if (!receiverPlayer.getPos().isInRange(senderPlayer.getPos(), senderRange)) {
+            int receiverRange = getRange(receiverStack);
+            int receiverCanal = getCanal(receiverStack);
+
+            if (!senderPlayer.getPos().isInRange(receiverPlayer.getPos(), receiverRange)) {
                 continue;
             }
-
-            int receiverCanal = getCanal(receiverPlayer);
 
             if (receiverCanal != senderCanal) {
                 continue;
@@ -122,16 +123,16 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
     }
 
-    private int getCanal(PlayerEntity player) {
-        return Objects.requireNonNull(Objects.requireNonNull(getWalkieTalkieActivate(player)).getNbt()).getInt(WalkieTalkieItem.NBT_KEY_CANAL);
+    public int getCanal(ItemStack stack) {
+        return Objects.requireNonNull(stack.getNbt()).getInt(WalkieTalkieItem.NBT_KEY_CANAL);
     }
 
-    private int getRange(PlayerEntity player) {
-        WalkieTalkieItem item = (WalkieTalkieItem) Objects.requireNonNull(getWalkieTalkieActivate(player)).getItem();
+    public int getRange(ItemStack stack) {
+        WalkieTalkieItem item = (WalkieTalkieItem) Objects.requireNonNull(stack.getItem());
         return item.getRange();
     }
 
-    private boolean hasWalkieTalkieMute(PlayerEntity player) {
-        return Objects.requireNonNull(Objects.requireNonNull(getWalkieTalkieActivate(player)).getNbt()).getBoolean(WalkieTalkieItem.NBT_KEY_MUTE);
+    public boolean isWalkieTalkieMute(ItemStack stack) {
+        return Objects.requireNonNull(stack.getNbt()).getBoolean(WalkieTalkieItem.NBT_KEY_MUTE);
     }
 }

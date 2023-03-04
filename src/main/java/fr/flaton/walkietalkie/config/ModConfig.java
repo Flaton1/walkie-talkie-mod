@@ -14,25 +14,25 @@ import java.util.Properties;
 public class ModConfig {
 
     private static final Path CONFIG_FOLDER = FabricLoader.getInstance().getConfigDir();
+    private static final File CONFIG_FILE = new File(CONFIG_FOLDER.toString(), "WalkieTalkie.properties");
 
-    public static int maxCanal;
-    public static int woodenWalkieTalkieRange;
-    public static int stoneWalkieTalkieRange;
-    public static int ironWalkieTalkieRange;
-    public static int diamondWalkieTalkieRange;
-    public static int netheriteWalkieTalkieRange;
+    public static int maxCanal = 16;
+    public static int woodenWalkieTalkieRange = 128;
+    public static int stoneWalkieTalkieRange = 256;
+    public static int ironWalkieTalkieRange = 512;
+    public static int diamondWalkieTalkieRange = 1024;
+    public static int netheriteWalkieTalkieRange = 2048;
 
     public static void registerModConfig() {
         loadConfig();
     }
 
     private static void loadConfig() {
-        File configFile = new File(CONFIG_FOLDER.toString(), "WalkieTalkie.properties");
         Properties properties = new Properties();
 
-        if (configFile.exists()) {
+        if (CONFIG_FILE.exists()) {
             try {
-                FileInputStream stream = new FileInputStream(configFile);
+                FileInputStream stream = new FileInputStream(CONFIG_FILE);
                 properties.load(stream);
                 stream.close();
 
@@ -43,31 +43,37 @@ public class ModConfig {
                 ironWalkieTalkieRange = Integer.parseInt(properties.getProperty("iron-walkie-talkie-range", "512"));
                 diamondWalkieTalkieRange = Integer.parseInt(properties.getProperty("diamond-walkie-talkie-range", "1024"));
                 netheriteWalkieTalkieRange = Integer.parseInt(properties.getProperty("netherite-walkie-talkie-range", "2048"));
+
+                createConfig(mapConfig());
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
             // Create default config file
-            createDefaultConfig();
+            createConfig(mapConfig());
         }
     }
 
-    private static void createDefaultConfig() {
-        File configFile = new File(CONFIG_FOLDER.toString(), "WalkieTalkie.properties");
+    private static Map<String, String> mapConfig() {
         Map<String, String> config = new LinkedHashMap<>();
 
         config.put("# Walkie-Talkie Config File", "");
         config.put("\n# Channel settings", "");
-        config.put("max-canal", "16");
+        config.put("max-canal", String.valueOf(maxCanal));
         config.put("\n# Walkie-Talkie settings", "");
-        config.put("wooden-walkie-talkie-range", "128");
-        config.put("stone-walkie-talkie-range", "256");
-        config.put("iron-walkie-talkie-range", "512");
-        config.put("diamond-walkie-talkie-range", "1024");
-        config.put("netherite-walkie-talkie-range", "2048");
+        config.put("wooden-walkie-talkie-range", String.valueOf(woodenWalkieTalkieRange));
+        config.put("stone-walkie-talkie-range", String.valueOf(stoneWalkieTalkieRange));
+        config.put("iron-walkie-talkie-range", String.valueOf(ironWalkieTalkieRange));
+        config.put("diamond-walkie-talkie-range", String.valueOf(diamondWalkieTalkieRange));
+        config.put("netherite-walkie-talkie-range", String.valueOf(netheriteWalkieTalkieRange));
 
+        return config;
+    }
+
+    private static void createConfig(Map<String, String> config) {
         try {
-            FileOutputStream output = new FileOutputStream(configFile);
+            FileOutputStream output = new FileOutputStream(CONFIG_FILE);
 
             for (Map.Entry<String, String> entry : config.entrySet()) {
                 String key = entry.getKey();

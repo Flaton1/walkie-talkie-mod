@@ -1,5 +1,6 @@
 package fr.flaton.walkietalkie;
 
+import fr.flaton.walkietalkie.config.ModConfig;
 import fr.flaton.walkietalkie.item.ModItems;
 import fr.flaton.walkietalkie.networking.ModMessages;
 import net.fabricmc.api.ModInitializer;
@@ -13,6 +14,7 @@ public class WalkieTalkie implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		ModConfig.registerModConfig();
 		ModItems.registerModItems();
 		ModMessages.registerC2SPackets();
 

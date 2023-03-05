@@ -1,5 +1,6 @@
 package fr.flaton.walkietalkie.networking.packet;
 
+import fr.flaton.walkietalkie.config.ModConfig;
 import fr.flaton.walkietalkie.item.WalkieTalkieItem;
 import fr.flaton.walkietalkie.networking.ModMessages;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -27,7 +28,7 @@ public class CanalButtonC2SPacket {
         int canal = stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL);
 
         if (upButton) {
-            if (canal < 16) {
+            if (canal < ModConfig.maxCanal) {
                 canal++;
             } else {
                 canal = 1;
@@ -36,7 +37,7 @@ public class CanalButtonC2SPacket {
             if (canal > 1) {
                 canal--;
             } else {
-                canal = 16;
+                canal = ModConfig.maxCanal;
             }
         }
 

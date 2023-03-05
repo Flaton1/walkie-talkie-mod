@@ -12,18 +12,21 @@
 This mod adds walkie-talkies with different upgrades.
 
 ## Features
-+ An interface to configure the walkie-talkie
-+ Choose a walkie-talkie channel
++ An interface for configuring the radio
++ Select a radio channel
 + Cut off the microphone (of the walkie-talkie)
-+ Disable/Enable the walkie-talkie
++ Switch off the microphone (of the walkie-talkie)
 + Limited distance
 + Upgrade to extend the limit
++ Configure maximum channel in mod config
 ## Upgrade
 + Wood: 128 block distance
 + Stone: 256 block distance
 + Iron: 512 block distance
 + Diamond: 1024 block distance
 + Netherite: 2048 block distance
+
+*Range can be changed in mod config*
 ## Credits
 ### Translators :
 + Russian: **Heimdallr-1**

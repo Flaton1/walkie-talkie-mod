@@ -5,16 +5,21 @@ import de.maxhenkel.voicechat.api.VoicechatPlugin;
 import de.maxhenkel.voicechat.api.VoicechatServerApi;
 import de.maxhenkel.voicechat.api.events.EventRegistration;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
+import de.maxhenkel.voicechat.api.events.VoicechatServerStartedEvent;
 import de.maxhenkel.voicechat.api.packets.StaticSoundPacket;
 import fr.flaton.walkietalkie.item.WalkieTalkieItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
+
+    @Nullable
+    public static VoicechatServerApi voicechatServerApi;
 
     @Override
     public String getPluginId() {
@@ -24,6 +29,11 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
     @Override
     public void registerEvents(EventRegistration registration) {
         registration.registerEvent(MicrophonePacketEvent.class, this::onMicPacket);
+        registration.registerEvent(VoicechatServerStartedEvent.class, this::onServerStarted);
+    }
+
+    private void onServerStarted(VoicechatServerStartedEvent event) {
+        voicechatServerApi = event.getVoicechat();
     }
 
     private void onMicPacket(MicrophonePacketEvent event) {
@@ -49,8 +59,6 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
         int senderCanal = getCanal(senderStack);
 
-        VoicechatServerApi api = event.getVoicechat();
-
         for (PlayerEntity receiverPlayer : Objects.requireNonNull(senderPlayer.getServer()).getPlayerManager().getPlayerList()) {
 
             if (receiverPlayer.getUuid().equals(senderPlayer.getUuid())) {
@@ -75,14 +83,14 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
             }
 
             // Send audio
-            VoicechatConnection connection = api.getConnectionOf(receiverPlayer.getUuid());
+            VoicechatConnection connection = voicechatServerApi.getConnectionOf(receiverPlayer.getUuid());
             if (connection == null) {
                 continue;
             }
 
             StaticSoundPacket packet = event.getPacket().toStaticSoundPacket();
 
-            api.sendStaticSoundPacketTo(connection, packet);
+            voicechatServerApi.sendStaticSoundPacketTo(connection, packet);
 
 
         }

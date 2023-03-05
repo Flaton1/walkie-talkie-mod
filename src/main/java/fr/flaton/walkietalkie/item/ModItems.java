@@ -1,6 +1,7 @@
 package fr.flaton.walkietalkie.item;
 
 import fr.flaton.walkietalkie.WalkieTalkie;
+import fr.flaton.walkietalkie.config.ModConfig;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;

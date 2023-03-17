@@ -28,6 +28,9 @@ This mod adds walkie-talkies with different upgrades.
 
 *Range can be changed in mod config*
 ## Credits
+### Textures and models :
++ Meallows
+
 ### Translators :
 + Russian: **Heimdallr-1**
 

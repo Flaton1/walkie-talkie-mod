@@ -1,7 +1,7 @@
-package fr.flaton.walkietalkie.networking.packet;
+package fr.flaton.walkietalkie.network.packet.c2s;
 
 import fr.flaton.walkietalkie.item.WalkieTalkieItem;
-import fr.flaton.walkietalkie.networking.ModMessages;
+import fr.flaton.walkietalkie.network.ModMessages;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.item.ItemStack;
@@ -13,7 +13,6 @@ import net.minecraft.util.Hand;
 
 public class ActivateButtonC2SPacket {
 
-
     public static void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
 
         ItemStack stack = player.getStackInHand(getHandUse(player));
@@ -24,11 +23,9 @@ public class ActivateButtonC2SPacket {
 
         stack.getNbt().putBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE, !stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE));
 
-
         PacketByteBuf packet = PacketByteBufs.create();
         packet.writeItemStack(stack);
         packetSender.sendPacket(ModMessages.BUTTON_PRESSED_RESPONSE, packet);
-
     }
 
     private static Hand getHandUse(ServerPlayerEntity player) {

@@ -1,7 +1,6 @@
 {
-	"credit": "Made with Blockbench",
 	"parent": "walkietalkie:item/walkietalkie",
 	"textures": {
-		"4": "block/stone"
+		"2": "block/stone"
 	}
 }

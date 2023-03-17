@@ -5,6 +5,10 @@
   "item.walkietalkie.diamond_walkietalkie": "Talkie-Walkie en diamant",
   "item.walkietalkie.netherite_walkietalkie": "Talkie-Walkie en Netherite",
 
+  "block.walkietalkie.speaker": "Enceinte",
+
+  "gui.walkietalkie.speaker.title": "Enceinte",
+
   "gui.walkietalkie.label": "Talkie-Walkie",
 
   "advancement.walkietalkie.root.title": "Talkie-Walkie",

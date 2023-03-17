@@ -1,10 +1,10 @@
-package fr.flaton.walkietalkie.gui;
+package fr.flaton.walkietalkie.client.gui.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import fr.flaton.walkietalkie.WalkieTalkie;
-import fr.flaton.walkietalkie.gui.widget.ToggleImageButton;
+import fr.flaton.walkietalkie.client.gui.widget.ToggleImageButton;
 import fr.flaton.walkietalkie.item.WalkieTalkieItem;
-import fr.flaton.walkietalkie.networking.ModMessages;
+import fr.flaton.walkietalkie.network.ModMessages;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -43,6 +43,7 @@ public class WalkieTalkieScreen extends Screen {
         super(Text.translatable("gui.walkietalkie.label"));
         instance = this;
         this.stack = stack;
+
         MinecraftClient.getInstance().setScreen(this);
     }
 
@@ -80,11 +81,6 @@ public class WalkieTalkieScreen extends Screen {
     }
 
     @Override
-    public void tick() {
-        super.tick();
-    }
-
-    @Override
     public void renderBackground(MatrixStack matrices) {
         super.renderBackground(matrices);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -106,8 +102,6 @@ public class WalkieTalkieScreen extends Screen {
         mute.setState(stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_MUTE));
         activate.setState(stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE));
         canal = Text.literal(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
-
-        MinecraftClient.getInstance();
     }
 
     public static WalkieTalkieScreen getInstance() {

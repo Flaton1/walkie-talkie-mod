@@ -7,6 +7,7 @@ import de.maxhenkel.voicechat.api.events.EventRegistration;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import de.maxhenkel.voicechat.api.events.VoicechatServerStartedEvent;
 import de.maxhenkel.voicechat.api.packets.StaticSoundPacket;
+import fr.flaton.walkietalkie.block.entity.SpeakerBlockEntity;
 import fr.flaton.walkietalkie.item.WalkieTalkieItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -59,6 +60,10 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
         int senderCanal = getCanal(senderStack);
 
+        for (SpeakerBlockEntity entity : SpeakerBlockEntity.getSpeakersActivate(senderCanal)) {
+            entity.playSound(voicechatServerApi, event.getPacket());
+        }
+
         for (PlayerEntity receiverPlayer : Objects.requireNonNull(senderPlayer.getServer()).getPlayerManager().getPlayerList()) {
 
             if (receiverPlayer.getUuid().equals(senderPlayer.getUuid())) {
@@ -88,11 +93,9 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
                 continue;
             }
 
-            StaticSoundPacket packet = event.getPacket().toStaticSoundPacket();
+            StaticSoundPacket packet = event.getPacket().staticSoundPacketBuilder().build();
 
             voicechatServerApi.sendStaticSoundPacketTo(connection, packet);
-
-
         }
     }
 

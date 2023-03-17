@@ -1,6 +1,6 @@
 package fr.flaton.walkietalkie.item;
 
-import fr.flaton.walkietalkie.gui.WalkieTalkieScreen;
+import fr.flaton.walkietalkie.client.gui.screen.WalkieTalkieScreen;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -15,6 +15,7 @@ public class WalkieTalkieItem extends Item {
     public int getRange() {
         return RANGE;
     }
+
     private final int RANGE;
 
     public static final String NBT_KEY_CANAL = "walkietalkie.canal";
@@ -37,13 +38,12 @@ public class WalkieTalkieItem extends Item {
                 ItemStack stack = player.getStackInHand(hand);
 
                 new WalkieTalkieScreen(stack);
-
-
             }
         }
 
         return super.use(world, player, hand);
     }
+
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {

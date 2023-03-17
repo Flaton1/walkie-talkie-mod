@@ -38,8 +38,6 @@ public class ModItems {
     }
 
     public static void registerModItems() {
-        WalkieTalkie.LOGGER.info("Registering Mod Items for " + WalkieTalkie.MOD_ID);
-
         addItemsToItemGroup();
     }
 

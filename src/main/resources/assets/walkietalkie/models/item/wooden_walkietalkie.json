@@ -1,7 +1,6 @@
 {
-	"credit": "Made with Blockbench",
 	"parent": "walkietalkie:item/walkietalkie",
 	"textures": {
-		"4": "block/oak_planks"
+		"2": "block/oak_planks"
 	}
 }

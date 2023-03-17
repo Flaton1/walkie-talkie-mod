@@ -1,8 +1,11 @@
 package fr.flaton.walkietalkie;
 
+import fr.flaton.walkietalkie.block.ModBlocks;
+import fr.flaton.walkietalkie.block.entity.ModBlockEntities;
 import fr.flaton.walkietalkie.config.ModConfig;
+import fr.flaton.walkietalkie.screen.ModScreenHandlers;
 import fr.flaton.walkietalkie.item.ModItems;
-import fr.flaton.walkietalkie.networking.ModMessages;
+import fr.flaton.walkietalkie.network.ModMessages;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -14,9 +17,14 @@ public class WalkieTalkie implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		ModConfig.registerModConfig();
-		ModItems.registerModItems();
-		ModMessages.registerC2SPackets();
+		ModConfig.loadModConfig();
 
+		ModItems.registerModItems();
+
+		ModBlocks.registerModBlocks();
+		ModBlockEntities.registerBlockEntities();
+		ModScreenHandlers.registerScreenHandlers();
+
+		ModMessages.registerC2SPackets();
 	}
 }

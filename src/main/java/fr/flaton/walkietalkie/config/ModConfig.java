@@ -23,11 +23,7 @@ public class ModConfig {
     public static int diamondWalkieTalkieRange = 1024;
     public static int netheriteWalkieTalkieRange = 2048;
 
-    public static void registerModConfig() {
-        loadConfig();
-    }
-
-    private static void loadConfig() {
+    public static void loadModConfig() {
         Properties properties = new Properties();
 
         if (CONFIG_FILE.exists()) {

@@ -1,4 +1,4 @@
-package fr.flaton.walkietalkie.gui.widget;
+package fr.flaton.walkietalkie.client.gui.widget;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
@@ -11,7 +11,6 @@ import net.minecraft.util.Identifier;
 
 @Environment(value = EnvType.CLIENT)
 public class ImageButton extends ButtonWidget {
-
 
     protected Identifier texture;
 

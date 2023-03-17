@@ -1,4 +1,4 @@
-package fr.flaton.walkietalkie.gui.widget;
+package fr.flaton.walkietalkie.client.gui.widget;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;

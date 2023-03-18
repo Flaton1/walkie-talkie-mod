@@ -3,6 +3,7 @@ package fr.flaton.walkietalkie.block.entity;
 import de.maxhenkel.voicechat.api.*;
 import de.maxhenkel.voicechat.api.audiochannel.LocationalAudioChannel;
 import de.maxhenkel.voicechat.api.packets.MicrophonePacket;
+import fr.flaton.walkietalkie.config.ModConfig;
 import fr.flaton.walkietalkie.screen.SpeakerScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
@@ -122,7 +123,7 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedScreenHan
         if (channel == null) {
             return;
         }
-        channel.setDistance(16F);
+        channel.setDistance(ModConfig.speakerRange);
 
         api.getPlayersInRange(api.fromServerLevel(this.world), channel.getLocation(), channel.getDistance() + 1F, serverPlayer -> {
             VoicechatConnection connection = api.getConnectionOf(serverPlayer);

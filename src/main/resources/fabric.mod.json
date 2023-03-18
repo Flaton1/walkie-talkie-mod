@@ -33,7 +33,7 @@
 		"minecraft": "1.19.3",
 		"java": ">=17",
 		"fabric-api": "*",
-		"voicechat": ">=1.19.4-2.3.3"
+		"voicechat": ">=1.19.3-2.3.3"
 	},
 	"suggests": {
 		"another-mod": "*"

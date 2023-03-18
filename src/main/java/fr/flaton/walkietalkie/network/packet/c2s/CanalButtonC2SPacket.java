@@ -27,9 +27,9 @@ public class CanalButtonC2SPacket {
         int canal = stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL);
 
         if (upButton) {
-            canal = Math.min(canal + 1, ModConfig.maxCanal);
+            canal = loop(canal + 1, 1, ModConfig.maxCanal);
         } else {
-            canal = Math.max(canal - 1, 1);
+            canal = loop(canal - 1, 1, ModConfig.maxCanal);
         }
 
         stack.getNbt().putInt(WalkieTalkieItem.NBT_KEY_CANAL, canal);
@@ -51,6 +51,18 @@ public class CanalButtonC2SPacket {
             return Hand.OFF_HAND;
         }
         return null;
+    }
+
+
+    private static int loop(int value, int min, int max) {
+
+        if (value > max) {
+            value = min;
+        } else if (value < min) {
+            value = max;
+        }
+        return value;
+
     }
 
 

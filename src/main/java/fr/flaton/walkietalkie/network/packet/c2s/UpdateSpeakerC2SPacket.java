@@ -30,14 +30,23 @@ public class UpdateSpeakerC2SPacket {
             } else if (index == 1) {
 
                 if (status) {
-                    canal = Math.min(canal + 1, ModConfig.maxCanal);
+                    canal = loop(canal + 1, 1, ModConfig.maxCanal);
                 } else {
-                    canal = Math.max(canal - 1, 1);
+                    canal = loop(canal - 1, 1, ModConfig.maxCanal);
                 }
-
             }
-
             speakerScreenHandler.setPropertyDelegate(activate , canal);
         }
+    }
+
+    private static int loop(int value, int min, int max) {
+
+        if (value > max) {
+            value = min;
+        } else if (value < min) {
+            value = max;
+        }
+        return value;
+
     }
 }

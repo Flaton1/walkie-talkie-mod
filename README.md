@@ -9,7 +9,7 @@
 > This mod **requires [Simple Voice Chat](https://github.com/henkelmax/simple-voice-chat) and [Fabric API](https://github.com/FabricMC/fabric).**
 <!-- prettier-ignore-end -->
 
-This mod adds walkie-talkies with different upgrades.
+This mod adds two-way radios with different upgrades.
 
 ## Features
 + An interface for configuring the radio

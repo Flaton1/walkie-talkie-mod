@@ -36,9 +36,15 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedScreenHan
     private int activate = 0;
     private int canal = 1;
 
+    private final UUID channelId;
+
+    private LocationalAudioChannel channel = null;
+
     public SpeakerBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.SPEAKER_BLOCK_ENTITY, pos, state);
         speakerBlockEntities.add(this);
+
+        channelId = UUID.randomUUID();
 
         this.propertyDelegate = new PropertyDelegate() {
             @Override
@@ -115,27 +121,16 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedScreenHan
     }
 
     public void playSound(VoicechatServerApi api, MicrophonePacket packet) {
-        UUID channelId = UUID.randomUUID();
-
         Position pos = api.createPosition(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ());
 
-        LocationalAudioChannel channel = api.createLocationalAudioChannel(channelId, api.fromServerLevel(this.world), pos);
-        if (channel == null) {
-            return;
-        }
-        channel.setDistance(ModConfig.speakerRange);
-
-        api.getPlayersInRange(api.fromServerLevel(this.world), channel.getLocation(), channel.getDistance() + 1F, serverPlayer -> {
-            VoicechatConnection connection = api.getConnectionOf(serverPlayer);
-            if (connection != null) {
-                api.sendLocationalSoundPacketTo(connection, packet.locationalSoundPacketBuilder().position(pos).distance(channel.getDistance() + 1F).build());
-                return connection.isDisabled();
+        if (this.channel == null) {
+            this.channel = api.createLocationalAudioChannel(this.channelId, api.fromServerLevel(this.world), pos);
+            if (this.channel == null) {
+                return;
             }
-            return true;
-        });
+            this.channel.setDistance(ModConfig.speakerDistance);
+        }
 
-
-
-
+        this.channel.send(packet.getOpusEncodedData());
     }
 }

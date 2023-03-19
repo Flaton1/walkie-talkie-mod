@@ -17,7 +17,7 @@ public class ModConfig {
     private static final File CONFIG_FILE = new File(CONFIG_FOLDER.toString(), "WalkieTalkie.properties");
 
     public static int maxCanal = 16;
-    public static int speakerRange = 32;
+    public static int speakerDistance = 32;
     public static int woodenWalkieTalkieRange = 128;
     public static int stoneWalkieTalkieRange = 256;
     public static int ironWalkieTalkieRange = 512;
@@ -35,7 +35,7 @@ public class ModConfig {
 
                 // Set values from loaded config
                 maxCanal = Integer.parseInt(properties.getProperty("max-canal", "16"));
-                speakerRange = Integer.parseInt(properties.getProperty("speaker-range", "32"));
+                speakerDistance = Integer.parseInt(properties.getProperty("speaker-distance", "32"));
                 woodenWalkieTalkieRange = Integer.parseInt(properties.getProperty("wooden-walkie-talkie-range", "128"));
                 stoneWalkieTalkieRange = Integer.parseInt(properties.getProperty("stone-walkie-talkie-range", "256"));
                 ironWalkieTalkieRange = Integer.parseInt(properties.getProperty("iron-walkie-talkie-range", "512"));
@@ -60,8 +60,7 @@ public class ModConfig {
         config.put("\n# Channel settings", "");
         config.put("max-canal", String.valueOf(maxCanal));
         config.put("\n# Speaker setting", "");
-        config.put("# speaker-range = Listening range", "");
-        config.put("speaker-range", String.valueOf(speakerRange));
+        config.put("speaker-distance", String.valueOf(speakerDistance));
         config.put("\n# Walkie-Talkie settings", "");
         config.put("wooden-walkie-talkie-range", String.valueOf(woodenWalkieTalkieRange));
         config.put("stone-walkie-talkie-range", String.valueOf(stoneWalkieTalkieRange));

@@ -13,7 +13,7 @@
     "show_toast": true,
     "announce_to_chat": true
   },
-  "parent": "walkietalkie:root",
+  "parent": "walkietalkie:walkietalkie/root",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",

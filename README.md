@@ -5,7 +5,7 @@
 >
 > This is not an official addon. **Please don't go to the Simple Voice Chat discord server for support! Instead, please use [GitHub issues](https://github.com/Flaton1/walkie-talkie-mod/issues)
 > for support.** I'll try to provide support as soon as possible but there is no guarantee for how long it will take.
-> 
+>
 > This mod **requires [Simple Voice Chat](https://github.com/henkelmax/simple-voice-chat) and [Fabric API](https://github.com/FabricMC/fabric).**
 <!-- prettier-ignore-end -->
 
@@ -18,8 +18,9 @@ This mod adds walkie-talkies with different upgrades.
 + Switch off the microphone (of the walkie-talkie)
 + Limited distance
 + Upgrade to extend the limit
++ Add speaker block
 + Configure maximum channel in mod config
-## Upgrade
+## Upgrades
 + Wood: 128 block distance
 + Stone: 256 block distance
 + Iron: 512 block distance
@@ -29,7 +30,7 @@ This mod adds walkie-talkies with different upgrades.
 *Range can be changed in mod config*
 ## Credits
 ### Textures and models :
-+ Meallows
++ **Meallows**
 
 ### Translators :
 + Russian: **Heimdallr-1**

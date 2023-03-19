@@ -1,22 +1,22 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "blu",
-    "bru",
-    "buu"
+    "l#",
+    "rw",
+    "ww"
   ],
   "key": {
-    "u": {
+    "#": {
       "tag": "minecraft:planks"
     },
     "r": {
-      "item": "minecraft:redstone_block"
+      "item": "minecraft:redstone"
     },
     "l": {
       "item": "minecraft:lightning_rod"
     },
-    "b":{
-      "tag": "minecraft:wooden_buttons"
+    "w":{
+      "tag": "minecraft:wool"
     }
   },
   "result": {

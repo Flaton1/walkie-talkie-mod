@@ -60,7 +60,7 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
         int senderCanal = getCanal(senderStack);
 
-        for (SpeakerBlockEntity entity : SpeakerBlockEntity.getSpeakersActivate(senderCanal)) {
+        for (SpeakerBlockEntity entity : SpeakerBlockEntity.getSpeakersActivateInRange(senderCanal, senderPlayer.getPos(), getRange(senderStack))) {
             entity.playSound(voicechatServerApi, event.getPacket());
         }
 

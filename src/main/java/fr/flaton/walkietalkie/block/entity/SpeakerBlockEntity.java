@@ -18,6 +18,7 @@ import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,7 +100,7 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedScreenHan
         nbt.putInt(NBT_KEY_CANAL, canal);
     }
 
-    public static List<SpeakerBlockEntity> getSpeakersActivate(int canal) {
+    public static List<SpeakerBlockEntity> getSpeakersActivateInRange(int canal, Vec3d pos, int range) {
         speakerBlockEntities.removeIf(BlockEntity::isRemoved);
 
         List<SpeakerBlockEntity> list = new ArrayList<>();
@@ -107,6 +108,10 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedScreenHan
         for (SpeakerBlockEntity e : speakerBlockEntities) {
 
             if (!e.hasWorld()) {
+                continue;
+            }
+
+            if (!pos.isInRange(e.getPos().toCenterPos(), range)) {
                 continue;
             }
 
@@ -128,7 +133,7 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedScreenHan
             if (this.channel == null) {
                 return;
             }
-            this.channel.setDistance(ModConfig.speakerDistance);
+            this.channel.setDistance(ModConfig.speakerDistance + 1F);
         }
 
         this.channel.send(packet.getOpusEncodedData());

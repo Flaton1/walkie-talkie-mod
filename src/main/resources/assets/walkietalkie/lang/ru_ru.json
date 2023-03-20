@@ -12,20 +12,20 @@
   "gui.walkietalkie.label": "Рация",
 
   "advancement.walkietalkie.root.title": "Рация",
-  "advancement.walkietalkie.root.description": "Откройте для себя силу общения с рацией.",
+  "advancement.walkietalkie.root.description": "Откройте для себя всю мощь общения с помощью рации.",
 
   "advancement.walkietalkie.wooden_walkietalkie.title": "Основная связь",
-  "advancement.walkietalkie.wooden_walkietalkie.description": "Полученная деревянная рация позволит связываться на короткие расстояния.",
+  "advancement.walkietalkie.wooden_walkietalkie.description": "Получите «Деревянную рацию», позволяющая связываться на короткие расстояния.",
 
   "advancement.walkietalkie.stone_walkietalkie.title": "Улучшенная связь",
-  "advancement.walkietalkie.stone_walkietalkie.description": "Полученная каменная рация предоставит большой диапазон связи.",
+  "advancement.walkietalkie.stone_walkietalkie.description": "Получите «Каменную рацию», предоставляющая большой диапазон связи.",
 
   "advancement.walkietalkie.iron_walkietalkie.title": "Продвинутая связь",
-  "advancement.walkietalkie.iron_walkietalkie.description": "Полученная железная рация ещё больше увеличит дальность связи.",
+  "advancement.walkietalkie.iron_walkietalkie.description": "Получите «Железную рацию», увеличивающая дальность связи ещё больше.",
 
   "advancement.walkietalkie.diamond_walkietalkie.title": "Элитная связь",
-  "advancement.walkietalkie.diamond_walkietalkie.description": "Полученная передовая алмазная рация позволит непрерывно связываться на огромные расстояния.",
+  "advancement.walkietalkie.diamond_walkietalkie.description": "Получите «Передовую алмазную рацию», позволяющая непрерывно связываться на огромные расстояния.",
 
   "advancement.walkietalkie.netherite_walkietalkie.title": "Потрясающая связь",
-  "advancement.walkietalkie.netherite_walkietalkie.description": "Полученная ультрасовременная незеритовая рация предоставит феноменальную дальность связи."
+  "advancement.walkietalkie.netherite_walkietalkie.description": "Получите «Современную незеритовую рацию», предоставляющая феноменальную дальность связи."
 }

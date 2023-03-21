@@ -34,8 +34,8 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedScreenHan
 
     protected final PropertyDelegate propertyDelegate;
 
-    private int activate = 0;
-    private int canal = 1;
+    int activate;
+    int canal;
 
     private final UUID channelId;
 
@@ -50,19 +50,20 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedScreenHan
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {
-                switch (index) {
-                    case 0: return SpeakerBlockEntity.this.activate;
-                    case 1: return SpeakerBlockEntity.this.canal;
-                    default: return 0;
-                }
+                return switch (index) {
+                    case 0 -> SpeakerBlockEntity.this.activate;
+                    case 1 -> SpeakerBlockEntity.this.canal;
+                    default -> 0;
+                };
             }
 
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0: SpeakerBlockEntity.this.activate = value; break;
-                    case 1: SpeakerBlockEntity.this.canal = value; break;
-                    default: break;
+                    case 0 -> SpeakerBlockEntity.this.activate = value;
+                    case 1 -> SpeakerBlockEntity.this.canal = value;
+                    default -> {
+                    }
                 }
             }
 
@@ -89,15 +90,15 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedScreenHan
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
-        activate = nbt.getInt(NBT_KEY_ACTIVATE);
-        canal = nbt.getInt(NBT_KEY_CANAL);
+        this.activate = nbt.getInt(NBT_KEY_ACTIVATE);
+        this.canal = nbt.getInt(NBT_KEY_CANAL);
     }
 
     @Override
     public void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
-        nbt.putInt(NBT_KEY_ACTIVATE, activate);
-        nbt.putInt(NBT_KEY_CANAL, canal);
+        nbt.putInt(NBT_KEY_ACTIVATE, this.activate);
+        nbt.putInt(NBT_KEY_CANAL, this.canal);
     }
 
     public static List<SpeakerBlockEntity> getSpeakersActivateInRange(int canal, Vec3d pos, int range) {

@@ -40,7 +40,7 @@ public class WalkieTalkieScreen extends Screen {
     private static final Identifier ACTIVATE_TEXTURE = new Identifier(WalkieTalkie.MOD_ID, "textures/icons/activate.png");
 
     public WalkieTalkieScreen(ItemStack stack) {
-        super(Text.translatable("gui.walkietalkie.label"));
+        super(Text.translatable("gui.walkietalkie.title"));
         instance = this;
         this.stack = stack;
 

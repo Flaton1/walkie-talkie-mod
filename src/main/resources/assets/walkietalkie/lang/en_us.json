@@ -7,9 +7,10 @@
 
   "block.walkietalkie.speaker": "Speaker",
 
-  "gui.walkietalkie.speaker.title": "Speaker",
+  "itemGroup.walkietalkie": "Walkie-Talkie",
 
-  "gui.walkietalkie.label": "Walkie-Talkie",
+  "gui.walkietalkie.speaker.title": "Speaker",
+  "gui.walkietalkie.title": "Walkie-Talkie",
 
   "advancement.walkietalkie.root.title": "Walkie Talkie",
   "advancement.walkietalkie.root.description": "Discover the power of communication with the walkie-talkie.",

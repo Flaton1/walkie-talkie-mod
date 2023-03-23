@@ -7,9 +7,10 @@
 
   "block.walkietalkie.speaker": "Haut-parleur",
 
-  "gui.walkietalkie.speaker.title": "Haut-parleur",
+  "itemGroup.walkietalkie": "Talkie-Walkie",
 
-  "gui.walkietalkie.label": "Talkie-Walkie",
+  "gui.walkietalkie.speaker.title": "Haut-parleur",
+  "gui.walkietalkie.title": "Talkie-Walkie",
 
   "advancement.walkietalkie.root.title": "Talkie-Walkie",
   "advancement.walkietalkie.root.description": "Découvrez la puissance de la communication grâce au talkie-walkie.",

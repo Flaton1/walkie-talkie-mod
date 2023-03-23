@@ -7,9 +7,10 @@
 
   "block.walkietalkie.speaker": "Акустическая колонка",
 
-  "gui.walkietalkie.speaker.title": "Акустическая колонка",
+  "itemGroup.walkietalkie": "Рация",
 
-  "gui.walkietalkie.label": "Рация",
+  "gui.walkietalkie.speaker.title": "Акустическая колонка",
+  "gui.walkietalkie.title": "Рация",
 
   "advancement.walkietalkie.root.title": "Рация",
   "advancement.walkietalkie.root.description": "Откройте для себя всю мощь общения с помощью рации.",

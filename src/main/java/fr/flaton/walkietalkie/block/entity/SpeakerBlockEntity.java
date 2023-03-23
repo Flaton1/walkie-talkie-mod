@@ -34,11 +34,10 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedScreenHan
 
     protected final PropertyDelegate propertyDelegate;
 
-    int activate;
-    int canal;
+    int activate = 0;
+    int canal = 1;
 
     private final UUID channelId;
-
     private LocationalAudioChannel channel = null;
 
     public SpeakerBlockEntity(BlockPos pos, BlockState state) {
@@ -99,6 +98,11 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedScreenHan
         super.writeNbt(nbt);
         nbt.putInt(NBT_KEY_ACTIVATE, this.activate);
         nbt.putInt(NBT_KEY_CANAL, this.canal);
+    }
+
+    @Override
+    public boolean onSyncedBlockEvent(int type, int data) {
+        return super.onSyncedBlockEvent(type, data);
     }
 
     public static List<SpeakerBlockEntity> getSpeakersActivateInRange(int canal, Vec3d pos, int range) {

@@ -13,7 +13,7 @@ public class ModItemGroup {
 
     static {
         WALKIETALKIE = FabricItemGroup.builder(new Identifier(WalkieTalkie.MOD_ID, "walkietalkie"))
-                .displayName(Text.translatable("itemGroup.walkietalkie"))
-                .icon(() -> new ItemStack(ModItems.STONE_WALKIETALKIE)).build();
+                .displayName(Text.translatable("itemGroup.walkietalkie.walkietalkie"))
+                .icon(() -> new ItemStack(ModItems.WOODEN_WALKIETALKIE)).build();
     }
 }

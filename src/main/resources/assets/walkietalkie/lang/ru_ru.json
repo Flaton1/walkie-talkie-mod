@@ -1,32 +1,33 @@
 {
+  "_comment": "Translator by Heimdallr-1",
+
+  "itemGroup.walkietalkie.walkietalkie": "Рация",
+
   "item.walkietalkie.wooden_walkietalkie": "Деревянная рация",
   "item.walkietalkie.stone_walkietalkie": "Каменная рация",
   "item.walkietalkie.iron_walkietalkie": "Железная рация",
   "item.walkietalkie.diamond_walkietalkie": "Алмазная рация",
   "item.walkietalkie.netherite_walkietalkie": "Незеритовая рация",
 
-  "block.walkietalkie.speaker": "Акустическая колонка",
-
-  "itemGroup.walkietalkie.walkietalkie": "Рация",
-
-  "gui.walkietalkie.speaker.title": "Акустическая колонка",
+  "block.walkietalkie.speaker": "Динамик",
+  "gui.walkietalkie.speaker.title": "Динамик",
   "gui.walkietalkie.title": "Рация",
 
   "advancement.walkietalkie.root.title": "Рация",
-  "advancement.walkietalkie.root.description": "Откройте для себя всю мощь общения с помощью рации.",
+  "advancement.walkietalkie.root.description": "Откройте для себя новые способности общения с помощью рации.",
 
-  "advancement.walkietalkie.wooden_walkietalkie.title": "Основная связь",
-  "advancement.walkietalkie.wooden_walkietalkie.description": "Получите «Деревянную рацию», позволяющая связываться на короткие расстояния.",
+  "advancement.walkietalkie.wooden_walkietalkie.title": "Базовый уровень общения",
+  "advancement.walkietalkie.wooden_walkietalkie.description": "Приобретите «Деревянную рацию», для связи на короткие расстояния.",
 
-  "advancement.walkietalkie.stone_walkietalkie.title": "Улучшенная связь",
-  "advancement.walkietalkie.stone_walkietalkie.description": "Получите «Каменную рацию», предоставляющая большой диапазон связи.",
+  "advancement.walkietalkie.stone_walkietalkie.title": "Улучшенный уровень общения",
+  "advancement.walkietalkie.stone_walkietalkie.description": "Приобретите «Каменную рацию», для связи на больших расстояниях.",
 
-  "advancement.walkietalkie.iron_walkietalkie.title": "Продвинутая связь",
-  "advancement.walkietalkie.iron_walkietalkie.description": "Получите «Железную рацию», увеличивающая дальность связи ещё больше.",
+  "advancement.walkietalkie.iron_walkietalkie.title": "Продвинутый уровень общения",
+  "advancement.walkietalkie.iron_walkietalkie.description": "Приобретите «Железную рацию», увеличивающую дальность связи ещё больше.",
 
-  "advancement.walkietalkie.diamond_walkietalkie.title": "Элитная связь",
-  "advancement.walkietalkie.diamond_walkietalkie.description": "Получите «Передовую алмазную рацию», позволяющая непрерывно связываться на огромные расстояния.",
+  "advancement.walkietalkie.diamond_walkietalkie.title": "Элитный уровень общения",
+  "advancement.walkietalkie.diamond_walkietalkie.description": "Приобретите «Алмазную рацию премиум-класса», обеспечивающую непрерывную связь на больших расстояниях.",
 
-  "advancement.walkietalkie.netherite_walkietalkie.title": "Потрясающая связь",
-  "advancement.walkietalkie.netherite_walkietalkie.description": "Получите «Современную незеритовую рацию», предоставляющая феноменальную дальность связи."
+  "advancement.walkietalkie.netherite_walkietalkie.title": "Потрясающий уровень общения",
+  "advancement.walkietalkie.netherite_walkietalkie.description": "Приобретите «Современную незеритовую рацию», обеспечивающую феноменальную дальность связи."
 }

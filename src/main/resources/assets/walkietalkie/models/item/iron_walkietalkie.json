@@ -1,6 +1,0 @@
-{
-	"parent": "walkietalkie:item/walkietalkie",
-	"textures": {
-		"2": "block/iron_block"
-	}
-}

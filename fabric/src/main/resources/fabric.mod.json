@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "walkietalkie",
+  "version": "${version}",
+
+  "name": "Walkie-Talkie",
+  "description": "Adds walkie-talkies with different upgrades",
+  "authors": [
+    "Flaton"
+  ],
+  "contact": {},
+
+  "license": "MIT",
+  "icon": "icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "fr.flaton.walkietalkie.fabric.WalkieTalkieFabric"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.19",
+    "minecraft": ">=1.19.4",
+    "fabric-api": "*",
+    "voicechat": ">=1.19.4-2.3.3"
+  }
+}

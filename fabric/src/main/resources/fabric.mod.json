@@ -26,10 +26,10 @@
     ]
   },
   "depends": {
-    "fabricloader": ">=0.14.21",
-    "minecraft": ">=1.20",
+    "fabricloader": ">=0.14.11",
+    "minecraft": ">=1.19.2",
     "fabric-api": "*",
-    "voicechat": ">=1.20-2.3.28",
-    "architectury": ">=9.0.8"
+    "voicechat": ">=1.19.2-2.3.28",
+    "architectury": ">=6.5.82"
   }
 }

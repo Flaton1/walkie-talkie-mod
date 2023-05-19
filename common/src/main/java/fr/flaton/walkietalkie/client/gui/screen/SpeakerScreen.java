@@ -1,15 +1,15 @@
 package fr.flaton.walkietalkie.client.gui.screen;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import dev.architectury.networking.NetworkManager;
 import fr.flaton.walkietalkie.WalkieTalkie;
 import fr.flaton.walkietalkie.client.gui.widget.ToggleImageButton;
 import fr.flaton.walkietalkie.network.ModMessages;
 import fr.flaton.walkietalkie.screen.SpeakerScreenHandler;
 import io.netty.buffer.Unpooled;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
@@ -33,31 +33,43 @@ public class SpeakerScreen extends HandledScreen<SpeakerScreenHandler> {
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        this.renderBackground(context);
-        super.render(context, mouseX, mouseY, delta);
-        drawCenteredText(context, this.textRenderer, title.getString(), this.width / 2, guiTop + 7, 4210752);
+    public void renderBackground(MatrixStack matrices) {
+        super.renderBackground(matrices);
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+        RenderSystem.setShaderTexture(0, TEXTURE);
+        drawTexture(matrices, guiLeft, guiTop, 0, 0, xSize, ySize);
+    }
+
+    @Override
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        this.renderBackground(matrices);
+        int titleWidth = this.textRenderer.getWidth(title.asOrderedText());
+        this.textRenderer.draw(matrices, this.title, (float) (this.width / 2 - titleWidth / 2), (float) guiTop + 7, 4210752);
 
         updateActivateState();
+        renderCanalText(matrices);
 
-        drawCenteredText(context, this.textRenderer, String.valueOf(handler.getCanal()), this.width / 2, guiTop + 26, 4210752);
-    }
-
-    protected void drawCenteredText(DrawContext context, TextRenderer textRenderer, String text, int centerX, int y, int color) {
-        context.drawText(textRenderer, text, centerX - textRenderer.getWidth(text) / 2, y, color, false);
+        super.render(matrices, mouseX, mouseY, delta);
     }
 
     @Override
-    protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
-        context.drawTexture(TEXTURE, guiLeft, guiTop, 0, 0, xSize, ySize);
-    }
+    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
 
+    }
     @Override
-    protected void drawForeground(DrawContext context, int mouseX, int mouseY) {
+    protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
+
     }
 
     private void updateActivateState() {
         activateButton.setState(handler.isActivate());
+    }
+
+    private void renderCanalText(MatrixStack matrices) {
+        canalText = Text.literal(String.valueOf(handler.getCanal()));
+
+        int canalWidth = this.textRenderer.getWidth(canalText.asOrderedText());
+        this.textRenderer.draw(matrices, canalText, (float) (this.width / 2 - canalWidth / 2), (float) guiTop + 26, 4210752);
     }
 
     @Override
@@ -70,9 +82,9 @@ public class SpeakerScreen extends HandledScreen<SpeakerScreenHandler> {
         activateButton = new ToggleImageButton(guiLeft + 6, guiTop + ySize - 6 - 20, ACTIVATE_TEXTURE, button -> sendUpdateSpeaker(0, false), handler.isActivate());
         this.addDrawableChild(activateButton);
 
-        this.addDrawableChild(ButtonWidget.builder(Text.literal(">"), button -> sendUpdateSpeaker(1, true)).dimensions(this.width / 2 - 10 + 40, guiTop + 20, 20, 20).build());
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 + 40, guiTop + 20, 20, 20, Text.literal(">"), button -> sendUpdateSpeaker(1, true)));
 
-        this.addDrawableChild(ButtonWidget.builder(Text.literal("<"), button -> sendUpdateSpeaker(1, false)).dimensions(this.width / 2 - 10 - 40, guiTop + 20, 20, 20).build());
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 - 40, guiTop + 20, 20, 20, Text.literal("<"), button -> sendUpdateSpeaker(1, false)));
 
         canalText = Text.literal(String.valueOf(handler.getCanal()));
     }

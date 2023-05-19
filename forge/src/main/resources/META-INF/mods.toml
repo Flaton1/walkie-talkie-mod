@@ -61,6 +61,18 @@ Adds walkie-talkies with different upgrades
    modId="minecraft"
    mandatory=true
    # This version range declares a minimum of the current minecraft version up to but not including the next major version
-   versionRange="[1.19.4,1.20)"
+   versionRange="[1.19.4]"
    ordering="NONE"
    side="BOTH"
+[[dependencies.walkietalkie]]
+   modId="voicechat"
+   mandatory=true
+   versionRange="[1.19.4-2.3.28,)"
+   ordering="AFTER"
+   side="BOTH"
+[[dependencies.walkietalkie]]
+   modId = "architectury"
+   mandatory = true
+   versionRange = "[8.1.80,)"
+   ordering = "AFTER"
+   side = "BOTH"

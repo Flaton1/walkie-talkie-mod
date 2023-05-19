@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "l#",
+    "rw",
+    "ww"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "l": {
+      "item": "minecraft:lightning_rod"
+    },
+    "w":{
+      "tag": "minecraft:wool"
+    }
+  },
+  "result": {
+    "item": "walkietalkie:iron_walkietalkie"
+  }
+}

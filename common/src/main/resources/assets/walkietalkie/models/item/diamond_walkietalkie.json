@@ -1,0 +1,6 @@
+{
+	"parent": "walkietalkie:item/walkietalkie",
+	"textures": {
+		"2": "block/diamond_block"
+	}
+}

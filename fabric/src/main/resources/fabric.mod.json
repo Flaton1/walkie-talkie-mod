@@ -17,12 +17,19 @@
   "entrypoints": {
     "main": [
       "fr.flaton.walkietalkie.fabric.WalkieTalkieFabric"
+    ],
+    "client": [
+      "fr.flaton.walkietalkie.fabric.WalkieTalkieClientFabric"
+    ],
+    "voicechat": [
+      "fr.flaton.walkietalkie.WalkieTalkieVoiceChatPlugin"
     ]
   },
   "depends": {
     "fabricloader": ">=0.14.19",
     "minecraft": ">=1.19.4",
     "fabric-api": "*",
-    "voicechat": ">=1.19.4-2.3.3"
+    "voicechat": ">=1.19.4-2.3.28",
+    "architectury": ">=8.1.80"
   }
 }

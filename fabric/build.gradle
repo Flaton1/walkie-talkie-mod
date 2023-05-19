@@ -31,11 +31,7 @@ processResources {
     inputs.property "version", project.version
 
     filesMatching("fabric.mod.json") {
-        expand "version": project.version,
-        "minecraft_version": minecraft_version,
-        "fabric_loader_version": fabric_loader_version,
-        "architectury_version": architectury_version,
-        "min_voicechat_version": min_voicechat_version
+        expand "version": project.version
     }
 }
 

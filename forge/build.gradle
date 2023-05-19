@@ -30,7 +30,11 @@ processResources {
     inputs.property "version", project.version
 
     filesMatching("META-INF/mods.toml") {
-        expand "version": project.version
+        expand "version": project.version,
+                "minecraft_version": minecraft_version,
+                "forge_range_version": forge_range_version,
+                "architectury_version": architectury_version,
+                "min_voicechat_version": min_voicechat_version
     }
 }
 

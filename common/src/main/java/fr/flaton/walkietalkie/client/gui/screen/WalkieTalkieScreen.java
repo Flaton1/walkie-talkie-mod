@@ -14,6 +14,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 public class WalkieTalkieScreen extends Screen {
@@ -37,7 +38,7 @@ public class WalkieTalkieScreen extends Screen {
     private static final Identifier ACTIVATE_TEXTURE = new Identifier(WalkieTalkie.MOD_ID, "textures/icons/activate.png");
 
     public WalkieTalkieScreen(ItemStack stack) {
-        super(Text.translatable("gui.walkietalkie.title"));
+        super(new TranslatableText("gui.walkietalkie.title"));
         instance = this;
         this.stack = stack;
 
@@ -57,19 +58,19 @@ public class WalkieTalkieScreen extends Screen {
         this.addDrawableChild(activate);
 
 
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 + 40, guiTop + 20, 20, 20, Text.literal(">"), button -> {
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 + 40, guiTop + 20, 20, 20, Text.of(">"), button -> {
             PacketByteBuf packet = new PacketByteBuf(Unpooled.buffer());
             packet.writeBoolean(true);
             NetworkManager.sendToServer(ModMessages.CANAL_PRESSED, packet);
         }));
 
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 - 40, guiTop + 20, 20, 20, Text.literal(">"), button -> {
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 - 40, guiTop + 20, 20, 20, Text.of(">"), button -> {
             PacketByteBuf packet = new PacketByteBuf(Unpooled.buffer());
             packet.writeBoolean(false);
             NetworkManager.sendToServer(ModMessages.CANAL_PRESSED, packet);
         }));
 
-        canal = Text.literal(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
+        canal = Text.of(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
     }
 
     @Override
@@ -93,7 +94,7 @@ public class WalkieTalkieScreen extends Screen {
     public void checkButtons(ItemStack stack) {
         mute.setState(stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_MUTE));
         activate.setState(stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE));
-        canal = Text.literal(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
+        canal = Text.of(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
     }
 
     public static WalkieTalkieScreen getInstance() {

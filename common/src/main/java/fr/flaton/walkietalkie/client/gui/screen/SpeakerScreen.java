@@ -12,6 +12,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -26,7 +27,7 @@ public class SpeakerScreen extends HandledScreen<SpeakerScreenHandler> {
     private int guiTop;
 
     private ToggleImageButton activateButton;
-    private Text canalText = Text.literal("");
+    private Text canalText = LiteralText.EMPTY;
 
     public SpeakerScreen(SpeakerScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -66,7 +67,7 @@ public class SpeakerScreen extends HandledScreen<SpeakerScreenHandler> {
     }
 
     private void renderCanalText(MatrixStack matrices) {
-        canalText = Text.literal(String.valueOf(handler.getCanal()));
+        canalText = Text.of(String.valueOf(handler.getCanal()));
 
         int canalWidth = this.textRenderer.getWidth(canalText.asOrderedText());
         this.textRenderer.draw(matrices, canalText, (float) (this.width / 2 - canalWidth / 2), (float) guiTop + 26, 4210752);
@@ -82,11 +83,11 @@ public class SpeakerScreen extends HandledScreen<SpeakerScreenHandler> {
         activateButton = new ToggleImageButton(guiLeft + 6, guiTop + ySize - 6 - 20, ACTIVATE_TEXTURE, button -> sendUpdateSpeaker(0, false), handler.isActivate());
         this.addDrawableChild(activateButton);
 
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 + 40, guiTop + 20, 20, 20, Text.literal(">"), button -> sendUpdateSpeaker(1, true)));
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 + 40, guiTop + 20, 20, 20, Text.of(">"), button -> sendUpdateSpeaker(1, true)));
 
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 - 40, guiTop + 20, 20, 20, Text.literal("<"), button -> sendUpdateSpeaker(1, false)));
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 - 40, guiTop + 20, 20, 20, Text.of("<"), button -> sendUpdateSpeaker(1, false)));
 
-        canalText = Text.literal(String.valueOf(handler.getCanal()));
+        canalText = Text.of(String.valueOf(handler.getCanal()));
     }
 
     private void sendUpdateSpeaker(int index, boolean status) {

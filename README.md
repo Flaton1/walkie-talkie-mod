@@ -1,12 +1,17 @@
-# Walkie Talkie Mod Minecraft
+# Minecraft Walkie-Talkie Mod
 
 <!-- prettier-ignore-start -->
 > **Warning**
 >
 > This is not an official addon. **Please don't go to the Simple Voice Chat discord server for support! Instead, please use [GitHub issues](https://github.com/Flaton1/walkie-talkie-mod/issues)
 > for support.** I'll try to provide support as soon as possible but there is no guarantee for how long it will take.
+
+> **Attention**
 >
-> This mod **requires [Simple Voice Chat](https://github.com/henkelmax/simple-voice-chat) and [Fabric API](https://github.com/FabricMC/fabric).**
+> This mod requires [Simple Voice Chat](https://github.com/henkelmax/simple-voice-chat) and [Architectury API](https://github.com/architectury/architectury-api)
+> 
+> If you use Fabric, this mod require [Fabric API](https://github.com/FabricMC/fabric).
+
 <!-- prettier-ignore-end -->
 
 This mod adds two-way radios with different upgrades.

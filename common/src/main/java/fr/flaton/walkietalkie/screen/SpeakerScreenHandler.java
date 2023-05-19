@@ -4,6 +4,7 @@ import fr.flaton.walkietalkie.block.ModBlocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -22,7 +23,7 @@ public class SpeakerScreenHandler extends ScreenHandler {
         addProperties(delegate);
     }
 
-    public SpeakerScreenHandler(int i, PlayerInventory playerInventory) {
+    public SpeakerScreenHandler(int i, PlayerInventory playerInventory, PacketByteBuf packetByteBuf) {
         this(i, new ArrayPropertyDelegate(2), ScreenHandlerContext.EMPTY);
     }
 

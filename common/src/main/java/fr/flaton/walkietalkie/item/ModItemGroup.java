@@ -8,9 +8,9 @@ import net.minecraft.util.Identifier;
 
 public class ModItemGroup {
 
-    public static CreativeTabRegistry.TabSupplier WALKIETALKIE = register("walkietalkie", ModItems.WOODEN_WALKIETALKIE);
+    public static ItemGroup WALKIETALKIE = register("walkietalkie", ModItems.WOODEN_WALKIETALKIE);
 
-    private static CreativeTabRegistry.TabSupplier register(String id, RegistrySupplier<Item> icon) {
+    private static ItemGroup register(String id, RegistrySupplier<Item> icon) {
         return CreativeTabRegistry.create(new Identifier(WalkieTalkie.MOD_ID, id), () -> new ItemStack(icon.get()));
     }
 }

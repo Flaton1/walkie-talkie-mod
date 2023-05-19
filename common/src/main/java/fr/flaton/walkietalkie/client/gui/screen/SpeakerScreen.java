@@ -7,9 +7,6 @@ import fr.flaton.walkietalkie.client.gui.widget.ToggleImageButton;
 import fr.flaton.walkietalkie.network.ModMessages;
 import fr.flaton.walkietalkie.screen.SpeakerScreenHandler;
 import io.netty.buffer.Unpooled;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
@@ -85,9 +82,9 @@ public class SpeakerScreen extends HandledScreen<SpeakerScreenHandler> {
         activateButton = new ToggleImageButton(guiLeft + 6, guiTop + ySize - 6 - 20, ACTIVATE_TEXTURE, button -> sendUpdateSpeaker(0, false), handler.isActivate());
         this.addDrawableChild(activateButton);
 
-        this.addDrawableChild(ButtonWidget.builder(Text.literal(">"), button -> sendUpdateSpeaker(1, true)).dimensions(this.width / 2 - 10 + 40, guiTop + 20, 20, 20).build());
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 + 40, guiTop + 20, 20, 20, Text.literal(">"), button -> sendUpdateSpeaker(1, true)));
 
-        this.addDrawableChild(ButtonWidget.builder(Text.literal("<"), button -> sendUpdateSpeaker(1, false)).dimensions(this.width / 2 - 10 - 40, guiTop + 20, 20, 20).build());
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 - 40, guiTop + 20, 20, 20, Text.literal("<"), button -> sendUpdateSpeaker(1, false)));
 
         canalText = Text.literal(String.valueOf(handler.getCanal()));
     }

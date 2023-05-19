@@ -116,7 +116,7 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedMenuProvi
                 continue;
             }
 
-            if (!pos.isInRange(e.getPos().toCenterPos(), range)) {
+            if (!pos.isInRange(new Vec3d(e.getPos().getX(), e.getPos().getY(), e.getPos().getX()), range)) {
                 continue;
             }
 

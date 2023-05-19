@@ -7,10 +7,7 @@ import fr.flaton.walkietalkie.client.gui.widget.ToggleImageButton;
 import fr.flaton.walkietalkie.item.WalkieTalkieItem;
 import fr.flaton.walkietalkie.network.ModMessages;
 import io.netty.buffer.Unpooled;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
@@ -60,20 +57,19 @@ public class WalkieTalkieScreen extends Screen {
         this.addDrawableChild(activate);
 
 
-        this.addDrawableChild(ButtonWidget.builder(Text.literal(">"), button -> {
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 + 40, guiTop + 20, 20, 20, Text.literal(">"), button -> {
             PacketByteBuf packet = new PacketByteBuf(Unpooled.buffer());
             packet.writeBoolean(true);
             NetworkManager.sendToServer(ModMessages.CANAL_PRESSED, packet);
-        }).dimensions(this.width / 2 - 10 + 40, guiTop + 20, 20, 20).build());
+        }));
 
-        this.addDrawableChild(ButtonWidget.builder(Text.literal("<"), button -> {
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 - 40, guiTop + 20, 20, 20, Text.literal(">"), button -> {
             PacketByteBuf packet = new PacketByteBuf(Unpooled.buffer());
             packet.writeBoolean(false);
             NetworkManager.sendToServer(ModMessages.CANAL_PRESSED, packet);
-        }).dimensions(this.width / 2 - 10 - 40, guiTop + 20, 20, 20).build());
+        }));
 
         canal = Text.literal(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
-
     }
 
     @Override

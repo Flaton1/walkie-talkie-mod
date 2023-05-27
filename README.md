@@ -36,6 +36,7 @@ This mod adds two-way radios with different upgrades.
 
 ### Translators :
 + Russian: **Heimdallr-1**
++ German: **Kampftroll**
 
 ### Mod :
 [Simple Voice Chat](https://github.com/henkelmax/simple-voice-chat)

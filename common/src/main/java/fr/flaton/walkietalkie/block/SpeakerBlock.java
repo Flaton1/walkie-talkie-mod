@@ -1,6 +1,7 @@
 package fr.flaton.walkietalkie.block;
 
 
+import dev.architectury.registry.menu.MenuRegistry;
 import fr.flaton.walkietalkie.block.entity.SpeakerBlockEntity;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockRenderType;
@@ -8,6 +9,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -34,7 +36,7 @@ public class SpeakerBlock extends BlockWithEntity implements BlockEntityProvider
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
             if (world.getBlockEntity(pos) instanceof SpeakerBlockEntity speakerBlockEntity) {
-                player.openHandledScreen(speakerBlockEntity);
+                MenuRegistry.openExtendedMenu((ServerPlayerEntity) player, speakerBlockEntity);
             }
         }
         return ActionResult.SUCCESS;

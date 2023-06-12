@@ -4,6 +4,7 @@ import de.maxhenkel.voicechat.api.Position;
 import de.maxhenkel.voicechat.api.VoicechatServerApi;
 import de.maxhenkel.voicechat.api.audiochannel.LocationalAudioChannel;
 import de.maxhenkel.voicechat.api.packets.MicrophonePacket;
+import dev.architectury.registry.menu.ExtendedMenuProvider;
 import fr.flaton.walkietalkie.config.ModConfig;
 import fr.flaton.walkietalkie.screen.SpeakerScreenHandler;
 import net.minecraft.block.BlockState;
@@ -11,6 +12,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.*;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
@@ -21,7 +23,7 @@ import java.util.List;
 import java.util.UUID;
 
 
-public class SpeakerBlockEntity extends BlockEntity implements NamedScreenHandlerFactory {
+public class SpeakerBlockEntity extends BlockEntity implements ExtendedMenuProvider {
 
     private static final List<SpeakerBlockEntity> speakerBlockEntities = new ArrayList<>();
 
@@ -77,6 +79,11 @@ public class SpeakerBlockEntity extends BlockEntity implements NamedScreenHandle
     @Override
     public Text getDisplayName() {
         return Text.translatable("gui.walkietalkie.speaker.title");
+    }
+
+    @Override
+    public void saveExtraData(PacketByteBuf buf) {
+        buf.writeBlockPos(this.pos);
     }
 
     @Override

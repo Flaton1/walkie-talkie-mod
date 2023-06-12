@@ -19,7 +19,6 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-@Environment(value = EnvType.CLIENT)
 public class WalkieTalkieScreen extends Screen {
 
     private static WalkieTalkieScreen instance;

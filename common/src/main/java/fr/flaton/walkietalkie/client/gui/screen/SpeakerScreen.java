@@ -1,15 +1,12 @@
 package fr.flaton.walkietalkie.client.gui.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import dev.architectury.networking.NetworkManager;
 import fr.flaton.walkietalkie.WalkieTalkie;
 import fr.flaton.walkietalkie.client.gui.widget.ToggleImageButton;
 import fr.flaton.walkietalkie.network.ModMessages;
 import fr.flaton.walkietalkie.screen.SpeakerScreenHandler;
 import io.netty.buffer.Unpooled;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
@@ -36,43 +33,23 @@ public class SpeakerScreen extends HandledScreen<SpeakerScreenHandler> {
     }
 
     @Override
-    public void renderBackground(MatrixStack matrices) {
-        super.renderBackground(matrices);
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-        RenderSystem.setShaderTexture(0, TEXTURE);
-        drawTexture(matrices, guiLeft, guiTop, 0, 0, xSize, ySize);
-    }
-
-    @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        this.renderBackground(matrices);
-        int titleWidth = this.textRenderer.getWidth(title.asOrderedText());
-        this.textRenderer.draw(matrices, this.title, (float) (this.width / 2 - titleWidth / 2), (float) guiTop + 7, 4210752);
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        this.renderBackground(context);
+        super.render(context, mouseX, mouseY, delta);
+        context.drawCenteredTextWithShadow(this.textRenderer, title, this.width / 2, guiTop + 7, 4210752);
 
         updateActivateState();
-        renderCanalText(matrices);
 
-        super.render(matrices, mouseX, mouseY, delta);
+        context.drawCenteredTextWithShadow(this.textRenderer, String.valueOf(handler.getCanal()), this.width / 2, guiTop + 26, 4210752);
     }
 
     @Override
-    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
-
-    }
-    @Override
-    protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
-
+    protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
+        context.drawTexture(TEXTURE, guiLeft, guiTop, 0, 0, xSize, ySize);
     }
 
     private void updateActivateState() {
         activateButton.setState(handler.isActivate());
-    }
-
-    private void renderCanalText(MatrixStack matrices) {
-        canalText = Text.literal(String.valueOf(handler.getCanal()));
-
-        int canalWidth = this.textRenderer.getWidth(canalText.asOrderedText());
-        this.textRenderer.draw(matrices, canalText, (float) (this.width / 2 - canalWidth / 2), (float) guiTop + 26, 4210752);
     }
 
     @Override

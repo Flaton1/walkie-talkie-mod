@@ -1,19 +1,15 @@
 package fr.flaton.walkietalkie.client.gui.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import dev.architectury.networking.NetworkManager;
 import fr.flaton.walkietalkie.WalkieTalkie;
 import fr.flaton.walkietalkie.client.gui.widget.ToggleImageButton;
 import fr.flaton.walkietalkie.item.WalkieTalkieItem;
 import fr.flaton.walkietalkie.network.ModMessages;
 import io.netty.buffer.Unpooled;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
@@ -77,21 +73,17 @@ public class WalkieTalkieScreen extends Screen {
     }
 
     @Override
-    public void renderBackground(MatrixStack matrices) {
-        super.renderBackground(matrices);
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-        RenderSystem.setShaderTexture(0, BG_TEXTURE);
-        drawTexture(matrices, guiLeft, guiTop, 0, 0, xSize, ySize);
+    public void renderBackground(DrawContext context) {
+        super.renderBackground(context);
+        context.drawTexture(BG_TEXTURE, guiLeft, guiTop, 0, 0, xSize, ySize);
     }
 
     @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        this.renderBackground(matrices);
-        int titleWidth = this.textRenderer.getWidth(title.asOrderedText());
-        this.textRenderer.draw(matrices, this.title, (float) (this.width / 2 - titleWidth / 2), (float) guiTop + 7, 4210752);
-        int canalWidth = this.textRenderer.getWidth(canal.asOrderedText());
-        this.textRenderer.draw(matrices, canal, (float) (this.width / 2 - canalWidth / 2), (float) guiTop + 26, 4210752);
-        super.render(matrices, mouseX, mouseY, delta);
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        this.renderBackground(context);
+        super.render(context, mouseX, mouseY, delta);
+        context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, guiTop + 7, 4210752);
+        context.drawCenteredTextWithShadow(this.textRenderer, this.canal, this.width / 2, guiTop + 26, 4210752);
     }
 
     public void checkButtons(ItemStack stack) {

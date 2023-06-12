@@ -1,11 +1,7 @@
 package fr.flaton.walkietalkie.client.gui.widget;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -19,16 +15,14 @@ public class ImageButton extends ButtonWidget {
 
     }
 
-    protected void renderImage(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
-        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
-        RenderSystem.setShaderTexture(0, texture);
-        drawTexture(matrices, getX() + 2, getY()+ 2, 0, 0, 16, 16, 16, 16);
+    protected void renderImage(DrawContext context) {
+        context.setShaderColor(1.0f, 1.0f, 1.0f, this.alpha);
+        drawTexture(context, texture, getX() + 2, getY()+ 2, 0, 0, 16, 16, 16, 16, 16);
     }
 
     @Override
-    public void renderButton(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        super.renderButton(matrices, mouseX, mouseY, delta);
-        renderImage(matrices, mouseX, mouseY, delta);
+    public void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
+        super.renderButton(context, mouseX, mouseY, delta);
+        renderImage(context);
     }
 }

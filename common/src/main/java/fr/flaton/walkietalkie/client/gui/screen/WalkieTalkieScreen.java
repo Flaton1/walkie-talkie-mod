@@ -1,6 +1,5 @@
 package fr.flaton.walkietalkie.client.gui.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import dev.architectury.networking.NetworkManager;
 import fr.flaton.walkietalkie.WalkieTalkie;
 import fr.flaton.walkietalkie.client.gui.widget.ToggleImageButton;
@@ -8,13 +7,13 @@ import fr.flaton.walkietalkie.item.WalkieTalkieItem;
 import fr.flaton.walkietalkie.network.ModMessages;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 public class WalkieTalkieScreen extends Screen {
@@ -38,7 +37,7 @@ public class WalkieTalkieScreen extends Screen {
     private static final Identifier ACTIVATE_TEXTURE = new Identifier(WalkieTalkie.MOD_ID, "textures/icons/activate.png");
 
     public WalkieTalkieScreen(ItemStack stack) {
-        super(new TranslatableText("gui.walkietalkie.title"));
+        super(Text.translatable("gui.walkietalkie.title"));
         instance = this;
         this.stack = stack;
 
@@ -58,43 +57,44 @@ public class WalkieTalkieScreen extends Screen {
         this.addDrawableChild(activate);
 
 
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 + 40, guiTop + 20, 20, 20, Text.of(">"), button -> {
+        this.addDrawableChild(ButtonWidget.builder(Text.literal(">"), button -> {
             PacketByteBuf packet = new PacketByteBuf(Unpooled.buffer());
             packet.writeBoolean(true);
             NetworkManager.sendToServer(ModMessages.CANAL_PRESSED, packet);
-        }));
+        }).dimensions(this.width / 2 - 10 + 40, guiTop + 20, 20, 20).build());
 
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 - 40, guiTop + 20, 20, 20, Text.of(">"), button -> {
+        this.addDrawableChild(ButtonWidget.builder(Text.literal("<"), button -> {
             PacketByteBuf packet = new PacketByteBuf(Unpooled.buffer());
             packet.writeBoolean(false);
             NetworkManager.sendToServer(ModMessages.CANAL_PRESSED, packet);
-        }));
+        }).dimensions(this.width / 2 - 10 - 40, guiTop + 20, 20, 20).build());
 
-        canal = Text.of(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
+        canal = Text.literal(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
+
     }
 
     @Override
-    public void renderBackground(MatrixStack matrices) {
-        super.renderBackground(matrices);
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-        RenderSystem.setShaderTexture(0, BG_TEXTURE);
-        drawTexture(matrices, guiLeft, guiTop, 0, 0, xSize, ySize);
+    public void renderBackground(DrawContext context) {
+        super.renderBackground(context);
+        context.drawTexture(BG_TEXTURE, guiLeft, guiTop, 0, 0, xSize, ySize);
     }
 
     @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        this.renderBackground(matrices);
-        int titleWidth = this.textRenderer.getWidth(title.asOrderedText());
-        this.textRenderer.draw(matrices, this.title, (float) (this.width / 2 - titleWidth / 2), (float) guiTop + 7, 4210752);
-        int canalWidth = this.textRenderer.getWidth(canal.asOrderedText());
-        this.textRenderer.draw(matrices, canal, (float) (this.width / 2 - canalWidth / 2), (float) guiTop + 26, 4210752);
-        super.render(matrices, mouseX, mouseY, delta);
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        this.renderBackground(context);
+        super.render(context, mouseX, mouseY, delta);
+        drawCenteredText(context, this.textRenderer, this.title, this.width / 2, guiTop + 7, 4210752);
+        drawCenteredText(context, this.textRenderer, this.canal, this.width / 2, guiTop + 26, 4210752);
+    }
+
+    protected void drawCenteredText(DrawContext context, TextRenderer textRenderer, Text text, int centerX, int y, int color) {
+        context.drawText(textRenderer, text, centerX - textRenderer.getWidth(text) / 2, y, color, false);
     }
 
     public void checkButtons(ItemStack stack) {
         mute.setState(stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_MUTE));
         activate.setState(stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE));
-        canal = Text.of(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
+        canal = Text.literal(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
     }
 
     public static WalkieTalkieScreen getInstance() {

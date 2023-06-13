@@ -19,4 +19,8 @@ public class ModItemGroup {
                     () -> new ItemStack(ModItems.WOODEN_WALKIETALKIE.get())
             )
     );
+
+    public static void register() {
+        TABS.register();
+    }
 }

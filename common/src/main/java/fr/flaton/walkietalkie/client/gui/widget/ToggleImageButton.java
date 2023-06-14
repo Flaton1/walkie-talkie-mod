@@ -20,9 +20,9 @@ public class ToggleImageButton extends ImageButton{
         context.setShaderColor(1.0f, 1.0f, 1.0f, this.alpha);
 
         if (state) {
-            drawTexture(context, texture, getX() + 2, getY()+ 2, 0, 16, 16, 32, 32, 32, 32);
+            drawTexture(context, texture, getX() + 2, getY()+ 2, 16, 0, 0, 16, 16, 32, 32);
         } else {
-            drawTexture(context, texture, getX() + 2, getY()+ 2, 0, 0, 16, 32, 32, 32, 32);
+            drawTexture(context, texture, getX() + 2, getY()+ 2, 0, 0, 0, 16, 16, 32, 32);
         }
 
     }

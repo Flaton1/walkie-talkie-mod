@@ -9,7 +9,6 @@ import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import de.maxhenkel.voicechat.api.events.VoicechatServerStartedEvent;
 import de.maxhenkel.voicechat.api.opus.OpusDecoder;
 import de.maxhenkel.voicechat.api.opus.OpusEncoder;
-import de.maxhenkel.voicechat.api.packets.StaticSoundPacket;
 import fr.flaton.walkietalkie.block.entity.SpeakerBlockEntity;
 import fr.flaton.walkietalkie.item.WalkieTalkieItem;
 import net.minecraft.entity.player.PlayerEntity;
@@ -102,13 +101,11 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
                 continue;
             }
 
-            byte[] data = compressOpusData(event.getPacket().getOpusEncodedData());
-            StaticSoundPacket soundPacket = event.getPacket().staticSoundPacketBuilder().opusEncodedData(data).build();
-
-            voicechatServerApi.sendStaticSoundPacketTo(connection, soundPacket);
+            voicechatServerApi.sendStaticSoundPacketTo(connection, event.getPacket().staticSoundPacketBuilder().build());
         }
     }
 
+    /*
     private static short[] downsample(short[] audio, int srcFreq, int dstFreq) {
         int ratio = srcFreq / dstFreq;
         int newLength = audio.length / ratio;
@@ -144,6 +141,8 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
         short[] audioCompressed = compressAudio(audio);
         return opusEncoder.encode(audioCompressed);
     }
+
+     */
 
     private ItemStack getWalkieTalkieActivate(PlayerEntity player) {
 

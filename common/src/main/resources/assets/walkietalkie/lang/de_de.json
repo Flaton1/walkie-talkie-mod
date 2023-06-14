@@ -1,0 +1,32 @@
+{
+  "item.walkietalkie.wooden_walkietalkie": "Holz Walkie-Talkie",
+  "item.walkietalkie.stone_walkietalkie": "Stein Walkie-Talkie",
+  "item.walkietalkie.iron_walkietalkie": "Eisen Walkie-Talkie",
+  "item.walkietalkie.diamond_walkietalkie": "Diamant Walkie-Talkie",
+  "item.walkietalkie.netherite_walkietalkie": "Netherite Walkie-Talkie",
+
+  "block.walkietalkie.speaker": "Lautsprecher",
+
+  "itemGroup.walkietalkie.walkietalkie": "Walkie-Talkie",
+
+  "gui.walkietalkie.speaker.title": "Lautsprecher",
+  "gui.walkietalkie.title": "Walkie-Talkie",
+
+  "advancement.walkietalkie.root.title": "Walkie Talkie",
+  "advancement.walkietalkie.root.description": "Entdecken Sie die Macht der Kommunikation mit dem Walkie-Talkie.",
+
+  "advancement.walkietalkie.wooden_walkietalkie.title": "Grundlegende Kommunikation",
+  "advancement.walkietalkie.wooden_walkietalkie.description": "Holz Walkie-Talkie erhalten, um über kurze Distanzen kommunizieren zu können.",
+
+  "advancement.walkietalkie.stone_walkietalkie.title": "Verbesserte Kommunikation",
+  "advancement.walkietalkie.stone_walkietalkie.description": "Stein Walkie-Talkies erhalten, das eine größere Kommunikationsreichweite ermöglicht.",
+
+  "advancement.walkietalkie.iron_walkietalkie.title": "Erweiterte Kommunikation",
+  "advancement.walkietalkie.iron_walkietalkie.description": "Eisen Walkie-Talkies erhalten, das die Reichweite der Kommunikation noch weiter erhöht.",
+
+  "advancement.walkietalkie.diamond_walkietalkie.title": "Elite Kommunikation",
+  "advancement.walkietalkie.diamond_walkietalkie.description": "Erstklassigens Diamant Walkie-Talkies erhalten, das eine nahtlose Kommunikation über große Entfernungen ermöglicht.",
+
+  "advancement.walkietalkie.netherite_walkietalkie.title": "Ultimative Kommunikation",
+  "advancement.walkietalkie.netherite_walkietalkie.description": "Hochmodernenes Netherite Walkie-Talkies erhalten, das eine noch nie dagewesene Kommunikationsreichweite bietet."
+}

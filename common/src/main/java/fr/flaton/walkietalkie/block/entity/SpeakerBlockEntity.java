@@ -15,7 +15,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.*;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
@@ -79,7 +78,7 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedMenuProvi
 
     @Override
     public Text getDisplayName() {
-        return new TranslatableText("gui.walkietalkie.speaker.title");
+        return Text.translatable("gui.walkietalkie.speaker.title");
     }
 
     @Override

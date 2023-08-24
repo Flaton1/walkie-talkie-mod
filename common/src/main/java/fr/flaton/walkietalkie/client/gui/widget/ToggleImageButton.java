@@ -1,6 +1,8 @@
 package fr.flaton.walkietalkie.client.gui.widget;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.util.Identifier;
 
 public class ToggleImageButton extends ImageButton{
@@ -16,13 +18,14 @@ public class ToggleImageButton extends ImageButton{
     }
 
     @Override
-    protected void renderImage(DrawContext context) {
-        context.setShaderColor(1.0f, 1.0f, 1.0f, this.alpha);
+    protected void renderImage(DrawContext context, int mouseX, int mouseY) {
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
+        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 
         if (state) {
-            drawTexture(context, texture, getX() + 2, getY()+ 2, 16, 0, 0, 16, 16, 32, 32);
+            context.drawTexture(texture, getX() + 2, getY() + 2, 16, 0, 16, 16, 32, 32);
         } else {
-            drawTexture(context, texture, getX() + 2, getY()+ 2, 0, 0, 0, 16, 16, 32, 32);
+            context.drawTexture(texture, getX() + 2, getY() + 2, 0, 0, 16, 16, 32, 32);
         }
 
     }

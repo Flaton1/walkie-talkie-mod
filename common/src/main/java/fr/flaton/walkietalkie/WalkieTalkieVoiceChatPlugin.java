@@ -105,45 +105,6 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
         }
     }
 
-    /*
-    private static short[] downsample(short[] audio, int srcFreq, int dstFreq) {
-        int ratio = srcFreq / dstFreq;
-        int newLength = audio.length / ratio;
-        short[] newAudio = new short[newLength];
-        for (int i = 0, j = 0; i < audio.length && j < newLength; i += ratio, j++) {
-            newAudio[j] = audio[i];
-        }
-        return newAudio;
-    }
-
-    private static short[] upsample(short[] audio, int srcFreq, int dstFreq) {
-        int ratio = dstFreq / srcFreq;
-        int newLength = audio.length * ratio;
-        short[] newAudio = new short[newLength];
-        for (int i = 0, j = 0; i < audio.length - 1 && j < newLength - 1; i++, j += ratio) {
-            newAudio[j] = audio[i];
-            for (int k = 1; k < ratio; k++) {
-                newAudio[j + k] = (short) ((audio[i] * (ratio - k) + audio[i + 1] * k) / ratio);
-            }
-        }
-        newAudio[newLength - 1] = audio[audio.length - 1];
-        return newAudio;
-    }
-
-    private static short[] compressAudio(short[] audio) {
-        short[] downsampled = downsample(audio, 48000, 4800);
-        short[] upsampled = upsample(downsampled, 4800, 48000);
-        return upsampled;
-    }
-
-    private byte[] compressOpusData(byte[] data) {
-        short[] audio = opusDecoder.decode(data);
-        short[] audioCompressed = compressAudio(audio);
-        return opusEncoder.encode(audioCompressed);
-    }
-
-     */
-
     private ItemStack getWalkieTalkieActivate(PlayerEntity player) {
 
         ItemStack itemStack = null;

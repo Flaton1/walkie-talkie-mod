@@ -1,5 +1,6 @@
 package fr.flaton.walkietalkie.client.gui.screen;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import dev.architectury.networking.NetworkManager;
 import fr.flaton.walkietalkie.WalkieTalkie;
 import fr.flaton.walkietalkie.client.gui.widget.ToggleImageButton;
@@ -8,9 +9,9 @@ import fr.flaton.walkietalkie.network.ModMessages;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
@@ -74,21 +75,23 @@ public class WalkieTalkieScreen extends Screen {
     }
 
     @Override
-    public void renderBackground(DrawContext context) {
-        super.renderBackground(context);
-        context.drawTexture(BG_TEXTURE, guiLeft, guiTop, 0, 0, xSize, ySize);
+    public void renderBackground(MatrixStack matrices) {
+        super.renderBackground(matrices);
+        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+        RenderSystem.setShaderTexture(0, BG_TEXTURE);
+        drawTexture(matrices, guiLeft, guiTop, 0, 0, xSize, ySize);
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        this.renderBackground(context);
-        super.render(context, mouseX, mouseY, delta);
-        drawCenteredText(context, this.textRenderer, this.title, this.width / 2, guiTop + 7, 4210752);
-        drawCenteredText(context, this.textRenderer, this.canal, this.width / 2, guiTop + 26, 4210752);
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        this.renderBackground(matrices);
+        super.render(matrices, mouseX, mouseY, delta);
+        drawCenteredText(matrices, this.textRenderer, this.title.getString(), guiTop + 7, 4210752);
+        drawCenteredText(matrices, this.textRenderer, this.canal.getString(), guiTop + 26, 4210752);
     }
 
-    protected void drawCenteredText(DrawContext context, TextRenderer textRenderer, Text text, int centerX, int y, int color) {
-        context.drawText(textRenderer, text, centerX - textRenderer.getWidth(text) / 2, y, color, false);
+    protected void drawCenteredText(MatrixStack matrices, TextRenderer textRenderer, String text, int y, int color) {
+        textRenderer.draw(matrices, text, (float) (this.width / 2 - textRenderer.getWidth(text) / 2), y, color);
     }
 
     public void checkButtons(ItemStack stack) {

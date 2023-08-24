@@ -1,5 +1,6 @@
 package fr.flaton.walkietalkie.client.gui.screen;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import dev.architectury.networking.NetworkManager;
 import fr.flaton.walkietalkie.WalkieTalkie;
 import fr.flaton.walkietalkie.client.gui.widget.ToggleImageButton;
@@ -7,9 +8,9 @@ import fr.flaton.walkietalkie.network.ModMessages;
 import fr.flaton.walkietalkie.screen.SpeakerScreenHandler;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
@@ -33,27 +34,35 @@ public class SpeakerScreen extends HandledScreen<SpeakerScreenHandler> {
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        this.renderBackground(context);
-        super.render(context, mouseX, mouseY, delta);
-        drawCenteredText(context, this.textRenderer, title.getString(), this.width / 2, guiTop + 7, 4210752);
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        this.renderBackground(matrices);
+        super.render(matrices, mouseX, mouseY, delta);
+        drawCenteredText(matrices, this.textRenderer, title.getString(), guiTop + 7, 4210752);
 
         updateActivateState();
 
-        drawCenteredText(context, this.textRenderer, String.valueOf(handler.getCanal()), this.width / 2, guiTop + 26, 4210752);
+        drawCenteredText(matrices, this.textRenderer, String.valueOf(handler.getCanal()), guiTop + 26, 4210752);
     }
 
-    protected void drawCenteredText(DrawContext context, TextRenderer textRenderer, String text, int centerX, int y, int color) {
-        context.drawText(textRenderer, text, centerX - textRenderer.getWidth(text) / 2, y, color, false);
-    }
-
-    @Override
-    protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
-        context.drawTexture(TEXTURE, guiLeft, guiTop, 0, 0, xSize, ySize);
+    protected void drawCenteredText(MatrixStack matrices, TextRenderer textRenderer, String text, int y, int color) {
+        textRenderer.draw(matrices, text, (float) (this.width / 2 - textRenderer.getWidth(text) / 2), y, color);
     }
 
     @Override
-    protected void drawForeground(DrawContext context, int mouseX, int mouseY) {
+    public void renderBackground(MatrixStack matrices) {
+        super.renderBackground(matrices);
+        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+        RenderSystem.setShaderTexture(0, TEXTURE);
+        drawTexture(matrices, guiLeft, guiTop, 0, 0, xSize, ySize);
+    }
+
+    @Override
+    protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
+    }
+
+    @Override
+    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
+
     }
 
     private void updateActivateState() {

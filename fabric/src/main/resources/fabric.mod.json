@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Walkie-Talkie",
-  "description": "Adds walkie-talkies with different upgrades",
+  "description": "Adds walkie-talkies with different upgrades.",
   "authors": [
     "Flaton"
   ],

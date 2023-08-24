@@ -1,26 +1,16 @@
 package fr.flaton.walkietalkie.item;
 
 import dev.architectury.registry.CreativeTabRegistry;
-import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
+import fr.flaton.walkietalkie.WalkieTalkie;
 import net.minecraft.item.*;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 
 public class ModItemGroup {
 
-    public static final DeferredRegister<ItemGroup> TABS =
-            DeferredRegister.create("walkietalkie", RegistryKeys.ITEM_GROUP);
+    public static CreativeTabRegistry.TabSupplier WALKIETALKIE = register("walkietalkie", ModItems.WOODEN_WALKIETALKIE);
 
-    public static final RegistrySupplier<ItemGroup> WALKIETALKIE = TABS.register(
-            "walkietalkie",
-            () -> CreativeTabRegistry.create(
-                    Text.translatable("itemGroup.walkietalkie.walkietalkie"),
-                    () -> new ItemStack(ModItems.WOODEN_WALKIETALKIE.get())
-            )
-    );
-
-    public static void register() {
-        TABS.register();
+    private static CreativeTabRegistry.TabSupplier register(String id, RegistrySupplier<Item> icon) {
+        return CreativeTabRegistry.create(new Identifier(WalkieTalkie.MOD_ID, id), () -> new ItemStack(icon.get()));
     }
 }

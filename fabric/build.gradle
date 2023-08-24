@@ -82,6 +82,7 @@ curseforge {
             relations {
                 requiredDependency 'simple-voice-chat'
                 requiredDependency 'architectury-api'
+                requiredDependency 'fabric-api'
             }
         }
     }
@@ -108,6 +109,7 @@ modrinth {
     dependencies {
         required.project '9eGKb6K1' // simple-voice-chat
         required.project 'lhGA9TYQ' // architectury-api
+        required.project 'P7dR8mSH' // fabric-api
     }
 }
 tasks.modrinth.dependsOn(build)

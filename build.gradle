@@ -64,7 +64,7 @@ allprojects {
                 ':common:clean',
                 ':fabric:clean',
                 ':fabric:curseforge',
-                //':fabric:modrinth'
+                ':fabric:modrinth'
         ]
     }
 

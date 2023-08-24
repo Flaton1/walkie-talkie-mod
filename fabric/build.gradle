@@ -34,9 +34,9 @@ processResources {
 
     filesMatching("fabric.mod.json") {
         expand "version": project.version,
-        "minecraft_version": minecraft_version,
+        "min_minecraft_version": min_mc_version,
         "voicechat_api_version": voicechat_api_version,
-        "architectury_version": architectury_version,
+        "min_architectury_version": min_architectury_version,
         "fabric_loader_version": fabric_loader_version
 
     }
@@ -50,7 +50,13 @@ shadowJar {
 remapJar {
     inputFile.set shadowJar.archiveFile
     dependsOn shadowJar
-    archiveAppendix.set("fabric-${minecraft_version}")
+
+    if (minecraft_version == min_mc_version) {
+        archiveAppendix.set("fabric-${minecraft_version}")
+    } else {
+        archiveAppendix.set("fabric-${min_mc_version}-${minecraft_version}")
+    }
+
     archiveClassifier.set(null)
 }
 
@@ -68,7 +74,11 @@ curseforge {
         addGameVersion minecraft_version
         addGameVersion 'Fabric'
         mainArtifact(remapJar) {
-            displayName = "[FABRIC][${minecraft_version}] Walkie-Talkie ${mod_version}"
+            if (minecraft_version == min_mc_version) {
+                displayName = "[FABRIC][${minecraft_version}] Walkie-Talkie ${mod_version}"
+            } else {
+                displayName = "[FABRIC][${min_mc_version}-${minecraft_version}] Walkie-Talkie ${mod_version}"
+            }
             relations {
                 requiredDependency 'simple-voice-chat'
                 requiredDependency 'architectury-api'
@@ -85,7 +95,11 @@ modrinth {
     token = file("${rootDir}/modrinth_token.txt").exists() ? file("${rootDir}/modrinth_token.txt").text : ''
     projectId = "yaRitiLw"
     versionNumber = "fabric-${mod_version}"
-    versionName = "[FABRIC][${minecraft_version}] Walkie-Talkie ${mod_version}"
+    if (minecraft_version == min_mc_version) {
+        versionName = "[FABRIC][${minecraft_version}] Walkie-Talkie ${mod_version}"
+    } else {
+        versionName = "[FABRIC][${min_mc_version}-${minecraft_version}] Walkie-Talkie ${mod_version}"
+    }
     uploadFile = remapJar
     versionType = release_type.toUpperCase()
     changelog = file("${rootDir}/changelog.md").text

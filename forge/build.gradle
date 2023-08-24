@@ -33,10 +33,10 @@ processResources {
 
     filesMatching("META-INF/mods.toml") {
         expand "version": project.version,
-        "minecraft_version": minecraft_version,
+        "min_minecraft_version": min_mc_version,
         "voicechat_api_version": voicechat_api_version,
-        "architectury_version": architectury_version,
-        "forge_loader_version": forge_loader_version
+        "min_architectury_version": min_architectury_version,
+        "min_forge_loader_version": min_forge_version
     }
 }
 
@@ -50,7 +50,13 @@ shadowJar {
 remapJar {
     inputFile.set shadowJar.archiveFile
     dependsOn shadowJar
-    archiveAppendix.set("fabric-${minecraft_version}")
+
+    if (minecraft_version == min_mc_version) {
+        archiveAppendix.set("forge-${minecraft_version}")
+    } else {
+        archiveAppendix.set("forge-${min_mc_version}-${minecraft_version}")
+    }
+
     archiveClassifier.set(null)
 }
 
@@ -80,7 +86,11 @@ curseforge {
         addGameVersion minecraft_version
         addGameVersion 'Forge'
         mainArtifact(remapJar) {
-            displayName = "[FORGE][${minecraft_version}] Walkie-Talkie ${mod_version}"
+            if (minecraft_version == min_mc_version) {
+                displayName = "[FORGE][${minecraft_version}] Walkie-Talkie ${mod_version}"
+            } else {
+                displayName = "[FORGE][${min_mc_version}-${minecraft_version}] Walkie-Talkie ${mod_version}"
+            }
             relations {
                 requiredDependency 'simple-voice-chat'
                 requiredDependency 'architectury-api'
@@ -97,7 +107,11 @@ modrinth {
     token = file("${rootDir}/modrinth_token.txt").exists() ? file("${rootDir}/modrinth_token.txt").text : ''
     projectId = "yaRitiLw"
     versionNumber = "forge-${mod_version}"
-    versionName = "[FORGE][${minecraft_version}] Walkie-Talkie ${mod_version}"
+    if (minecraft_version == min_mc_version) {
+        versionName = "[FORGE][${minecraft_version}] Walkie-Talkie ${mod_version}"
+    } else {
+        versionName = "[FORGE][${min_mc_version}-${minecraft_version}] Walkie-Talkie ${mod_version}"
+    }
     uploadFile = remapJar
     versionType = release_type.toUpperCase()
     changelog = file("${rootDir}/changelog.md").text

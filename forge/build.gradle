@@ -36,7 +36,7 @@ processResources {
         "min_minecraft_version": min_mc_version,
         "voicechat_api_version": voicechat_api_version,
         "min_architectury_version": min_architectury_version,
-        "min_forge_loader_version": min_forge_version
+        "min_forge_version": min_forge_version
     }
 }
 

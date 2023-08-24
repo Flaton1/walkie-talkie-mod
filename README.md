@@ -18,7 +18,7 @@ This mod will receive no further improvements except for bug fixes in these vers
 | Minecraft Version | Fabric | Forge |
 |-------------------|--------|-------|
 | 1.20.1       | ✅      | ✅     |
-| 1.19.3-4          | ❌      | ❌     |
+| 1.19.3-4          | ✅      | ✅     |
 | 1.19.2            | ✅      | ❌     |
 | 1.18.2            | ❌      | ❌     |
 | 1.16.5            | ❌      | ❌     |

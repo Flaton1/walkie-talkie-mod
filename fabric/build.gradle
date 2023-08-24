@@ -50,6 +50,7 @@ shadowJar {
 remapJar {
     inputFile.set shadowJar.archiveFile
     dependsOn shadowJar
+    archiveAppendix.set("fabric-${minecraft_version}")
     archiveClassifier.set(null)
 }
 
@@ -66,7 +67,7 @@ curseforge {
         releaseType = release_type
         addGameVersion minecraft_version
         addGameVersion 'Fabric'
-        mainArtifact(jar) {
+        mainArtifact(remapJar) {
             displayName = "[FABRIC][${minecraft_version}] Walkie-Talkie ${mod_version}"
             relations {
                 requiredDependency 'simple-voice-chat'
@@ -85,7 +86,7 @@ modrinth {
     projectId = "yaRitiLw"
     versionNumber = "fabric-${mod_version}"
     versionName = "[FABRIC][${minecraft_version}] Walkie-Talkie ${mod_version}"
-    uploadFile = jar
+    uploadFile = remapJar
     versionType = release_type.toUpperCase()
     changelog = file("${rootDir}/changelog.md").text
     gameVersions = [minecraft_version]

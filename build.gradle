@@ -57,4 +57,25 @@ allprojects {
     java {
         withSourcesJar()
     }
+
+    tasks.register('publish01Fabric', GradleBuild) {
+        group = 'walkie-talkie'
+        tasks = [
+                ':common:clean',
+                ':fabric:clean',
+                ':fabric:curseforge',
+                //':fabric:modrinth'
+        ]
+    }
+
+    tasks.register('publish02Forge', GradleBuild) {
+        group = 'walkie-talkie'
+        tasks = [
+                ':common:clean',
+                ':forge:clean',
+                ':forge:curseforge',
+                ':forge:modrinth'
+        ]
+    }
+
 }

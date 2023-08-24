@@ -116,3 +116,7 @@ run/
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
+
+# Tokens / API key
+modrinth_token.txt
+curseforge_api_key.txt

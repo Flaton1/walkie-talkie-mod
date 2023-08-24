@@ -1,5 +1,7 @@
 plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
+    id "com.matthewprenger.cursegradle" version "1.4.0"
+    id "com.modrinth.minotaur" version "2.+"
 }
 
 architectury {
@@ -31,7 +33,12 @@ processResources {
     inputs.property "version", project.version
 
     filesMatching("fabric.mod.json") {
-        expand "version": project.version
+        expand "version": project.version,
+        "minecraft_version": minecraft_version,
+        "voicechat_api_version": voicechat_api_version,
+        "architectury_version": architectury_version,
+        "fabric_loader_version": fabric_loader_version
+
     }
 }
 
@@ -49,6 +56,46 @@ remapJar {
 jar {
     archiveClassifier.set("dev")
 }
+
+curseforge {
+    apiKey = file("${rootDir}/curseforge_api_key.txt").exists() ? file("${rootDir}/curseforge_api_key.txt").text : ''
+    project {
+        id = "825621"
+        changelogType = 'markdown'
+        changelog = file("${rootDir}/changelog.md")
+        releaseType = release_type
+        addGameVersion minecraft_version
+        addGameVersion 'Fabric'
+        mainArtifact(jar) {
+            displayName = "[FABRIC][${minecraft_version}] Walkie-Talkie ${mod_version}"
+            relations {
+                requiredDependency 'simple-voice-chat'
+                requiredDependency 'architectury-api'
+            }
+        }
+    }
+}
+
+tasks.modrinth.configure({
+    group = 'upload'
+})
+
+modrinth {
+    token = file("${rootDir}/modrinth_token.txt").exists() ? file("${rootDir}/modrinth_token.txt").text : ''
+    projectId = "yaRitiLw"
+    versionNumber = "fabric-${mod_version}"
+    versionName = "[FABRIC][${minecraft_version}] Walkie-Talkie ${mod_version}"
+    uploadFile = jar
+    versionType = release_type.toUpperCase()
+    changelog = file("${rootDir}/changelog.md").text
+    gameVersions = [minecraft_version]
+    loaders = ['fabric']
+    dependencies {
+        required.project '9eGKb6K1' // simple-voice-chat
+        required.project 'lhGA9TYQ' // architectury-api
+    }
+}
+tasks.modrinth.dependsOn(build)
 
 sourcesJar {
     def commonSources = project(":common").sourcesJar

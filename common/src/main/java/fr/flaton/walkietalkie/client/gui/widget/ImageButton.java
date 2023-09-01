@@ -37,10 +37,10 @@ public class ImageButton extends PressableWidget {
     }
 
     protected void renderImage(MatrixStack matrices, int mouseX, int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
         RenderSystem.setShaderTexture(0, texture);
-        drawTexture(matrices, getX() + 2, getY() + 2, 0, 0, 16, 16, 16, 16);
+        drawTexture(matrices, x + 2, y + 2, 0, 0, 16, 16, 16, 16);
     }
 
     @Override
@@ -60,9 +60,8 @@ public class ImageButton extends PressableWidget {
         tooltipSupplier.onTooltip(this, matrices, textRenderer, mouseX, mouseY);
     }
 
-
     @Override
-    protected void appendClickableNarrations(NarrationMessageBuilder builder) {
+    public void appendNarrations(NarrationMessageBuilder builder) {
         appendDefaultNarrations(builder);
     }
 

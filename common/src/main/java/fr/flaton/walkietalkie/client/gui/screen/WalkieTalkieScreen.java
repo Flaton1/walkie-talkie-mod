@@ -57,18 +57,17 @@ public class WalkieTalkieScreen extends Screen {
         activate = new ToggleImageButton(guiLeft + 28, guiTop + ySize - 26, ACTIVATE_TEXTURE, button -> NetworkManager.sendToServer(ModMessages.ACTIVATE_PRESSED, new PacketByteBuf(Unpooled.EMPTY_BUFFER)), stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE));
         this.addDrawableChild(activate);
 
-
-        this.addDrawableChild(ButtonWidget.builder(Text.literal(">"), button -> {
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 + 40, guiTop + 20, 20, 20, Text.literal(">"), button -> {
             PacketByteBuf packet = new PacketByteBuf(Unpooled.buffer());
             packet.writeBoolean(true);
             NetworkManager.sendToServer(ModMessages.CANAL_PRESSED, packet);
-        }).dimensions(this.width / 2 - 10 + 40, guiTop + 20, 20, 20).build());
+        }));
 
-        this.addDrawableChild(ButtonWidget.builder(Text.literal("<"), button -> {
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 - 40, guiTop + 20, 20, 20, Text.literal("<"), button -> {
             PacketByteBuf packet = new PacketByteBuf(Unpooled.buffer());
             packet.writeBoolean(false);
             NetworkManager.sendToServer(ModMessages.CANAL_PRESSED, packet);
-        }).dimensions(this.width / 2 - 10 - 40, guiTop + 20, 20, 20).build());
+        }));
 
         canal = Text.literal(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
 

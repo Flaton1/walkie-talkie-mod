@@ -6,14 +6,14 @@ import fr.flaton.walkietalkie.WalkieTalkie;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.registry.Registry;
 
 import java.util.function.Supplier;
 
 public class ModBlocks {
 
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(WalkieTalkie.MOD_ID, RegistryKeys.BLOCK);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(WalkieTalkie.MOD_ID, Registry.BLOCK_KEY);
 
     public static final RegistrySupplier<Block> SPEAKER = registerBlock("speaker",
             () -> new SpeakerBlock(AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).strength(0.8F)));

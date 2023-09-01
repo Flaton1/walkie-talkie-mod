@@ -50,3 +50,4 @@ This mod will receive no further improvements except for bug fixes in these vers
 
 ### Mod :
 [Simple Voice Chat](https://github.com/henkelmax/simple-voice-chat)
+[Architectury API](https://github.com/architectury/architectury-api)

@@ -34,7 +34,7 @@ If necessary, add logs to explain your problem.
 
 **Server (please complete the following information, if you own the server):**
  - OS: [e.g. iOS]
- - Simple Voice Chat Version [e.g. client, server]
+ - Simple Voice Chat Version [e.g. 2.4.24]
  - Minecraft Version [e.g. 1.20.2]
  - Mod Version [e.g. 1.2.2]
 

@@ -78,6 +78,10 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
                 continue;
             }
 
+            if (!receiverPlayer.getWorld().getDimension().equals(senderPlayer.getWorld().getDimension())) {
+                continue;
+            }
+
             ItemStack receiverStack = getWalkieTalkieActivate(receiverPlayer);
 
             if (receiverStack == null) {

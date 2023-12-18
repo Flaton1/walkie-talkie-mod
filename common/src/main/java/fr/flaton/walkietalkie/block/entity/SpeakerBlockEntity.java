@@ -5,6 +5,7 @@ import de.maxhenkel.voicechat.api.VoicechatServerApi;
 import de.maxhenkel.voicechat.api.audiochannel.LocationalAudioChannel;
 import de.maxhenkel.voicechat.api.packets.MicrophonePacket;
 import dev.architectury.registry.menu.ExtendedMenuProvider;
+import fr.flaton.walkietalkie.Util;
 import fr.flaton.walkietalkie.config.ModConfig;
 import fr.flaton.walkietalkie.screen.SpeakerScreenHandler;
 import net.minecraft.block.BlockState;
@@ -13,10 +14,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.*;
+import net.minecraft.screen.PropertyDelegate;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,7 +109,7 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedMenuProvi
         return super.onSyncedBlockEvent(type, data);
     }
 
-    public static List<SpeakerBlockEntity> getSpeakersActivateInRange(int canal, Vec3d pos, int range) {
+    public static List<SpeakerBlockEntity> getSpeakersActivateInRange(int canal, World world, Vec3d pos, int range) {
         speakerBlockEntities.removeIf(BlockEntity::isRemoved);
 
         List<SpeakerBlockEntity> list = new ArrayList<>();
@@ -116,7 +120,12 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedMenuProvi
                 continue;
             }
 
-            if (!pos.isInRange(new Vec3d(e.getPos().getX(), e.getPos().getY(), e.getPos().getX()), range)) {
+            if (!ModConfig.crossDimensionsEnabled
+                    && !world.getRegistryKey().getRegistry().equals(e.getWorld().getRegistryKey().getRegistry())) {
+                continue;
+            }
+
+            if (!e.canBroadcastToSpeaker(world, pos, e, range)) {
                 continue;
             }
 
@@ -142,5 +151,15 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedMenuProvi
         }
 
         this.channel.send(packet.getOpusEncodedData());
+    }
+
+    private boolean canBroadcastToSpeaker(World senderWorld, Vec3d senderPos, SpeakerBlockEntity speaker, int range) {
+        World receiverWorld = speaker.getWorld();
+
+        if (receiverWorld == null) {
+            return false;
+        }
+
+        return Util.canBroadcastToReceiver(senderWorld, receiverWorld, senderPos, speaker.pos.toCenterPos(), range);
     }
 }

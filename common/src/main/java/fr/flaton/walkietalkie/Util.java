@@ -1,9 +1,12 @@
 package fr.flaton.walkietalkie;
 
+import fr.flaton.walkietalkie.config.ModConfig;
 import fr.flaton.walkietalkie.item.WalkieTalkieItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 
 public class Util {
 
@@ -21,8 +24,13 @@ public class Util {
         return null;
     }
 
+    public static boolean canBroadcastToReceiver(World senderWorld, World receiverWorld, Vec3d senderPos, Vec3d receiverPos, int range) {
+        double senderCoordinateScale = senderWorld.getDimension().coordinateScale();
+        double receiverCoordinateScale = receiverWorld.getDimension().coordinateScale();
 
+        double appliedRange = ModConfig.applyDimensionScale ? range / Math.max(senderCoordinateScale, receiverCoordinateScale) : range;
 
-
+        return senderPos.isInRange(receiverPos, appliedRange);
+    }
 
 }

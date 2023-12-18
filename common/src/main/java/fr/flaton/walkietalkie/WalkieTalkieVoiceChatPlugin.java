@@ -15,8 +15,6 @@ import fr.flaton.walkietalkie.item.WalkieTalkieItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -72,7 +70,7 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
         int senderCanal = getCanal(senderStack);
 
-        for (SpeakerBlockEntity entity : SpeakerBlockEntity.getSpeakersActivateInRange(senderCanal, senderPlayer.getPos(), getRange(senderStack))) {
+        for (SpeakerBlockEntity entity : SpeakerBlockEntity.getSpeakersActivateInRange(senderCanal, senderPlayer.getWorld(), senderPlayer.getPos(), getRange(senderStack))) {
             entity.playSound(voicechatServerApi, event.getPacket());
         }
 
@@ -165,11 +163,6 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
         World senderWorld = senderPlayer.getWorld();
         World receiverWorld = receiverPlayer.getWorld();
 
-        double senderCoordinateScale = senderWorld.getDimension().coordinateScale();
-        double receiverCoordinateScale = receiverWorld.getDimension().coordinateScale();
-
-        double range = ModConfig.applyDimensionScale ? receiverRange / Math.max(senderCoordinateScale, receiverCoordinateScale) : receiverRange;
-
-        return senderPlayer.getPos().isInRange(receiverPlayer.getPos(), range);
+        return Util.canBroadcastToReceiver(senderWorld, receiverWorld, senderPlayer.getPos(), receiverPlayer.getPos(), receiverRange);
     }
 }

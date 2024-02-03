@@ -20,6 +20,8 @@ public class ModConfig {
     public static int ironWalkieTalkieRange = 512;
     public static int diamondWalkieTalkieRange = 1024;
     public static int netheriteWalkieTalkieRange = 2048;
+    public static boolean crossDimensionsEnabled = false;
+    public static boolean applyDimensionScale = true;
 
     public ModConfig(Path ConfigFolder) {
         this.CONFIG_FILE = new File(ConfigFolder.toString(), "WalkieTalkie.properties");
@@ -42,6 +44,8 @@ public class ModConfig {
                 ironWalkieTalkieRange = Integer.parseInt(properties.getProperty("iron-walkie-talkie-range", "512"));
                 diamondWalkieTalkieRange = Integer.parseInt(properties.getProperty("diamond-walkie-talkie-range", "1024"));
                 netheriteWalkieTalkieRange = Integer.parseInt(properties.getProperty("netherite-walkie-talkie-range", "2048"));
+                crossDimensionsEnabled = Boolean.parseBoolean(properties.getProperty("cross-dimensions-enabled", "false"));
+                applyDimensionScale = Boolean.parseBoolean(properties.getProperty("apply-dimension-scale", "true"));
 
                 createConfig(mapConfig());
 
@@ -68,6 +72,9 @@ public class ModConfig {
         config.put("iron-walkie-talkie-range", String.valueOf(ironWalkieTalkieRange));
         config.put("diamond-walkie-talkie-range", String.valueOf(diamondWalkieTalkieRange));
         config.put("netherite-walkie-talkie-range", String.valueOf(netheriteWalkieTalkieRange));
+        config.put("\n# Cross dimensions settings", "");
+        config.put("cross-dimensions-enabled", String.valueOf(crossDimensionsEnabled));
+        config.put("apply-dimension-scale", String.valueOf(applyDimensionScale));
 
         return config;
     }

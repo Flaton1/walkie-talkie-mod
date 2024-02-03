@@ -10,10 +10,12 @@ import de.maxhenkel.voicechat.api.events.VoicechatServerStartedEvent;
 import de.maxhenkel.voicechat.api.opus.OpusDecoder;
 import de.maxhenkel.voicechat.api.opus.OpusEncoder;
 import fr.flaton.walkietalkie.block.entity.SpeakerBlockEntity;
+import fr.flaton.walkietalkie.config.ModConfig;
 import fr.flaton.walkietalkie.item.WalkieTalkieItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -68,7 +70,7 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
         int senderCanal = getCanal(senderStack);
 
-        for (SpeakerBlockEntity entity : SpeakerBlockEntity.getSpeakersActivateInRange(senderCanal, senderPlayer.getPos(), getRange(senderStack))) {
+        for (SpeakerBlockEntity entity : SpeakerBlockEntity.getSpeakersActivateInRange(senderCanal, senderPlayer.getWorld(), senderPlayer.getPos(), getRange(senderStack))) {
             entity.playSound(voicechatServerApi, event.getPacket());
         }
 
@@ -78,7 +80,7 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
                 continue;
             }
 
-            if (!receiverPlayer.getWorld().getDimension().equals(senderPlayer.getWorld().getDimension())) {
+            if (!ModConfig.crossDimensionsEnabled && !receiverPlayer.getWorld().getDimension().equals(senderPlayer.getWorld().getDimension())) {
                 continue;
             }
 
@@ -91,7 +93,7 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
             int receiverRange = getRange(receiverStack);
             int receiverCanal = getCanal(receiverStack);
 
-            if (!senderPlayer.getPos().isInRange(receiverPlayer.getPos(), receiverRange)) {
+            if (!canBroadcastToReceiver(senderPlayer, receiverPlayer, receiverRange)) {
                 continue;
             }
 
@@ -137,7 +139,7 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
                     range = walkieTalkieItem.getRange();
                 }
             }
-            
+
         }
 
         return itemStack;
@@ -155,5 +157,12 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
     private boolean isWalkieTalkieMute(ItemStack stack) {
         return Objects.requireNonNull(stack.getNbt()).getBoolean(WalkieTalkieItem.NBT_KEY_MUTE);
+    }
+
+    private boolean canBroadcastToReceiver(PlayerEntity senderPlayer, PlayerEntity receiverPlayer, int receiverRange) {
+        World senderWorld = senderPlayer.getWorld();
+        World receiverWorld = receiverPlayer.getWorld();
+
+        return Util.canBroadcastToReceiver(senderWorld, receiverWorld, senderPlayer.getPos(), receiverPlayer.getPos(), receiverRange);
     }
 }

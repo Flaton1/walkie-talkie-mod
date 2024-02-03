@@ -17,7 +17,7 @@ This mod adds two-way radios with different upgrades.
 This mod will receive no further improvements except for bug fixes in these versions:
 | Minecraft Version | Fabric | Forge |
 |-------------------|--------|-------|
-| 1.20.1       | ✅      | ✅     |
+| 1.20.1            | ✅      | ✅     |
 | 1.19.3-4          | ✅      | ✅     |
 | 1.19.2            | ✅      | ❌     |
 | 1.18.2            | ❌      | ❌     |
@@ -32,6 +32,7 @@ This mod will receive no further improvements except for bug fixes in these vers
 + Upgrade to extend the limit
 + Add speaker block
 + Configure maximum channel in mod config
++ Configure cross dimensions behavior
 ## Upgrades
 + Wood: 128 block distance
 + Stone: 256 block distance

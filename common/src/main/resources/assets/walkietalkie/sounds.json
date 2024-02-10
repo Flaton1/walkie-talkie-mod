@@ -1,0 +1,12 @@
+{
+  "on": {
+    "sounds": [
+      "walkietalkie:on"
+    ]
+  },
+  "off": {
+    "sounds": [
+      "walkietalkie:off"
+    ]
+  }
+}

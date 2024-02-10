@@ -1,17 +1,16 @@
 {
   "schemaVersion": 1,
-  "id": "walkietalkie",
+  "id": "${mod_id}",
   "version": "${version}",
-
-  "name": "Walkie-Talkie",
-  "description": "Adds walkie-talkies with different upgrades",
+  "name": "${mod_name}",
+  "description": "${description}",
   "authors": [
-    "Flaton"
+    "${mod_author}"
   ],
   "contact": {},
 
-  "license": "MIT",
-  "icon": "icon.png",
+  "license": "${license}",
+  "icon": "${mod_id}.png",
 
   "environment": "*",
   "entrypoints": {
@@ -30,6 +29,6 @@
     "minecraft": ">=${min_minecraft_version}",
     "fabric-api": "*",
     "voicechat": ">=${min_minecraft_version}-${voicechat_api_version}",
-    "architectury": ">=${min_architectury_version}"
+    "architectury": ">=${architectury_version}"
   }
 }

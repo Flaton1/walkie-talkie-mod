@@ -1,7 +1,7 @@
 package fr.flaton.walkietalkie.client.gui.screen;
 
 import dev.architectury.networking.NetworkManager;
-import fr.flaton.walkietalkie.WalkieTalkie;
+import fr.flaton.walkietalkie.Constants;
 import fr.flaton.walkietalkie.client.gui.widget.ToggleImageButton;
 import fr.flaton.walkietalkie.item.WalkieTalkieItem;
 import fr.flaton.walkietalkie.network.ModMessages;
@@ -32,9 +32,9 @@ public class WalkieTalkieScreen extends Screen {
     private ToggleImageButton activate;
     private Text canal;
 
-    private static final Identifier BG_TEXTURE = new Identifier(WalkieTalkie.MOD_ID, "textures/gui/gui_walkietalkie.png");
+    private static final Identifier BG_TEXTURE = new Identifier(Constants.MOD_ID, "textures/gui/gui_walkietalkie.png");
     private static final Identifier MUTE_TEXTURE = new Identifier("voicechat", "textures/icons/microphone_button.png");
-    private static final Identifier ACTIVATE_TEXTURE = new Identifier(WalkieTalkie.MOD_ID, "textures/icons/activate.png");
+    private static final Identifier ACTIVATE_TEXTURE = new Identifier(Constants.MOD_ID, "textures/icons/activate.png");
 
     public WalkieTalkieScreen(ItemStack stack) {
         super(Text.translatable("gui.walkietalkie.title"));
@@ -50,27 +50,26 @@ public class WalkieTalkieScreen extends Screen {
         this.guiLeft = (this.width - xSize) / 2;
         this.guiTop = (this.height - ySize) / 2;
 
-        mute = new ToggleImageButton(guiLeft + 6, guiTop + ySize - 6 - 20, MUTE_TEXTURE, button -> NetworkManager.sendToServer(ModMessages.MUTE_PRESSED, new PacketByteBuf(Unpooled.EMPTY_BUFFER)), stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_MUTE));
+        mute = new ToggleImageButton(guiLeft + 6, guiTop + ySize - 6 - 20, MUTE_TEXTURE, button -> sendUpdateWalkieTalkie(2, false), stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_MUTE));
         this.addDrawableChild(mute);
 
-        activate = new ToggleImageButton(guiLeft + 28, guiTop + ySize - 26, ACTIVATE_TEXTURE, button -> NetworkManager.sendToServer(ModMessages.ACTIVATE_PRESSED, new PacketByteBuf(Unpooled.EMPTY_BUFFER)), stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE));
+        activate = new ToggleImageButton(guiLeft + 28, guiTop + ySize - 26, ACTIVATE_TEXTURE, button -> sendUpdateWalkieTalkie(0, false), stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE));
         this.addDrawableChild(activate);
 
 
-        this.addDrawableChild(ButtonWidget.builder(Text.literal(">"), button -> {
-            PacketByteBuf packet = new PacketByteBuf(Unpooled.buffer());
-            packet.writeBoolean(true);
-            NetworkManager.sendToServer(ModMessages.CANAL_PRESSED, packet);
-        }).dimensions(this.width / 2 - 10 + 40, guiTop + 20, 20, 20).build());
+        this.addDrawableChild(ButtonWidget.builder(Text.literal(">"), button -> sendUpdateWalkieTalkie(1, true)).dimensions(this.width / 2 - 10 + 40, guiTop + 20, 20, 20).build());
 
-        this.addDrawableChild(ButtonWidget.builder(Text.literal("<"), button -> {
-            PacketByteBuf packet = new PacketByteBuf(Unpooled.buffer());
-            packet.writeBoolean(false);
-            NetworkManager.sendToServer(ModMessages.CANAL_PRESSED, packet);
-        }).dimensions(this.width / 2 - 10 - 40, guiTop + 20, 20, 20).build());
+        this.addDrawableChild(ButtonWidget.builder(Text.literal("<"), button -> sendUpdateWalkieTalkie(1, false)).dimensions(this.width / 2 - 10 - 40, guiTop + 20, 20, 20).build());
 
         canal = Text.literal(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
 
+    }
+
+    private void sendUpdateWalkieTalkie(int index, boolean status) {
+        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+        buf.writeInt(index);
+        buf.writeBoolean(status);
+        NetworkManager.sendToServer(ModMessages.UPDATE_WALKIETALKIE_C2S, buf);
     }
 
     @Override
@@ -91,7 +90,7 @@ public class WalkieTalkieScreen extends Screen {
         context.drawText(textRenderer, text, centerX - textRenderer.getWidth(text) / 2, y, color, false);
     }
 
-    public void checkButtons(ItemStack stack) {
+    public void updateButtons(ItemStack stack) {
         mute.setState(stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_MUTE));
         activate.setState(stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE));
         canal = Text.literal(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));

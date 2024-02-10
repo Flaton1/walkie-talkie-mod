@@ -28,5 +28,8 @@
   "advancement.walkietalkie.diamond_walkietalkie.description": "Obtained a top-of-the-line diamond walkie-talkie, allowing for seamless communication over great distances.",
 
   "advancement.walkietalkie.netherite_walkietalkie.title": "Ultimate Communication",
-  "advancement.walkietalkie.netherite_walkietalkie.description": "Obtained a state-of-the-art Netherite walkie-talkie, providing unprecedented communication range."
+  "advancement.walkietalkie.netherite_walkietalkie.description": "Obtained a state-of-the-art Netherite walkie-talkie, providing unprecedented communication range.",
+
+  "category.walkietalkie.keys": "Walkie-Talkie",
+  "key.walkietalkie.activate": "On/Off"
 }

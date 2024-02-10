@@ -2,7 +2,7 @@ package fr.flaton.walkietalkie.block;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
-import fr.flaton.walkietalkie.WalkieTalkie;
+import fr.flaton.walkietalkie.Constants;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 
 public class ModBlocks {
 
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(WalkieTalkie.MOD_ID, RegistryKeys.BLOCK);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(Constants.MOD_ID, RegistryKeys.BLOCK);
 
     public static final RegistrySupplier<Block> SPEAKER = registerBlock("speaker",
             () -> new SpeakerBlock(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).instrument(Instrument.BASS).sounds(BlockSoundGroup.WOOD).strength(0.8F).burnable()));

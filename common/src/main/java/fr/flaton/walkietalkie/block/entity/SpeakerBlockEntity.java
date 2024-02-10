@@ -3,8 +3,7 @@ package fr.flaton.walkietalkie.block.entity;
 import de.maxhenkel.voicechat.api.Position;
 import de.maxhenkel.voicechat.api.VoicechatServerApi;
 import de.maxhenkel.voicechat.api.audiochannel.LocationalAudioChannel;
-import de.maxhenkel.voicechat.api.packets.MicrophonePacket;
-import dev.architectury.registry.menu.ExtendedMenuProvider;
+import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import fr.flaton.walkietalkie.Util;
 import fr.flaton.walkietalkie.config.ModConfig;
 import fr.flaton.walkietalkie.screen.SpeakerScreenHandler;
@@ -13,10 +12,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.PropertyDelegate;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerContext;
+import net.minecraft.screen.*;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -27,7 +23,7 @@ import java.util.List;
 import java.util.UUID;
 
 
-public class SpeakerBlockEntity extends BlockEntity implements ExtendedMenuProvider {
+public class SpeakerBlockEntity extends BlockEntity implements NamedScreenHandlerFactory {
 
     private static final List<SpeakerBlockEntity> speakerBlockEntities = new ArrayList<>();
 
@@ -36,7 +32,7 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedMenuProvi
 
     protected final PropertyDelegate propertyDelegate;
 
-    int activate = 0;
+    boolean activated;
     int canal = 1;
 
     private final UUID channelId;
@@ -52,7 +48,7 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedMenuProvi
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> SpeakerBlockEntity.this.activate;
+                    case 0 -> SpeakerBlockEntity.this.activated ? 1 : 0;
                     case 1 -> SpeakerBlockEntity.this.canal;
                     default -> 0;
                 };
@@ -61,7 +57,7 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedMenuProvi
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> SpeakerBlockEntity.this.activate = value;
+                    case 0 -> SpeakerBlockEntity.this.activated = value == 1;
                     case 1 -> SpeakerBlockEntity.this.canal = value;
                     default -> {
                     }
@@ -86,21 +82,16 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedMenuProvi
     }
 
     @Override
-    public void saveExtraData(PacketByteBuf buf) {
-        buf.writeBlockPos(this.pos);
-    }
-
-    @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
-        this.activate = nbt.getInt(NBT_KEY_ACTIVATE);
+        this.activated = nbt.getBoolean(NBT_KEY_ACTIVATE);
         this.canal = nbt.getInt(NBT_KEY_CANAL);
     }
 
     @Override
     public void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
-        nbt.putInt(NBT_KEY_ACTIVATE, this.activate);
+        nbt.putBoolean(NBT_KEY_ACTIVATE, this.activated);
         nbt.putInt(NBT_KEY_CANAL, this.canal);
     }
 
@@ -109,29 +100,29 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedMenuProvi
         return super.onSyncedBlockEvent(type, data);
     }
 
-    public static List<SpeakerBlockEntity> getSpeakersActivateInRange(int canal, World world, Vec3d pos, int range) {
+    public static List<SpeakerBlockEntity> getSpeakersActivatedInRange(int canal, World world, Vec3d pos, int range) {
         speakerBlockEntities.removeIf(BlockEntity::isRemoved);
 
         List<SpeakerBlockEntity> list = new ArrayList<>();
 
-        for (SpeakerBlockEntity e : speakerBlockEntities) {
+        for (SpeakerBlockEntity speaker : speakerBlockEntities) {
 
-            if (!e.hasWorld()) {
+            if (!speaker.hasWorld()) {
                 continue;
             }
 
             if (!ModConfig.crossDimensionsEnabled
-                    && !world.getRegistryKey().getRegistry().equals(e.getWorld().getRegistryKey().getRegistry())) {
+                    && !world.getRegistryKey().getRegistry().equals(speaker.getWorld().getRegistryKey().getRegistry())) {
                 continue;
             }
 
-            if (!e.canBroadcastToSpeaker(world, pos, e, range)) {
+            if (!speaker.canBroadcastToSpeaker(world, pos, speaker, range)) {
                 continue;
             }
 
-            if (e.activate > 0) {
-                if (e.canal == canal) {
-                    list.add(e);
+            if (speaker.activated) {
+                if (speaker.canal == canal) {
+                    list.add(speaker);
                 }
             }
         }
@@ -139,7 +130,7 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedMenuProvi
         return list;
     }
 
-    public void playSound(VoicechatServerApi api, MicrophonePacket packet) {
+    public void playSound(VoicechatServerApi api, MicrophonePacketEvent event) {
         Position pos = api.createPosition(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ());
 
         if (this.channel == null) {
@@ -148,9 +139,12 @@ public class SpeakerBlockEntity extends BlockEntity implements ExtendedMenuProvi
                 return;
             }
             this.channel.setDistance(ModConfig.speakerDistance + 1F);
+            if (!ModConfig.voiceDuplication) {
+                this.channel.setFilter(serverPlayer -> !serverPlayer.getEntity().equals(event.getSenderConnection().getPlayer().getEntity()));
+            }
         }
 
-        this.channel.send(packet.getOpusEncodedData());
+        this.channel.send(event.getPacket().getOpusEncodedData());
     }
 
     private boolean canBroadcastToSpeaker(World senderWorld, Vec3d senderPos, SpeakerBlockEntity speaker, int range) {

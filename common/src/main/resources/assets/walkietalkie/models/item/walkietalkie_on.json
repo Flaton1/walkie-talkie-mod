@@ -1,0 +1,6 @@
+{
+  "parent": "walkietalkie:item/walkietalkie",
+  "textures": {
+    "1": "walkietalkie:item/on"
+  }
+}

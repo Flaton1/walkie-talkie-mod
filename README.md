@@ -18,10 +18,11 @@ This mod will receive no further improvements except for bug fixes in these vers
 | Minecraft Version | Fabric | Forge |
 |-------------------|--------|-------|
 | 1.20.1            | ✅      | ✅     |
-| 1.19.3-4          | ✅      | ✅     |
-| 1.19.2            | ✅      | ❌     |
+| 1.20.1            | ❌      | ❌     |
+| 1.19.4            | ❌      | ❌     |
+| 1.19.2            | ✅      | ✅     |
 | 1.18.2            | ❌      | ❌     |
-| 1.16.5            | ❌      | ❌     |
+| 1.16.5            | ✅      | ✅     |
 
 ## Features
 + An interface for configuring the radio
@@ -48,6 +49,9 @@ This mod will receive no further improvements except for bug fixes in these vers
 ### Translators :
 + Russian: **Heimdallr-1**
 + German: **Kampftroll**
+
+### SFX :
++ **JustinBW**
 
 ### Mod :
 [Simple Voice Chat](https://github.com/henkelmax/simple-voice-chat)

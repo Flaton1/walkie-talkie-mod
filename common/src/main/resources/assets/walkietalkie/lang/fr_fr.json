@@ -28,5 +28,8 @@
   "advancement.walkietalkie.diamond_walkietalkie.description": "Obtenez un talkie-walkie haut de gamme en diamant, permettant une communication fluide à distance.",
 
   "advancement.walkietalkie.netherite_walkietalkie.title": "Communication ultime",
-  "advancement.walkietalkie.netherite_walkietalkie.description": "Obtenez un talkie-walkie de pointe en Netherite, offrant une portée de communication sans précédent."
+  "advancement.walkietalkie.netherite_walkietalkie.description": "Obtenez un talkie-walkie de pointe en Netherite, offrant une portée de communication sans précédent.",
+
+  "category.walkietalkie.keys": "Talkie-Walkie",
+  "key.walkietalkie.activate": "Activé/Désactivé"
 }

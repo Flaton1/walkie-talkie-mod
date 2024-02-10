@@ -1,7 +1,7 @@
 package fr.flaton.walkietalkie.client.gui.screen;
 
 import dev.architectury.networking.NetworkManager;
-import fr.flaton.walkietalkie.WalkieTalkie;
+import fr.flaton.walkietalkie.Constants;
 import fr.flaton.walkietalkie.client.gui.widget.ToggleImageButton;
 import fr.flaton.walkietalkie.network.ModMessages;
 import fr.flaton.walkietalkie.screen.SpeakerScreenHandler;
@@ -16,8 +16,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class SpeakerScreen extends HandledScreen<SpeakerScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier(WalkieTalkie.MOD_ID, "textures/gui/gui_walkietalkie.png");
-    private static final Identifier ACTIVATE_TEXTURE = new Identifier(WalkieTalkie.MOD_ID, "textures/icons/activate.png");
+    private static final Identifier TEXTURE = new Identifier(Constants.MOD_ID, "textures/gui/gui_walkietalkie.png");
+    private static final Identifier ACTIVATE_TEXTURE = new Identifier(Constants.MOD_ID, "textures/icons/activate.png");
 
     private final int xSize = 195;
     private final int ySize = 76;
@@ -82,7 +82,7 @@ public class SpeakerScreen extends HandledScreen<SpeakerScreenHandler> {
         buf.writeInt(index);
         buf.writeBoolean(status);
 
-        NetworkManager.sendToServer(ModMessages.UPDATE_SPEAKER, buf);
+        NetworkManager.sendToServer(ModMessages.UPDATE_SPEAKER_C2S, buf);
     }
 
 

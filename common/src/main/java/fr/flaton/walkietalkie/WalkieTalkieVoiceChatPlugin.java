@@ -7,18 +7,14 @@ import de.maxhenkel.voicechat.api.VoicechatServerApi;
 import de.maxhenkel.voicechat.api.events.EventRegistration;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import de.maxhenkel.voicechat.api.events.VoicechatServerStartedEvent;
-import de.maxhenkel.voicechat.api.opus.OpusDecoder;
-import de.maxhenkel.voicechat.api.opus.OpusEncoder;
 import fr.flaton.walkietalkie.block.entity.SpeakerBlockEntity;
 import fr.flaton.walkietalkie.config.ModConfig;
 import fr.flaton.walkietalkie.item.WalkieTalkieItem;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 @ForgeVoicechatPlugin
@@ -27,12 +23,9 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
     @Nullable
     public static VoicechatServerApi voicechatServerApi;
 
-    public static OpusDecoder opusDecoder;
-    public static OpusEncoder opusEncoder;
-
     @Override
     public String getPluginId() {
-        return WalkieTalkie.MOD_ID;
+        return Constants.MOD_ID;
     }
 
     @Override
@@ -43,8 +36,6 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
     private void onServerStarted(VoicechatServerStartedEvent event) {
         voicechatServerApi = event.getVoicechat();
-        opusDecoder = voicechatServerApi.createDecoder();
-        opusEncoder = voicechatServerApi.createEncoder();
     }
 
     private void onMicPacket(MicrophonePacketEvent event) {
@@ -58,20 +49,24 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
             return;
         }
 
-        ItemStack senderStack = getWalkieTalkieActivate(senderPlayer);
+        ItemStack senderItemStack = Util.getWalkieTalkieInHand(senderPlayer);
 
-        if (getWalkieTalkieActivate(senderPlayer) == null) {
+        if (senderItemStack == null) {
             return;
         }
 
-        if (isWalkieTalkieMute(senderStack)) {
+        if (!(senderItemStack.getItem() instanceof WalkieTalkieItem)) {
             return;
         }
 
-        int senderCanal = getCanal(senderStack);
+        if (isWalkieTalkieMute(senderItemStack)) {
+            return;
+        }
 
-        for (SpeakerBlockEntity entity : SpeakerBlockEntity.getSpeakersActivateInRange(senderCanal, senderPlayer.getWorld(), senderPlayer.getPos(), getRange(senderStack))) {
-            entity.playSound(voicechatServerApi, event.getPacket());
+        int senderCanal = getCanal(senderItemStack);
+
+        for (SpeakerBlockEntity entity : SpeakerBlockEntity.getSpeakersActivatedInRange(senderCanal, senderPlayer.getWorld(), senderPlayer.getPos(), getRange(senderItemStack))) {
+            entity.playSound(voicechatServerApi, event);
         }
 
         for (PlayerEntity receiverPlayer : Objects.requireNonNull(senderPlayer.getServer()).getPlayerManager().getPlayerList()) {
@@ -84,7 +79,7 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
                 continue;
             }
 
-            ItemStack receiverStack = getWalkieTalkieActivate(receiverPlayer);
+            ItemStack receiverStack = Util.getWalkieTalkieActivated(receiverPlayer);
 
             if (receiverStack == null) {
                 continue;
@@ -111,40 +106,7 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
         }
     }
 
-    private ItemStack getWalkieTalkieActivate(PlayerEntity player) {
 
-        ItemStack itemStack = null;
-
-        int range = 0;
-
-        PlayerInventory playerInventory = player.getInventory();
-
-        ArrayList<ItemStack> inventory = new ArrayList<>();
-        inventory.addAll(playerInventory.main);
-        inventory.addAll(playerInventory.armor);
-        inventory.addAll(playerInventory.offHand);
-
-        for (ItemStack item : inventory) {
-
-            if (item.getItem() instanceof WalkieTalkieItem && item.hasNbt()) {
-
-                WalkieTalkieItem walkieTalkieItem = (WalkieTalkieItem) Objects.requireNonNull(item.getItem());
-
-                if (!Objects.requireNonNull(item.getNbt()).getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE)) {
-                    continue;
-                }
-
-                if (walkieTalkieItem.getRange() > range) {
-                    itemStack = item;
-                    range = walkieTalkieItem.getRange();
-                }
-            }
-
-        }
-
-        return itemStack;
-
-    }
 
     private int getCanal(ItemStack stack) {
         return Objects.requireNonNull(stack.getNbt()).getInt(WalkieTalkieItem.NBT_KEY_CANAL);

@@ -38,6 +38,7 @@ public class WalkieTalkieItem extends Item {
                 ItemStack stack = player.getStackInHand(hand);
 
                 new WalkieTalkieScreen(stack);
+                return TypedActionResult.success(stack);
             }
         }
 

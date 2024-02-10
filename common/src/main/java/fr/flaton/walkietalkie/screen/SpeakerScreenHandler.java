@@ -4,7 +4,6 @@ import fr.flaton.walkietalkie.block.ModBlocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -15,16 +14,16 @@ public class SpeakerScreenHandler extends ScreenHandler {
 
     private final ScreenHandlerContext context;
 
+    public SpeakerScreenHandler(int i, PlayerInventory playerInventory) {
+        this(i, new ArrayPropertyDelegate(2), ScreenHandlerContext.EMPTY);
+    }
+
     public SpeakerScreenHandler(int syncId, PropertyDelegate delegate, ScreenHandlerContext context) {
         super(ModScreenHandlers.SPEAKER.get(), syncId);
         this.propertyDelegate = delegate;
         this.context = context;
 
         addProperties(delegate);
-    }
-
-    public SpeakerScreenHandler(int i, PlayerInventory playerInventory, PacketByteBuf packetByteBuf) {
-        this(i, new ArrayPropertyDelegate(2), ScreenHandlerContext.EMPTY);
     }
 
     public boolean isActivate() {

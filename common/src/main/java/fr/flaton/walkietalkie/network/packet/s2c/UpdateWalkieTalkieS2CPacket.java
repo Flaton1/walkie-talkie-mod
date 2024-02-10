@@ -5,11 +5,11 @@ import fr.flaton.walkietalkie.client.gui.screen.WalkieTalkieScreen;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 
-public class ButtonS2CPacket {
+public class UpdateWalkieTalkieS2CPacket {
 
     public static void receive(PacketByteBuf packetByteBuf, NetworkManager.PacketContext packetContext) {
         ItemStack stack = packetByteBuf.readItemStack();
 
-        WalkieTalkieScreen.getInstance().checkButtons(stack);
+        WalkieTalkieScreen.getInstance().updateButtons(stack);
     }
 }

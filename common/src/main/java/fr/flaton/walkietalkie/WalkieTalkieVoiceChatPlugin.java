@@ -59,6 +59,10 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
             return;
         }
 
+        if (!isWalkieTalkieActivate(senderItemStack)) {
+            return;
+        }
+
         if (isWalkieTalkieMute(senderItemStack)) {
             return;
         }
@@ -115,6 +119,10 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
     private int getRange(ItemStack stack) {
         WalkieTalkieItem item = (WalkieTalkieItem) Objects.requireNonNull(stack.getItem());
         return item.getRange();
+    }
+
+    private boolean isWalkieTalkieActivate(ItemStack stack) {
+        return Objects.requireNonNull(stack.getNbt()).getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE);
     }
 
     private boolean isWalkieTalkieMute(ItemStack stack) {

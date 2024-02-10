@@ -3,3 +3,6 @@
 + Adding an activate/deactivate sound, credit: **JustinBW**
 + Cross dimension support, credit: **krazzbeluh**
 + New config to suppress speaker voice duplication
++ Adjustment:
++ + you can only talk into the walkie-talkie if it's in your hand
++ + the walkie-talkie only works if it's in the hotbar

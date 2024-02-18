@@ -5,6 +5,7 @@ import de.maxhenkel.voicechat.api.VoicechatServerApi;
 import de.maxhenkel.voicechat.api.audiochannel.LocationalAudioChannel;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import fr.flaton.walkietalkie.Util;
+import fr.flaton.walkietalkie.WalkieTalkieVoiceChatPlugin;
 import fr.flaton.walkietalkie.config.ModConfig;
 import fr.flaton.walkietalkie.screen.SpeakerScreenHandler;
 import net.minecraft.block.BlockState;
@@ -138,12 +139,12 @@ public class SpeakerBlockEntity extends BlockEntity implements NamedScreenHandle
             if (this.channel == null) {
                 return;
             }
+            this.channel.setCategory(WalkieTalkieVoiceChatPlugin.SPEAKER_CATEGORY);
             this.channel.setDistance(ModConfig.speakerDistance + 1F);
             if (!ModConfig.voiceDuplication) {
                 this.channel.setFilter(serverPlayer -> !serverPlayer.getEntity().equals(event.getSenderConnection().getPlayer().getEntity()));
             }
         }
-
         this.channel.send(event.getPacket().getOpusEncodedData());
     }
 

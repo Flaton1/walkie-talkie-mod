@@ -4,13 +4,13 @@
 			"predicate": {
 				"walkietalkie:activate": 0
 			},
-			"model": "walkietalkie:item/walkietalkie_off"
+			"model": "walkietalkie:item/netherite_walkietalkie/off"
 		},
 		{
 			"predicate": {
 				"walkietalkie:activate": 1
 			},
-			"model": "walkietalkie:item/walkietalkie_on"
+			"model": "walkietalkie:item/netherite_walkietalkie/on"
 		}
 	]
 }

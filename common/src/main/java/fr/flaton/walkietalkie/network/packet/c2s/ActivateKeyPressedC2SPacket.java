@@ -22,24 +22,13 @@ public class ActivateKeyPressedC2SPacket {
 
         stack.getNbt().putBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE, !activated);
 
-        if (activated) {
-            player.getWorld().playSound(
-                    null,
-                    player.getBlockPos(),
-                    ModSoundEvents.OFF_SOUND_EVENT.get(),
-                    SoundCategory.PLAYERS,
-                    1f,
-                    1f
-            );
-        } else {
-            player.getWorld().playSound(
-                    null,
-                    player.getBlockPos(),
-                    ModSoundEvents.ON_SOUND_EVENT.get(),
-                    SoundCategory.PLAYERS,
-                    1f,
-                    1f
-            );
-        }
+        player.getWorld().playSound(
+                null,
+                player.getBlockPos(),
+                activated ? ModSoundEvents.OFF_SOUND_EVENT.get() : ModSoundEvents.ON_SOUND_EVENT.get(),
+                SoundCategory.PLAYERS,
+                0.5f,
+                1f
+        );
     }
 }

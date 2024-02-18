@@ -1,12 +1,12 @@
 {
-  "on": {
+  "walkietalkie_on": {
     "sounds": [
-      "walkietalkie:on"
+      "walkietalkie:walkietalkie_on"
     ]
   },
-  "off": {
+  "walkietalkie_off": {
     "sounds": [
-      "walkietalkie:off"
+      "walkietalkie:walkietalkie_off"
     ]
   }
 }

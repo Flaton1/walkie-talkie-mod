@@ -1,9 +1,6 @@
 package fr.flaton.walkietalkie;
 
-import de.maxhenkel.voicechat.api.ForgeVoicechatPlugin;
-import de.maxhenkel.voicechat.api.VoicechatConnection;
-import de.maxhenkel.voicechat.api.VoicechatPlugin;
-import de.maxhenkel.voicechat.api.VoicechatServerApi;
+import de.maxhenkel.voicechat.api.*;
 import de.maxhenkel.voicechat.api.events.EventRegistration;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import de.maxhenkel.voicechat.api.events.VoicechatServerStartedEvent;
@@ -12,16 +9,24 @@ import fr.flaton.walkietalkie.config.ModConfig;
 import fr.flaton.walkietalkie.item.WalkieTalkieItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.net.URL;
+import java.util.Enumeration;
 import java.util.Objects;
 
 @ForgeVoicechatPlugin
 public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
+    public final static String SPEAKER_CATEGORY = "speakers";
+
     @Nullable
-    public static VoicechatServerApi voicechatServerApi;
+    public static VoicechatServerApi api;
 
     @Override
     public String getPluginId() {
@@ -35,7 +40,42 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
     }
 
     private void onServerStarted(VoicechatServerStartedEvent event) {
-        voicechatServerApi = event.getVoicechat();
+        api = event.getVoicechat();
+
+        VolumeCategory speakers = api.volumeCategoryBuilder()
+                .setId(SPEAKER_CATEGORY)
+                .setName("Speakers")
+                .setDescription("The volume of all speakers")
+                .setIcon(getIcon("assets/walkietalkie/textures/block/speaker.png"))
+                .build();
+        api.registerVolumeCategory(speakers);
+    }
+
+    @Nullable
+    private int[][] getIcon(String path) {
+        try {
+            Enumeration<URL> resources = WalkieTalkieVoiceChatPlugin.class.getClassLoader().getResources(path);
+            while (resources.hasMoreElements()) {
+                BufferedImage bufferedImage = ImageIO.read(resources.nextElement().openStream());
+                if (bufferedImage.getWidth() != 16) {
+                    continue;
+                }
+                if (bufferedImage.getHeight() != 16) {
+                    continue;
+                }
+                int[][] image = new int[16][16];
+                for (int x = 0; x < bufferedImage.getWidth(); x++) {
+                    for (int y = 0; y < bufferedImage.getHeight(); y++) {
+                        image[x][y] = bufferedImage.getRGB(x, y);
+                    }
+                }
+                return image;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private void onMicPacket(MicrophonePacketEvent event) {
@@ -70,7 +110,7 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
         int senderCanal = getCanal(senderItemStack);
 
         for (SpeakerBlockEntity entity : SpeakerBlockEntity.getSpeakersActivatedInRange(senderCanal, senderPlayer.getWorld(), senderPlayer.getPos(), getRange(senderItemStack))) {
-            entity.playSound(voicechatServerApi, event);
+            entity.playSound(api, event);
         }
 
         for (PlayerEntity receiverPlayer : Objects.requireNonNull(senderPlayer.getServer()).getPlayerManager().getPlayerList()) {
@@ -101,12 +141,12 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
             }
 
             // Send audio
-            VoicechatConnection connection = voicechatServerApi.getConnectionOf(receiverPlayer.getUuid());
+            VoicechatConnection connection = api.getConnectionOf(receiverPlayer.getUuid());
             if (connection == null) {
                 continue;
             }
 
-            voicechatServerApi.sendStaticSoundPacketTo(connection, event.getPacket().staticSoundPacketBuilder().build());
+            api.sendStaticSoundPacketTo(connection, event.getPacket().staticSoundPacketBuilder().build());
         }
     }
 

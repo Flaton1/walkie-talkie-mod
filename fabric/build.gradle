@@ -27,6 +27,7 @@ dependencies {
 
     // SimpleVoiceChat dependencies
     modRuntimeOnly "maven.modrinth:simple-voice-chat:fabric-${voicechat_version}"
+    //modRuntimeOnly("maven.modrinth:modmenu:8.0.1")
 }
 
 shadowJar {

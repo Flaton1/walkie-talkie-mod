@@ -1,6 +1,8 @@
 + New model and texture
 + Keybind to activate/deactivate the walkie-talkie
 + Adding an activate/deactivate sound, credit: **JustinBW**
++ Adding volume category for speakers
++ Adding mod icon
 + Cross dimension support, credit: **krazzbeluh**
 + New config to suppress speaker voice duplication
 + Adjustment:

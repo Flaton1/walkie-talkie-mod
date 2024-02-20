@@ -11,7 +11,9 @@ import fr.flaton.walkietalkie.screen.ModScreenHandlers;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.util.Identifier;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -26,14 +28,13 @@ public class WalkieTalkieForge {
         config.loadModConfig();
 
         WalkieTalkie.init();
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> WalkieTalkieClient::init);
     }
 
     @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            WalkieTalkieClient.init();
-
             HandledScreens.register(ModScreenHandlers.SPEAKER.get(), SpeakerScreen::new);
 
             ModelPredicateProviderRegistry.registerGeneric(new Identifier(Constants.MOD_ID, "activate"), ((stack, world, entity, seed) -> {
@@ -44,5 +45,4 @@ public class WalkieTalkieForge {
             }));
         }
     }
-
 }

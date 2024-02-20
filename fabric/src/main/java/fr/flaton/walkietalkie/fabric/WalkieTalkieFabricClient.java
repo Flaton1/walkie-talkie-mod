@@ -10,7 +10,7 @@ import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.util.Identifier;
 
-public class WalkieTalkieClientFabric implements ClientModInitializer {
+public class WalkieTalkieFabricClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {

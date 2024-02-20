@@ -18,7 +18,7 @@
       "fr.flaton.walkietalkie.fabric.WalkieTalkieFabric"
     ],
     "client": [
-      "fr.flaton.walkietalkie.fabric.WalkieTalkieClientFabric"
+      "fr.flaton.walkietalkie.fabric.WalkieTalkieFabricClient"
     ],
     "voicechat": [
       "fr.flaton.walkietalkie.WalkieTalkieVoiceChatPlugin"

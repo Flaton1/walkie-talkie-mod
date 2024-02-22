@@ -22,9 +22,8 @@ public class ActivateKeyPressedC2SPacket {
 
         stack.getNbt().putBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE, !activated);
 
-        player.getWorld().playSound(
-                null,
-                player.getBlockPos(),
+
+        player.playSound(
                 activated ? ModSoundEvents.OFF_SOUND_EVENT.get() : ModSoundEvents.ON_SOUND_EVENT.get(),
                 SoundCategory.PLAYERS,
                 0.5f,

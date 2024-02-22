@@ -18,6 +18,10 @@ public class UpdateSpeakerC2SPacket {
 
         ScreenHandler screenHandler = player.currentScreenHandler;
 
+        if (screenHandler == null) {
+            return;
+        }
+
         if (screenHandler instanceof SpeakerScreenHandler speakerScreenHandler) {
 
             boolean activate = speakerScreenHandler.isActivate();

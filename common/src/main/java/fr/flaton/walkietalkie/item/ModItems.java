@@ -18,6 +18,8 @@ public class ModItems {
             new Item.Settings().maxCount(1).arch$tab(ModItemGroup.WALKIETALKIE), ModConfig.stoneWalkieTalkieRange));
     public static final RegistrySupplier<Item> IRON_WALKIETALKIE = ITEMS.register("iron_walkietalkie", () -> new WalkieTalkieItem(
             new Item.Settings().maxCount(1).arch$tab(ModItemGroup.WALKIETALKIE), ModConfig.ironWalkieTalkieRange));
+    public static final RegistrySupplier<Item> GOLDEN_WALKIETALKIE = ITEMS.register("golden_walkietalkie", () -> new WalkieTalkieItem(
+            new Item.Settings().maxCount(1).arch$tab(ModItemGroup.WALKIETALKIE), ModConfig.goldenWalkieTalkieRange));
     public static final RegistrySupplier<Item> DIAMOND_WALKIETALKIE = ITEMS.register("diamond_walkietalkie", () -> new WalkieTalkieItem(
             new Item.Settings().maxCount(1).arch$tab(ModItemGroup.WALKIETALKIE), ModConfig.diamondWalkieTalkieRange));
     public static final RegistrySupplier<Item> NETHERITE_WALKIETALKIE = ITEMS.register("netherite_walkietalkie", () -> new WalkieTalkieItem(

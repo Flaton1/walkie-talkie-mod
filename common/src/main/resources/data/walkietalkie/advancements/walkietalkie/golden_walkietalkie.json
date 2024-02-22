@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "walkietalkie:diamond_walkietalkie"
+      "item": "walkietalkie:golden_walkietalkie"
     },
     "title": {
-      "translate": "advancement.walkietalkie.diamond_walkietalkie.title"
+      "translate": "advancement.walkietalkie.golden_walkietalkie.title"
     },
     "description": {
-      "translate": "advancement.walkietalkie.diamond_walkietalkie.description"
+      "translate": "advancement.walkietalkie.golden_walkietalkie.description"
     },
     "frame": "task",
     "show_toast": true,

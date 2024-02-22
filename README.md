@@ -34,16 +34,19 @@ This mod will receive no further improvements except for bug fixes in these vers
 + Limited distance
 + Upgrade to extend the limit
 + Add speaker block
++ Volume category for speakers
++ Keybind to activate/deactivate the walkie-talkie
 + Configure maximum channel in mod config
 + Configure cross dimensions behavior
 + Configure walkie-talkie range
++ Configure to suppress speaker voice duplication
 ## Upgrades
 + Wood: 128 block distance
 + Stone: 256 block distance
 + Iron: 512 block distance
-+ Diamond: 1024 block distance
-+ Netherite: 2048 block distance
-
++ Gold: 1024 block distance
++ Diamond: 2048 block distance
++ Netherite: 4096 block distance
 ## Credits
 ### Textures and models :
 + **4irwan**

@@ -2,6 +2,7 @@
   "item.walkietalkie.wooden_walkietalkie": "Wooden Walkie-Talkie",
   "item.walkietalkie.stone_walkietalkie": "Stone Walkie-Talkie",
   "item.walkietalkie.iron_walkietalkie": "Iron Walkie-Talkie",
+  "item.walkietalkie.golden_walkietalkie": "Golden Walkie-Talkie",
   "item.walkietalkie.diamond_walkietalkie": "Diamond Walkie-Talkie",
   "item.walkietalkie.netherite_walkietalkie": "Netherite Walkie-Talkie",
 
@@ -23,6 +24,9 @@
 
   "advancement.walkietalkie.iron_walkietalkie.title": "Advanced Communication",
   "advancement.walkietalkie.iron_walkietalkie.description": "Obtained an iron walkie-talkie, increasing communication range even further.",
+
+  "advancement.walkietalkie.golden_walkietalkie.title": "Royal Communication",
+  "advancement.walkietalkie.golden_walkietalkie.description": "Obtained an golden walkie-talkie, to communicate with kings.",
 
   "advancement.walkietalkie.diamond_walkietalkie.title": "Elite Communication",
   "advancement.walkietalkie.diamond_walkietalkie.description": "Obtained a top-of-the-line diamond walkie-talkie, allowing for seamless communication over great distances.",

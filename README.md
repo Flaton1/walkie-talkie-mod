@@ -1,5 +1,5 @@
 # Minecraft Walkie-Talkie Mod
-
+![image](https://raw.githubusercontent.com/Flaton1/walkie-talkie-mod/1.20.4/gallery/walkie_talkie_large.png)
 <!-- prettier-ignore-start -->
 > **Warning**
 >

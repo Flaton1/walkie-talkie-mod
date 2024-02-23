@@ -13,8 +13,7 @@
 
 This mod adds two-way radios with different upgrades.
 
-## Versions maintained for updates
-This mod will receive no further improvements except for bug fixes in these versions:
+## Versions maintained
 | Minecraft Version | Fabric | Forge |
 |-------------------|--------|-------|
 | 1.20.4            | ✅      | ❌     |
@@ -24,8 +23,17 @@ This mod will receive no further improvements except for bug fixes in these vers
 | 1.19.3            | ❌      | ❌     |
 | 1.19.2            | ✅      | ✅     |
 | 1.18.2            | ✅      | ✅     |
-| 1.16.5            | ✅      | ✅     |
+| 1.16.5            | ❌      | ✅     |
 
+## How to use
+### Walkie-Talkie:
++ Right-click to open the Walkie-Talkie menu
++ Turn on the walkie-talkie
++ To speak, **make sure the walkie-talkie is in your hand**
++ To listen, **make sure the walkie-talkie is in your hotbar**
+### Speaker:
++ Right-click on the speaker to open menu
++ Turn on the speaker
 ## Features
 + An interface for configuring the radio
 + Select a radio channel
@@ -61,3 +69,5 @@ This mod will receive no further improvements except for bug fixes in these vers
 ### Mod :
 + [Simple Voice Chat](https://github.com/henkelmax/simple-voice-chat)
 + [Architectury API](https://github.com/architectury/architectury-api)
+
+[LICENSE](https://raw.githubusercontent.com/Flaton1/walkie-talkie-mod/1.20.4/LICENSE)

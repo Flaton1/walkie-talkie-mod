@@ -17,7 +17,7 @@ This mod adds two-way radios with different upgrades.
 This mod will receive no further improvements except for bug fixes in these versions:
 | Minecraft Version | Fabric | Forge |
 |-------------------|--------|-------|
-| 1.20.4            | ✅      | ✅     |
+| 1.20.4            | ✅      | ❌     |
 | 1.20.2            | ✅      | ✅     |
 | 1.20.1            | ✅      | ✅     |
 | 1.19.4            | ❌      | ❌     |

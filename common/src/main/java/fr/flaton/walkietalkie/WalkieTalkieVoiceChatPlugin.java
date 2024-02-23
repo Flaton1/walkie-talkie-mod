@@ -95,10 +95,6 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
             return;
         }
 
-        if (!(senderItemStack.getItem() instanceof WalkieTalkieItem)) {
-            return;
-        }
-
         if (!isWalkieTalkieActivate(senderItemStack)) {
             return;
         }
@@ -109,9 +105,8 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
         int senderCanal = getCanal(senderItemStack);
 
-        for (SpeakerBlockEntity entity : SpeakerBlockEntity.getSpeakersActivatedInRange(senderCanal, senderPlayer.getWorld(), senderPlayer.getPos(), getRange(senderItemStack))) {
-            entity.playSound(api, event);
-        }
+        SpeakerBlockEntity.getSpeakersActivatedInRange(senderCanal, senderPlayer.getWorld(), senderPlayer.getPos(), getRange(senderItemStack))
+                .forEach(speakerBlockEntity -> speakerBlockEntity.playSound(api, event));
 
         for (PlayerEntity receiverPlayer : Objects.requireNonNull(senderPlayer.getServer()).getPlayerManager().getPlayerList()) {
 

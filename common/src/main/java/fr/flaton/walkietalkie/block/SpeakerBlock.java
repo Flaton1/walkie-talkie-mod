@@ -12,6 +12,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public class SpeakerBlock extends BlockWithEntity implements BlockEntityProvider {
@@ -21,8 +22,8 @@ public class SpeakerBlock extends BlockWithEntity implements BlockEntityProvider
     }
 
     @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new SpeakerBlockEntity(pos, state);
+    public BlockEntity createBlockEntity(BlockView blockView) {
+        return new SpeakerBlockEntity();
     }
 
     @Override

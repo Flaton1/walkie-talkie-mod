@@ -1,7 +1,5 @@
 package fr.flaton.walkietalkie.client.gui.widget;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
@@ -19,9 +17,7 @@ public class ToggleImageButton extends ImageButton{
 
     @Override
     protected void renderImage(MatrixStack matrices, int mouseX, int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
-        RenderSystem.setShaderTexture(0, texture);
+        mc.getTextureManager().bindTexture(texture);
 
         if (state) {
             drawTexture(matrices, x + 2, y + 2, 16, 0, 16, 16, 32, 32);

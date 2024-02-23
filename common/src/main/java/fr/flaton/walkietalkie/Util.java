@@ -41,7 +41,7 @@ public class Util {
 
         ArrayList<ItemStack> itemStacks = new ArrayList<>();
 
-        PlayerInventory playerInventory = player.getInventory();
+        PlayerInventory playerInventory = player.inventory;
         ArrayList<ItemStack> inventory = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             inventory.add(playerInventory.main.get(i));
@@ -53,7 +53,7 @@ public class Util {
                 continue;
             }
 
-            if (stack.getItem() instanceof WalkieTalkieItem && stack.hasNbt()) {
+            if (stack.getItem() instanceof WalkieTalkieItem && stack.hasTag()) {
                 itemStacks.add(stack);
             }
 
@@ -85,7 +85,7 @@ public class Util {
 
     public static @Nullable ItemStack getWalkieTalkieActivated(PlayerEntity player) {
         ItemStack stack = getOptimalWalkieTalkieRange(player);
-        if (stack != null && stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE)) {
+        if (stack != null && stack.getTag().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE)) {
             return stack;
         }
         return null;

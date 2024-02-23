@@ -16,7 +16,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.*;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -40,8 +39,8 @@ public class SpeakerBlockEntity extends BlockEntity implements NamedScreenHandle
     private final UUID channelId;
     private LocationalAudioChannel channel = null;
 
-    public SpeakerBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.SPEAKER.get(), pos, state);
+    public SpeakerBlockEntity() {
+        super(ModBlockEntities.SPEAKER.get());
         speakerBlockEntities.add(this);
 
         channelId = UUID.randomUUID();
@@ -83,18 +82,19 @@ public class SpeakerBlockEntity extends BlockEntity implements NamedScreenHandle
         return new TranslatableText("gui.walkietalkie.speaker.title");
     }
 
+
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void fromTag(BlockState state,NbtCompound nbt) {
+        super.fromTag(state, nbt);
         this.activated = nbt.getBoolean(NBT_KEY_ACTIVATE);
         this.canal = nbt.getInt(NBT_KEY_CANAL);
     }
 
     @Override
-    public void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
+    public NbtCompound writeNbt(NbtCompound nbt) {
         nbt.putBoolean(NBT_KEY_ACTIVATE, this.activated);
         nbt.putInt(NBT_KEY_CANAL, this.canal);
+        return super.writeNbt(nbt);
     }
 
     @Override

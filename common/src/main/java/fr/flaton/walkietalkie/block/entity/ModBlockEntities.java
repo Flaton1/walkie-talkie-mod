@@ -1,9 +1,9 @@
 package fr.flaton.walkietalkie.block.entity;
 
-import dev.architectury.registry.registries.DeferredRegister;
-import dev.architectury.registry.registries.RegistrySupplier;
 import fr.flaton.walkietalkie.Constants;
 import fr.flaton.walkietalkie.block.ModBlocks;
+import me.shedaniel.architectury.registry.DeferredRegister;
+import me.shedaniel.architectury.registry.RegistrySupplier;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.registry.Registry;
 

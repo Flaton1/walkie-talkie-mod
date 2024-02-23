@@ -1,9 +1,9 @@
 package fr.flaton.walkietalkie.network;
 
-import dev.architectury.networking.NetworkManager;
 import fr.flaton.walkietalkie.Constants;
 import fr.flaton.walkietalkie.network.packet.c2s.*;
 import fr.flaton.walkietalkie.network.packet.s2c.UpdateWalkieTalkieS2CPacket;
+import me.shedaniel.architectury.networking.NetworkManager;
 import net.minecraft.util.Identifier;
 
 public class ModMessages {

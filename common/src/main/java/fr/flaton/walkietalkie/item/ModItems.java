@@ -1,10 +1,10 @@
 package fr.flaton.walkietalkie.item;
 
-import dev.architectury.registry.registries.DeferredRegister;
-import dev.architectury.registry.registries.RegistrySupplier;
 import fr.flaton.walkietalkie.Constants;
 import fr.flaton.walkietalkie.block.ModBlocks;
 import fr.flaton.walkietalkie.config.ModConfig;
+import me.shedaniel.architectury.registry.DeferredRegister;
+import me.shedaniel.architectury.registry.RegistrySupplier;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;

@@ -33,7 +33,7 @@ public class WalkieTalkieItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 
         if (world.isClient()) {
-            if (player.getStackInHand(hand).hasNbt()) {
+            if (player.getStackInHand(hand).hasTag()) {
 
                 ItemStack stack = player.getStackInHand(hand);
 
@@ -52,12 +52,12 @@ public class WalkieTalkieItem extends Item {
             return;
         }
 
-        if (!stack.hasNbt()) {
+        if (!stack.hasTag()) {
             NbtCompound nbtCompound = new NbtCompound();
             nbtCompound.putBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE, false);
             nbtCompound.putBoolean(WalkieTalkieItem.NBT_KEY_MUTE, false);
             nbtCompound.putInt(WalkieTalkieItem.NBT_KEY_CANAL, 1);
-            stack.setNbt(nbtCompound);
+            stack.setTag(nbtCompound);
         }
 
     }

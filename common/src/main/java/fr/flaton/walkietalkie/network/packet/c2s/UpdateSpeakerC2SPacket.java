@@ -1,9 +1,9 @@
 package fr.flaton.walkietalkie.network.packet.c2s;
 
-import dev.architectury.networking.NetworkManager;
 import fr.flaton.walkietalkie.Util;
 import fr.flaton.walkietalkie.config.ModConfig;
 import fr.flaton.walkietalkie.screen.SpeakerScreenHandler;
+import me.shedaniel.architectury.networking.NetworkManager;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;

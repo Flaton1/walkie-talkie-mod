@@ -1,12 +1,12 @@
 package fr.flaton.walkietalkie.client.gui.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import dev.architectury.networking.NetworkManager;
 import fr.flaton.walkietalkie.Constants;
 import fr.flaton.walkietalkie.client.gui.widget.ToggleImageButton;
 import fr.flaton.walkietalkie.network.ModMessages;
 import fr.flaton.walkietalkie.screen.SpeakerScreenHandler;
 import io.netty.buffer.Unpooled;
+import me.shedaniel.architectury.networking.NetworkManager;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -51,8 +51,8 @@ public class SpeakerScreen extends HandledScreen<SpeakerScreenHandler> {
     @Override
     public void renderBackground(MatrixStack matrices) {
         super.renderBackground(matrices);
-        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
-        RenderSystem.setShaderTexture(0, TEXTURE);
+        RenderSystem.color4f(1F, 1F, 1F, 1F);
+        this.client.getTextureManager().bindTexture(TEXTURE);
         drawTexture(matrices, guiLeft, guiTop, 0, 0, xSize, ySize);
     }
 
@@ -77,11 +77,11 @@ public class SpeakerScreen extends HandledScreen<SpeakerScreenHandler> {
         this.guiTop = (this.height - ySize) / 2;
 
         activateButton = new ToggleImageButton(guiLeft + 6, guiTop + ySize - 6 - 20, ACTIVATE_TEXTURE, button -> sendUpdateSpeaker(0, false), handler.isActivate());
-        this.addDrawableChild(activateButton);
+        this.addButton(activateButton);
 
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 + 40, guiTop + 20, 20, 20, Text.of(">"), button -> sendUpdateSpeaker(1, true)));
+        this.addButton(new ButtonWidget(this.width / 2 - 10 + 40, guiTop + 20, 20, 20, Text.of(">"), button -> sendUpdateSpeaker(1, true)));
 
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 - 40, guiTop + 20, 20, 20, Text.of("<"), button -> sendUpdateSpeaker(1, false)));
+        this.addButton(new ButtonWidget(this.width / 2 - 10 - 40, guiTop + 20, 20, 20, Text.of("<"), button -> sendUpdateSpeaker(1, false)));
 
         canalText = Text.of(String.valueOf(handler.getCanal()));
     }

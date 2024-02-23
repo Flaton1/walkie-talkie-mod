@@ -1,12 +1,12 @@
 package fr.flaton.walkietalkie.client.gui.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import dev.architectury.networking.NetworkManager;
 import fr.flaton.walkietalkie.Constants;
 import fr.flaton.walkietalkie.client.gui.widget.ToggleImageButton;
 import fr.flaton.walkietalkie.item.WalkieTalkieItem;
 import fr.flaton.walkietalkie.network.ModMessages;
 import io.netty.buffer.Unpooled;
+import me.shedaniel.architectury.networking.NetworkManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.Screen;
@@ -43,7 +43,7 @@ public class WalkieTalkieScreen extends Screen {
         instance = this;
         this.stack = stack;
 
-        MinecraftClient.getInstance().setScreen(this);
+        MinecraftClient.getInstance().openScreen(this);
     }
 
     @Override
@@ -52,17 +52,17 @@ public class WalkieTalkieScreen extends Screen {
         this.guiLeft = (this.width - xSize) / 2;
         this.guiTop = (this.height - ySize) / 2;
 
-        mute = new ToggleImageButton(guiLeft + 6, guiTop + ySize - 6 - 20, MUTE_TEXTURE, button -> sendUpdateWalkieTalkie(2, false), stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_MUTE));
-        this.addDrawableChild(mute);
+        mute = new ToggleImageButton(guiLeft + 6, guiTop + ySize - 6 - 20, MUTE_TEXTURE, button -> sendUpdateWalkieTalkie(2, false), stack.getTag().getBoolean(WalkieTalkieItem.NBT_KEY_MUTE));
+        this.addButton(mute);
 
-        activate = new ToggleImageButton(guiLeft + 28, guiTop + ySize - 26, ACTIVATE_TEXTURE, button -> sendUpdateWalkieTalkie(0, false), stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE));
-        this.addDrawableChild(activate);
+        activate = new ToggleImageButton(guiLeft + 28, guiTop + ySize - 26, ACTIVATE_TEXTURE, button -> sendUpdateWalkieTalkie(0, false), stack.getTag().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE));
+        this.addButton(activate);
 
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 + 40, guiTop + 20, 20, 20, Text.of(">"), button -> sendUpdateWalkieTalkie(1, true)));
+        this.addButton(new ButtonWidget(this.width / 2 - 10 + 40, guiTop + 20, 20, 20, Text.of(">"), button -> sendUpdateWalkieTalkie(1, true)));
 
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 - 40, guiTop + 20, 20, 20, Text.of("<"), button -> sendUpdateWalkieTalkie(1, false)));
+        this.addButton(new ButtonWidget(this.width / 2 - 10 - 40, guiTop + 20, 20, 20, Text.of("<"), button -> sendUpdateWalkieTalkie(1, false)));
 
-        canal = Text.of(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
+        canal = Text.of(String.valueOf(stack.getTag().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
 
     }
 
@@ -76,8 +76,8 @@ public class WalkieTalkieScreen extends Screen {
     @Override
     public void renderBackground(MatrixStack matrices) {
         super.renderBackground(matrices);
-        RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
-        RenderSystem.setShaderTexture(0, BG_TEXTURE);
+        RenderSystem.color4f(1F, 1F, 1F, 1F);
+        this.client.getTextureManager().bindTexture(BG_TEXTURE);
         drawTexture(matrices, guiLeft, guiTop, 0, 0, xSize, ySize);
     }
 
@@ -94,9 +94,9 @@ public class WalkieTalkieScreen extends Screen {
     }
 
     public void updateButtons(ItemStack stack) {
-        mute.setState(stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_MUTE));
-        activate.setState(stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE));
-        canal = Text.of(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
+        mute.setState(stack.getTag().getBoolean(WalkieTalkieItem.NBT_KEY_MUTE));
+        activate.setState(stack.getTag().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE));
+        canal = Text.of(String.valueOf(stack.getTag().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
     }
 
     public static WalkieTalkieScreen getInstance() {

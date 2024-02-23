@@ -103,7 +103,7 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
         int senderCanal = getCanal(senderItemStack);
 
-        SpeakerBlockEntity.getSpeakersActivatedInRange(senderCanal, senderPlayer.getWorld(), senderPlayer.getPos(), getRange(senderItemStack))
+        SpeakerBlockEntity.getSpeakersActivatedInRange(senderCanal, senderPlayer.getEntityWorld(), senderPlayer.getPos(), getRange(senderItemStack))
                 .forEach(speakerBlockEntity -> speakerBlockEntity.playSound(api, event));
 
         for (PlayerEntity receiverPlayer : Objects.requireNonNull(senderPlayer.getServer()).getPlayerManager().getPlayerList()) {
@@ -112,7 +112,7 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
                 continue;
             }
 
-            if (!ModConfig.crossDimensionsEnabled && !receiverPlayer.getWorld().getDimension().equals(senderPlayer.getWorld().getDimension())) {
+            if (!ModConfig.crossDimensionsEnabled && !receiverPlayer.getEntityWorld().getDimension().equals(senderPlayer.getEntityWorld().getDimension())) {
                 continue;
             }
 
@@ -146,7 +146,7 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
 
     private int getCanal(ItemStack stack) {
-        return Objects.requireNonNull(stack.getNbt()).getInt(WalkieTalkieItem.NBT_KEY_CANAL);
+        return Objects.requireNonNull(stack.getTag()).getInt(WalkieTalkieItem.NBT_KEY_CANAL);
     }
 
     private int getRange(ItemStack stack) {
@@ -155,16 +155,16 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
     }
 
     private boolean isWalkieTalkieActivate(ItemStack stack) {
-        return Objects.requireNonNull(stack.getNbt()).getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE);
+        return Objects.requireNonNull(stack.getTag()).getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE);
     }
 
     private boolean isWalkieTalkieMute(ItemStack stack) {
-        return Objects.requireNonNull(stack.getNbt()).getBoolean(WalkieTalkieItem.NBT_KEY_MUTE);
+        return Objects.requireNonNull(stack.getTag()).getBoolean(WalkieTalkieItem.NBT_KEY_MUTE);
     }
 
     private boolean canBroadcastToReceiver(PlayerEntity senderPlayer, PlayerEntity receiverPlayer, int receiverRange) {
-        World senderWorld = senderPlayer.getWorld();
-        World receiverWorld = receiverPlayer.getWorld();
+        World senderWorld = senderPlayer.getEntityWorld();
+        World receiverWorld = receiverPlayer.getEntityWorld();
 
         return Util.canBroadcastToReceiver(senderWorld, receiverWorld, senderPlayer.getPos(), receiverPlayer.getPos(), receiverRange);
     }

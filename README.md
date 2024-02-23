@@ -56,14 +56,43 @@ This mod adds two-way radios with different upgrades.
 + Diamond: 2048 block distance
 + Netherite: 4096 block distance
 ## Crafts:
-*Note: Any type of wood and wool is possible.*
-![image](https://raw.githubusercontent.com/Flaton1/walkie-talkie-mod/1.20.4/gallery/walkie_talkie_craft_wood.png)
+***Note: Any type of wood and wool is possible.***
+<details>
+  <summary>Wooden Walkie-Talkie</summary>
+
+  ![image](https://raw.githubusercontent.com/Flaton1/walkie-talkie-mod/1.20.4/gallery/walkie_talkie_craft_wood.png)
+</details>
+<details>
+  <summary>Stone Walkie-Talkie</summary>
+
 ![image](https://raw.githubusercontent.com/Flaton1/walkie-talkie-mod/1.20.4/gallery/walkie_talkie_craft_stone.png)
+</details>
+<details>
+  <summary>Iron Walkie-Talkie</summary>
+
 ![image](https://raw.githubusercontent.com/Flaton1/walkie-talkie-mod/1.20.4/gallery/walkie_talkie_craft_iron.png)
+</details>
+<details>
+  <summary>Gold Walkie-Talkie</summary>
+
 ![image](https://raw.githubusercontent.com/Flaton1/walkie-talkie-mod/1.20.4/gallery/walkie_talkie_craft_gold.png)
+</details>
+<details>
+  <summary>Diamond Walkie-Talkie</summary>
+
 ![image](https://raw.githubusercontent.com/Flaton1/walkie-talkie-mod/1.20.4/gallery/walkie_talkie_craft_diamond.png)
+</details>
+<details>
+  <summary>Netherite Walkie-Talkie</summary>
+
 ![image](https://raw.githubusercontent.com/Flaton1/walkie-talkie-mod/1.20.4/gallery/walkie_talkie_craft_netherite.png)
+</details>
+<details>
+  <summary>Speaker</summary>
+
 ![image](https://raw.githubusercontent.com/Flaton1/walkie-talkie-mod/1.20.4/gallery/walkie_talkie_craft_speaker.png)
+</details>
+
 ## Credits
 ### Textures and models :
 + **4irwan**

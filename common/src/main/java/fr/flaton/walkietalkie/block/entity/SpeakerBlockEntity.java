@@ -155,6 +155,6 @@ public class SpeakerBlockEntity extends BlockEntity implements NamedScreenHandle
             return false;
         }
 
-        return Util.canBroadcastToReceiver(senderWorld, receiverWorld, senderPos, speaker.pos.toCenterPos(), range);
+        return Util.canBroadcastToReceiver(senderWorld, receiverWorld, senderPos, Vec3d.ofCenter(speaker.pos), range);
     }
 }

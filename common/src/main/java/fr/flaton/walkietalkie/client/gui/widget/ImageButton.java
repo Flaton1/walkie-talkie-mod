@@ -20,7 +20,7 @@ public class ImageButton extends PressableWidget {
     protected TooltipSupplier tooltipSupplier;
 
     public ImageButton(int x, int y, Identifier texture, PressAction onPress, @Nullable TooltipSupplier tooltipSupplier) {
-        super(x, y, 20, 20, Text.empty());
+        super(x, y, 20, 20, Text.of(null));
         mc = MinecraftClient.getInstance();
         this.texture = texture;
         this.onPress = onPress;

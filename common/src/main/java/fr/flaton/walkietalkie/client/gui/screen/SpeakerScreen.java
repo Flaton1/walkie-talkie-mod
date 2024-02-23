@@ -27,7 +27,7 @@ public class SpeakerScreen extends HandledScreen<SpeakerScreenHandler> {
     private int guiTop;
 
     private ToggleImageButton activateButton;
-    private Text canalText = Text.literal("");
+    private Text canalText = Text.of("");
 
     public SpeakerScreen(SpeakerScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -79,11 +79,11 @@ public class SpeakerScreen extends HandledScreen<SpeakerScreenHandler> {
         activateButton = new ToggleImageButton(guiLeft + 6, guiTop + ySize - 6 - 20, ACTIVATE_TEXTURE, button -> sendUpdateSpeaker(0, false), handler.isActivate());
         this.addDrawableChild(activateButton);
 
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 + 40, guiTop + 20, 20, 20, Text.literal(">"), button -> sendUpdateSpeaker(1, true)));
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 + 40, guiTop + 20, 20, 20, Text.of(">"), button -> sendUpdateSpeaker(1, true)));
 
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 - 40, guiTop + 20, 20, 20, Text.literal("<"), button -> sendUpdateSpeaker(1, false)));
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 - 40, guiTop + 20, 20, 20, Text.of("<"), button -> sendUpdateSpeaker(1, false)));
 
-        canalText = Text.literal(String.valueOf(handler.getCanal()));
+        canalText = Text.of(String.valueOf(handler.getCanal()));
     }
 
     private void sendUpdateSpeaker(int index, boolean status) {

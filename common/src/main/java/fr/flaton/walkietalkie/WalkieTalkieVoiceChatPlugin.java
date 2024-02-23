@@ -9,8 +9,6 @@ import fr.flaton.walkietalkie.config.ModConfig;
 import fr.flaton.walkietalkie.item.WalkieTalkieItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 

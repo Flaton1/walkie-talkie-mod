@@ -15,6 +15,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.*;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -79,7 +80,7 @@ public class SpeakerBlockEntity extends BlockEntity implements NamedScreenHandle
 
     @Override
     public Text getDisplayName() {
-        return Text.translatable("gui.walkietalkie.speaker.title");
+        return new TranslatableText("gui.walkietalkie.speaker.title");
     }
 
     @Override
@@ -113,7 +114,7 @@ public class SpeakerBlockEntity extends BlockEntity implements NamedScreenHandle
             }
 
             if (!ModConfig.crossDimensionsEnabled
-                    && !world.getRegistryKey().getRegistry().equals(speaker.getWorld().getRegistryKey().getRegistry())) {
+                    && !world.getRegistryKey().getValue().equals(speaker.getWorld().getRegistryKey().getValue())) {
                 continue;
             }
 

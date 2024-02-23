@@ -15,6 +15,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 public class WalkieTalkieScreen extends Screen {
@@ -38,7 +39,7 @@ public class WalkieTalkieScreen extends Screen {
     private static final Identifier ACTIVATE_TEXTURE = new Identifier(Constants.MOD_ID, "textures/icons/activate.png");
 
     public WalkieTalkieScreen(ItemStack stack) {
-        super(Text.translatable("gui.walkietalkie.title"));
+        super(new TranslatableText("gui.walkietalkie.title"));
         instance = this;
         this.stack = stack;
 
@@ -57,11 +58,11 @@ public class WalkieTalkieScreen extends Screen {
         activate = new ToggleImageButton(guiLeft + 28, guiTop + ySize - 26, ACTIVATE_TEXTURE, button -> sendUpdateWalkieTalkie(0, false), stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE));
         this.addDrawableChild(activate);
 
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 + 40, guiTop + 20, 20, 20, Text.literal(">"), button -> sendUpdateWalkieTalkie(1, true)));
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 + 40, guiTop + 20, 20, 20, Text.of(">"), button -> sendUpdateWalkieTalkie(1, true)));
 
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 - 40, guiTop + 20, 20, 20, Text.literal("<"), button -> sendUpdateWalkieTalkie(1, false)));
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 10 - 40, guiTop + 20, 20, 20, Text.of("<"), button -> sendUpdateWalkieTalkie(1, false)));
 
-        canal = Text.literal(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
+        canal = Text.of(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
 
     }
 
@@ -95,7 +96,7 @@ public class WalkieTalkieScreen extends Screen {
     public void updateButtons(ItemStack stack) {
         mute.setState(stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_MUTE));
         activate.setState(stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE));
-        canal = Text.literal(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
+        canal = Text.of(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
     }
 
     public static WalkieTalkieScreen getInstance() {

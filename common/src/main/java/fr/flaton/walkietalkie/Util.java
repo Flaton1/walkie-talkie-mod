@@ -29,8 +29,8 @@ public class Util {
     }
 
     public static boolean canBroadcastToReceiver(World senderWorld, World receiverWorld, Vec3d senderPos, Vec3d receiverPos, int range) {
-        double senderCoordinateScale = senderWorld.getDimension().coordinateScale();
-        double receiverCoordinateScale = receiverWorld.getDimension().coordinateScale();
+        double senderCoordinateScale = senderWorld.getDimension().getCoordinateScale();
+        double receiverCoordinateScale = receiverWorld.getDimension().getCoordinateScale();
 
         double appliedRange = ModConfig.applyDimensionScale ? range / Math.max(senderCoordinateScale, receiverCoordinateScale) : range;
 

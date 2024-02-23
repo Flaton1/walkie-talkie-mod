@@ -15,11 +15,15 @@ public class ModConfig {
 
     public static int maxCanal = 16;
     public static int speakerDistance = 32;
+    public static boolean voiceDuplication = false;
     public static int woodenWalkieTalkieRange = 128;
     public static int stoneWalkieTalkieRange = 256;
     public static int ironWalkieTalkieRange = 512;
-    public static int diamondWalkieTalkieRange = 1024;
-    public static int netheriteWalkieTalkieRange = 2048;
+    public static int goldenWalkieTalkieRange = 1024;
+    public static int diamondWalkieTalkieRange = 2048;
+    public static int netheriteWalkieTalkieRange = 4096;
+    public static boolean crossDimensionsEnabled = false;
+    public static boolean applyDimensionScale = true;
 
     public ModConfig(Path ConfigFolder) {
         this.CONFIG_FILE = new File(ConfigFolder.toString(), "WalkieTalkie.properties");
@@ -37,11 +41,15 @@ public class ModConfig {
                 // Set values from loaded config
                 maxCanal = Integer.parseInt(properties.getProperty("max-canal", "16"));
                 speakerDistance = Integer.parseInt(properties.getProperty("speaker-distance", "32"));
+                voiceDuplication = Boolean.parseBoolean(properties.getProperty("voice-duplication", "false"));
                 woodenWalkieTalkieRange = Integer.parseInt(properties.getProperty("wooden-walkie-talkie-range", "128"));
                 stoneWalkieTalkieRange = Integer.parseInt(properties.getProperty("stone-walkie-talkie-range", "256"));
                 ironWalkieTalkieRange = Integer.parseInt(properties.getProperty("iron-walkie-talkie-range", "512"));
-                diamondWalkieTalkieRange = Integer.parseInt(properties.getProperty("diamond-walkie-talkie-range", "1024"));
-                netheriteWalkieTalkieRange = Integer.parseInt(properties.getProperty("netherite-walkie-talkie-range", "2048"));
+                goldenWalkieTalkieRange = Integer.parseInt(properties.getProperty("golden-walkie-talkie-range", "1024"));
+                diamondWalkieTalkieRange = Integer.parseInt(properties.getProperty("diamond-walkie-talkie-range", "2048"));
+                netheriteWalkieTalkieRange = Integer.parseInt(properties.getProperty("netherite-walkie-talkie-range", "4096"));
+                crossDimensionsEnabled = Boolean.parseBoolean(properties.getProperty("cross-dimensions-enabled", "false"));
+                applyDimensionScale = Boolean.parseBoolean(properties.getProperty("apply-dimension-scale", "true"));
 
                 createConfig(mapConfig());
 
@@ -62,12 +70,17 @@ public class ModConfig {
         config.put("max-canal", String.valueOf(maxCanal));
         config.put("\n# Speaker setting", "");
         config.put("speaker-distance", String.valueOf(speakerDistance));
+        config.put("voice-duplication", String.valueOf(voiceDuplication));
         config.put("\n# Walkie-Talkie settings", "");
         config.put("wooden-walkie-talkie-range", String.valueOf(woodenWalkieTalkieRange));
         config.put("stone-walkie-talkie-range", String.valueOf(stoneWalkieTalkieRange));
         config.put("iron-walkie-talkie-range", String.valueOf(ironWalkieTalkieRange));
+        config.put("golden-walkie-talkie-range", String.valueOf(goldenWalkieTalkieRange));
         config.put("diamond-walkie-talkie-range", String.valueOf(diamondWalkieTalkieRange));
         config.put("netherite-walkie-talkie-range", String.valueOf(netheriteWalkieTalkieRange));
+        config.put("\n# Cross dimensions settings", "");
+        config.put("cross-dimensions-enabled", String.valueOf(crossDimensionsEnabled));
+        config.put("apply-dimension-scale", String.valueOf(applyDimensionScale));
 
         return config;
     }

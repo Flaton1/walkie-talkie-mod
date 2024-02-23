@@ -17,7 +17,7 @@ configurations {
 }
 
 dependencies {
-    forge "net.minecraftforge:forge:${rootProject.forge_version}"
+    forge "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
 
     modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
 
@@ -26,18 +26,6 @@ dependencies {
 
     // SimpleVoiceChat dependencies
     modRuntimeOnly "maven.modrinth:simple-voice-chat:forge-${voicechat_version}"
-}
-
-processResources {
-    inputs.property "version", project.version
-
-    filesMatching("META-INF/mods.toml") {
-        expand "version": project.version,
-        "min_minecraft_version": min_mc_version,
-        "voicechat_api_version": voicechat_api_version,
-        "min_architectury_version": min_architectury_version,
-        "min_forge_version": min_forge_version
-    }
 }
 
 shadowJar {
@@ -51,10 +39,10 @@ remapJar {
     inputFile.set shadowJar.archiveFile
     dependsOn shadowJar
 
-    if (minecraft_version == min_mc_version) {
+    if (minecraft_version == min_minecraft_version) {
         archiveAppendix.set("forge-${minecraft_version}")
     } else {
-        archiveAppendix.set("forge-${min_mc_version}-${minecraft_version}")
+        archiveAppendix.set("forge-${min_minecraft_version}-${minecraft_version}")
     }
 
     archiveClassifier.set(null)
@@ -86,10 +74,10 @@ curseforge {
         addGameVersion minecraft_version
         addGameVersion 'Forge'
         mainArtifact(remapJar) {
-            if (minecraft_version == min_mc_version) {
-                displayName = "[FORGE][${minecraft_version}] Walkie-Talkie ${mod_version}"
+            if (minecraft_version == min_minecraft_version) {
+                displayName = "[FORGE][${minecraft_version}] Walkie-Talkie ${version}"
             } else {
-                displayName = "[FORGE][${min_mc_version}-${minecraft_version}] Walkie-Talkie ${mod_version}"
+                displayName = "[FORGE][${min_minecraft_version}-${minecraft_version}] Walkie-Talkie ${version}"
             }
             relations {
                 requiredDependency 'simple-voice-chat'
@@ -106,11 +94,11 @@ tasks.modrinth.configure({
 modrinth {
     token = file("${rootDir}/modrinth_token.txt").exists() ? file("${rootDir}/modrinth_token.txt").text : ''
     projectId = "yaRitiLw"
-    versionNumber = "forge-${mod_version}"
-    if (minecraft_version == min_mc_version) {
-        versionName = "[FORGE][${minecraft_version}] Walkie-Talkie ${mod_version}"
+    versionNumber = "forge-${version}"
+    if (minecraft_version == min_minecraft_version) {
+        versionName = "[FORGE][${minecraft_version}] Walkie-Talkie ${version}"
     } else {
-        versionName = "[FORGE][${min_mc_version}-${minecraft_version}] Walkie-Talkie ${mod_version}"
+        versionName = "[FORGE][${min_minecraft_version}-${minecraft_version}] Walkie-Talkie ${version}"
     }
     uploadFile = remapJar
     versionType = release_type.toUpperCase()
@@ -123,17 +111,3 @@ modrinth {
     }
 }
 tasks.modrinth.dependsOn(build)
-
-publishing {
-    publications {
-        mavenForge(MavenPublication) {
-            artifactId = rootProject.archives_base_name + "-" + project.name
-            from components.java
-        }
-    }
-
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-    repositories {
-        // Add repositories to publish to here.
-    }
-}

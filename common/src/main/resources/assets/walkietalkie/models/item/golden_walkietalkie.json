@@ -1,0 +1,16 @@
+{
+	"overrides": [
+		{
+			"predicate": {
+				"walkietalkie:activate": 0
+			},
+			"model": "walkietalkie:item/golden_walkietalkie/off"
+		},
+		{
+			"predicate": {
+				"walkietalkie:activate": 1
+			},
+			"model": "walkietalkie:item/golden_walkietalkie/on"
+		}
+	]
+}

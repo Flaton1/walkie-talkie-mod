@@ -19,7 +19,7 @@ configurations {
 
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+    modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_version}"
     modApi "dev.architectury:architectury-fabric:${rootProject.architectury_version}"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
@@ -27,19 +27,7 @@ dependencies {
 
     // SimpleVoiceChat dependencies
     modRuntimeOnly "maven.modrinth:simple-voice-chat:fabric-${voicechat_version}"
-}
-
-processResources {
-    inputs.property "version", project.version
-
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version,
-        "min_minecraft_version": min_mc_version,
-        "voicechat_api_version": voicechat_api_version,
-        "min_architectury_version": min_architectury_version,
-        "fabric_loader_version": fabric_loader_version
-
-    }
+    //modRuntimeOnly("maven.modrinth:modmenu:8.0.1")
 }
 
 shadowJar {
@@ -51,10 +39,10 @@ remapJar {
     inputFile.set shadowJar.archiveFile
     dependsOn shadowJar
 
-    if (minecraft_version == min_mc_version) {
+    if (minecraft_version == min_minecraft_version) {
         archiveAppendix.set("fabric-${minecraft_version}")
     } else {
-        archiveAppendix.set("fabric-${min_mc_version}-${minecraft_version}")
+        archiveAppendix.set("fabric-${min_minecraft_version}-${minecraft_version}")
     }
 
     archiveClassifier.set(null)
@@ -74,10 +62,10 @@ curseforge {
         addGameVersion minecraft_version
         addGameVersion 'Fabric'
         mainArtifact(remapJar) {
-            if (minecraft_version == min_mc_version) {
-                displayName = "[FABRIC][${minecraft_version}] Walkie-Talkie ${mod_version}"
+            if (minecraft_version == min_minecraft_version) {
+                displayName = "[FABRIC][${minecraft_version}] Walkie-Talkie ${version}"
             } else {
-                displayName = "[FABRIC][${min_mc_version}-${minecraft_version}] Walkie-Talkie ${mod_version}"
+                displayName = "[FABRIC][${min_minecraft_version}-${minecraft_version}] Walkie-Talkie ${version}"
             }
             relations {
                 requiredDependency 'simple-voice-chat'
@@ -95,11 +83,11 @@ tasks.modrinth.configure({
 modrinth {
     token = file("${rootDir}/modrinth_token.txt").exists() ? file("${rootDir}/modrinth_token.txt").text : ''
     projectId = "yaRitiLw"
-    versionNumber = "fabric-${mod_version}"
-    if (minecraft_version == min_mc_version) {
-        versionName = "[FABRIC][${minecraft_version}] Walkie-Talkie ${mod_version}"
+    versionNumber = "fabric-${version}"
+    if (minecraft_version == min_minecraft_version) {
+        versionName = "[FABRIC][${minecraft_version}] Walkie-Talkie ${version}"
     } else {
-        versionName = "[FABRIC][${min_mc_version}-${minecraft_version}] Walkie-Talkie ${mod_version}"
+        versionName = "[FABRIC][${min_minecraft_version}-${minecraft_version}] Walkie-Talkie ${version}"
     }
     uploadFile = remapJar
     versionType = release_type.toUpperCase()
@@ -123,19 +111,5 @@ sourcesJar {
 components.java {
     withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
         skip()
-    }
-}
-
-publishing {
-    publications {
-        mavenFabric(MavenPublication) {
-            artifactId = rootProject.archives_base_name + "-" + project.name
-            from components.java
-        }
-    }
-
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-    repositories {
-        // Add repositories to publish to here.
     }
 }

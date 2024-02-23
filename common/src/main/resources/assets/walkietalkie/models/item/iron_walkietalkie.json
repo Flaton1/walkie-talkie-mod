@@ -1,6 +1,16 @@
 {
-	"parent": "walkietalkie:item/walkietalkie",
-	"textures": {
-		"2": "block/iron_block"
-	}
+	"overrides": [
+		{
+			"predicate": {
+				"walkietalkie:activate": 0
+			},
+			"model": "walkietalkie:item/iron_walkietalkie/off"
+		},
+		{
+			"predicate": {
+				"walkietalkie:activate": 1
+			},
+			"model": "walkietalkie:item/iron_walkietalkie/on"
+		}
+	]
 }

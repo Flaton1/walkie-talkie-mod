@@ -1,36 +1,36 @@
 package fr.flaton.walkietalkie;
 
-import de.maxhenkel.voicechat.api.ForgeVoicechatPlugin;
-import de.maxhenkel.voicechat.api.VoicechatConnection;
-import de.maxhenkel.voicechat.api.VoicechatPlugin;
-import de.maxhenkel.voicechat.api.VoicechatServerApi;
+import de.maxhenkel.voicechat.api.*;
 import de.maxhenkel.voicechat.api.events.EventRegistration;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import de.maxhenkel.voicechat.api.events.VoicechatServerStartedEvent;
-import de.maxhenkel.voicechat.api.opus.OpusDecoder;
-import de.maxhenkel.voicechat.api.opus.OpusEncoder;
 import fr.flaton.walkietalkie.block.entity.SpeakerBlockEntity;
+import fr.flaton.walkietalkie.config.ModConfig;
 import fr.flaton.walkietalkie.item.WalkieTalkieItem;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableTextContent;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.net.URL;
+import java.util.Enumeration;
 import java.util.Objects;
 
 @ForgeVoicechatPlugin
 public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
 
-    @Nullable
-    public static VoicechatServerApi voicechatServerApi;
+    public final static String SPEAKER_CATEGORY = "speakers";
 
-    public static OpusDecoder opusDecoder;
-    public static OpusEncoder opusEncoder;
+    @Nullable
+    public static VoicechatServerApi api;
 
     @Override
     public String getPluginId() {
-        return WalkieTalkie.MOD_ID;
+        return Constants.MOD_ID;
     }
 
     @Override
@@ -40,9 +40,42 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
     }
 
     private void onServerStarted(VoicechatServerStartedEvent event) {
-        voicechatServerApi = event.getVoicechat();
-        opusDecoder = voicechatServerApi.createDecoder();
-        opusEncoder = voicechatServerApi.createEncoder();
+        api = event.getVoicechat();
+
+        VolumeCategory speakers = api.volumeCategoryBuilder()
+                .setId(SPEAKER_CATEGORY)
+                .setName("Speakers")
+                .setDescription("The volume of all speakers")
+                .setIcon(getIcon("assets/walkietalkie/textures/block/speaker.png"))
+                .build();
+        api.registerVolumeCategory(speakers);
+    }
+
+    @Nullable
+    private int[][] getIcon(String path) {
+        try {
+            Enumeration<URL> resources = WalkieTalkieVoiceChatPlugin.class.getClassLoader().getResources(path);
+            while (resources.hasMoreElements()) {
+                BufferedImage bufferedImage = ImageIO.read(resources.nextElement().openStream());
+                if (bufferedImage.getWidth() != 16) {
+                    continue;
+                }
+                if (bufferedImage.getHeight() != 16) {
+                    continue;
+                }
+                int[][] image = new int[16][16];
+                for (int x = 0; x < bufferedImage.getWidth(); x++) {
+                    for (int y = 0; y < bufferedImage.getHeight(); y++) {
+                        image[x][y] = bufferedImage.getRGB(x, y);
+                    }
+                }
+                return image;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private void onMicPacket(MicrophonePacketEvent event) {
@@ -56,21 +89,24 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
             return;
         }
 
-        ItemStack senderStack = getWalkieTalkieActivate(senderPlayer);
+        ItemStack senderItemStack = Util.getWalkieTalkieInHand(senderPlayer);
 
-        if (getWalkieTalkieActivate(senderPlayer) == null) {
+        if (senderItemStack == null) {
             return;
         }
 
-        if (isWalkieTalkieMute(senderStack)) {
+        if (!isWalkieTalkieActivate(senderItemStack)) {
             return;
         }
 
-        int senderCanal = getCanal(senderStack);
-
-        for (SpeakerBlockEntity entity : SpeakerBlockEntity.getSpeakersActivateInRange(senderCanal, senderPlayer.getPos(), getRange(senderStack))) {
-            entity.playSound(voicechatServerApi, event.getPacket());
+        if (isWalkieTalkieMute(senderItemStack)) {
+            return;
         }
+
+        int senderCanal = getCanal(senderItemStack);
+
+        SpeakerBlockEntity.getSpeakersActivatedInRange(senderCanal, senderPlayer.getWorld(), senderPlayer.getPos(), getRange(senderItemStack))
+                .forEach(speakerBlockEntity -> speakerBlockEntity.playSound(api, event));
 
         for (PlayerEntity receiverPlayer : Objects.requireNonNull(senderPlayer.getServer()).getPlayerManager().getPlayerList()) {
 
@@ -78,7 +114,11 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
                 continue;
             }
 
-            ItemStack receiverStack = getWalkieTalkieActivate(receiverPlayer);
+            if (!ModConfig.crossDimensionsEnabled && !receiverPlayer.getWorld().getDimension().equals(senderPlayer.getWorld().getDimension())) {
+                continue;
+            }
+
+            ItemStack receiverStack = Util.getWalkieTalkieActivated(receiverPlayer);
 
             if (receiverStack == null) {
                 continue;
@@ -87,7 +127,7 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
             int receiverRange = getRange(receiverStack);
             int receiverCanal = getCanal(receiverStack);
 
-            if (!senderPlayer.getPos().isInRange(receiverPlayer.getPos(), receiverRange)) {
+            if (!canBroadcastToReceiver(senderPlayer, receiverPlayer, receiverRange)) {
                 continue;
             }
 
@@ -96,49 +136,16 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
             }
 
             // Send audio
-            VoicechatConnection connection = voicechatServerApi.getConnectionOf(receiverPlayer.getUuid());
+            VoicechatConnection connection = api.getConnectionOf(receiverPlayer.getUuid());
             if (connection == null) {
                 continue;
             }
 
-            voicechatServerApi.sendStaticSoundPacketTo(connection, event.getPacket().staticSoundPacketBuilder().build());
+            api.sendStaticSoundPacketTo(connection, event.getPacket().staticSoundPacketBuilder().build());
         }
     }
 
-    private ItemStack getWalkieTalkieActivate(PlayerEntity player) {
 
-        ItemStack itemStack = null;
-
-        int range = 0;
-
-        PlayerInventory playerInventory = player.getInventory();
-
-        ArrayList<ItemStack> inventory = new ArrayList<>();
-        inventory.addAll(playerInventory.main);
-        inventory.addAll(playerInventory.armor);
-        inventory.addAll(playerInventory.offHand);
-
-        for (ItemStack item : inventory) {
-
-            if (item.getItem() instanceof WalkieTalkieItem && item.hasNbt()) {
-
-                WalkieTalkieItem walkieTalkieItem = (WalkieTalkieItem) Objects.requireNonNull(item.getItem());
-
-                if (!Objects.requireNonNull(item.getNbt()).getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE)) {
-                    continue;
-                }
-
-                if (walkieTalkieItem.getRange() > range) {
-                    itemStack = item;
-                    range = walkieTalkieItem.getRange();
-                }
-            }
-            
-        }
-
-        return itemStack;
-
-    }
 
     private int getCanal(ItemStack stack) {
         return Objects.requireNonNull(stack.getNbt()).getInt(WalkieTalkieItem.NBT_KEY_CANAL);
@@ -149,7 +156,18 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
         return item.getRange();
     }
 
+    private boolean isWalkieTalkieActivate(ItemStack stack) {
+        return Objects.requireNonNull(stack.getNbt()).getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE);
+    }
+
     private boolean isWalkieTalkieMute(ItemStack stack) {
         return Objects.requireNonNull(stack.getNbt()).getBoolean(WalkieTalkieItem.NBT_KEY_MUTE);
+    }
+
+    private boolean canBroadcastToReceiver(PlayerEntity senderPlayer, PlayerEntity receiverPlayer, int receiverRange) {
+        World senderWorld = senderPlayer.getWorld();
+        World receiverWorld = receiverPlayer.getWorld();
+
+        return Util.canBroadcastToReceiver(senderWorld, receiverWorld, senderPlayer.getPos(), receiverPlayer.getPos(), receiverRange);
     }
 }

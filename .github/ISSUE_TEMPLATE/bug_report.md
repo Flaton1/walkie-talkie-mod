@@ -23,16 +23,20 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+**Logs**
+If necessary, add logs to explain your problem.
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+**Client (please complete the following information):**
+ - OS: [e.g. iOS]
+ - Simple Voice Chat Version [e.g. 2.4.24]
+ - Minecraft Version [e.g. 1.20.2]
+ - Mod Version [e.g. 1.2.2]
+
+**Server (please complete the following information, if you own the server):**
+ - OS: [e.g. iOS]
+ - Simple Voice Chat Version [e.g. 2.4.24]
+ - Minecraft Version [e.g. 1.20.2]
+ - Mod Version [e.g. 1.2.2]
 
 **Additional context**
 Add any other context about the problem here.

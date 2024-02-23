@@ -73,14 +73,14 @@ public class WalkieTalkieScreen extends Screen {
     }
 
     @Override
-    public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
-        super.renderBackground(context, mouseX, mouseY, delta);
+    public void renderBackground(DrawContext context) {
+        super.renderBackground(context);
         context.drawTexture(BG_TEXTURE, guiLeft, guiTop, 0, 0, xSize, ySize);
     }
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        this.renderBackground(context, mouseX, mouseY, delta);
+        this.renderBackground(context);
         super.render(context, mouseX, mouseY, delta);
         drawCenteredText(context, this.textRenderer, this.title, this.width / 2, guiTop + 7, 4210752);
         drawCenteredText(context, this.textRenderer, this.canal, this.width / 2, guiTop + 26, 4210752);

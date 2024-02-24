@@ -44,10 +44,6 @@ This mod adds two-way radios with different upgrades.
 + Add speaker block
 + Volume category for speakers
 + Keybind to activate/deactivate the walkie-talkie
-+ Configure maximum channel in mod config
-+ Configure cross dimensions behavior
-+ Configure walkie-talkie range
-+ Configure to suppress speaker voice duplication
 ## Upgrades
 + Wood: 128 block distance
 + Stone: 256 block distance
@@ -56,7 +52,7 @@ This mod adds two-way radios with different upgrades.
 + Diamond: 2048 block distance
 + Netherite: 4096 block distance
 ## Crafts:
-***Note: Any type of wood and wool is possible.***
+***Notes: Any type of wood and wool is allowed. 1.16.5 replaced lightning rod with iron bars***
 <details>
   <summary>Wooden Walkie-Talkie</summary>
 
@@ -93,6 +89,12 @@ This mod adds two-way radios with different upgrades.
 ![image](https://raw.githubusercontent.com/Flaton1/walkie-talkie-mod/1.20.4/gallery/walkie_talkie_craft_speaker.png)
 </details>
 
+## Config
++ Max Channel
++ Speaker Distance
++ Speaker Voice Duplication
++ Walkie-Talkie Range
++ Cross dimensional behavior
 ## Credits
 ### Textures and models :
 + **4irwan**

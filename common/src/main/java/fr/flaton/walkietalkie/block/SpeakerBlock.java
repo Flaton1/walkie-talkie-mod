@@ -1,6 +1,5 @@
 package fr.flaton.walkietalkie.block;
 
-
 import fr.flaton.walkietalkie.block.entity.SpeakerBlockEntity;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockRenderType;

@@ -1,7 +1,5 @@
 package fr.flaton.walkietalkie.block;
 
-
-import com.mojang.serialization.MapCodec;
 import fr.flaton.walkietalkie.block.entity.SpeakerBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -14,15 +12,8 @@ import net.minecraft.world.World;
 
 public class SpeakerBlock extends BlockWithEntity implements BlockEntityProvider {
 
-    public static final MapCodec<SpeakerBlock> CODEC = createCodec(SpeakerBlock::new);
-
     protected SpeakerBlock(Settings settings) {
         super(settings);
-    }
-
-    @Override
-    protected MapCodec<? extends BlockWithEntity> getCodec() {
-        return CODEC;
     }
 
     @Override

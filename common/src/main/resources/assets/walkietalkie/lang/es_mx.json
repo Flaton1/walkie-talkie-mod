@@ -1,0 +1,39 @@
+{
+  "item.walkietalkie.wooden_walkietalkie": "Walkie-Talkie de Madera",
+  "item.walkietalkie.stone_walkietalkie": "Walkie-Talkie de Piedra",
+  "item.walkietalkie.iron_walkietalkie": "Walkie-Talkie de Hierro",
+  "item.walkietalkie.golden_walkietalkie": "Walkie-Talkie de Oro",
+  "item.walkietalkie.diamond_walkietalkie": "Walkie-Talkie de Diamante",
+  "item.walkietalkie.netherite_walkietalkie": "Walkie-Talkie de Netherita",
+
+  "block.walkietalkie.speaker": "Speaker",
+
+  "itemGroup.walkietalkie.walkietalkie": "Walkie-Talkie",
+
+  "gui.walkietalkie.speaker.title": "Speaker",
+  "gui.walkietalkie.title": "Walkie-Talkie",
+
+  "advancement.walkietalkie.root.title": "Walkie Talkie",
+  "advancement.walkietalkie.root.description": "Descubre el poder de la comunicación con el walkie-talkie.",
+
+  "advancement.walkietalkie.wooden_walkietalkie.title": "Comunicación Básica",
+  "advancement.walkietalkie.wooden_walkietalkie.description": "Obtén un walkie-talkie de madera, que te permite comunicarte a corta distancia.",
+
+  "advancement.walkietalkie.stone_walkietalkie.title": "Comunicación Mejorada",
+  "advancement.walkietalkie.stone_walkietalkie.description": "Obtén un walkie-talkie de piedra, que permite una mayor distancia de comunicación.",
+
+  "advancement.walkietalkie.iron_walkietalkie.title": "Comunicación Avanzada",
+  "advancement.walkietalkie.iron_walkietalkie.description": "Obtén un walkie-talkie de hierro, aumentando aún más la distancia de comunicación.",
+
+  "advancement.walkietalkie.golden_walkietalkie.title": "Comunicación Real",
+  "advancement.walkietalkie.golden_walkietalkie.description": "Obtén un walkie-talkie de oro, para comunicarte con Midas.",
+
+  "advancement.walkietalkie.diamond_walkietalkie.title": "Comunicación de Élite",
+  "advancement.walkietalkie.diamond_walkietalkie.description": "Obtén un walkie-talkie de diamante de última generación, permitiendo una comunicación sin problemas a largas distancias.",
+
+  "advancement.walkietalkie.netherite_walkietalkie.title": "Comunicación Definitiva",
+  "advancement.walkietalkie.netherite_walkietalkie.description": "Obtén un walkie-talkie de Netherita de última tecnología, proporcionando un rango de comunicación sin precedentes.",
+
+  "category.walkietalkie.keys": "Walkie-Talkie",
+  "key.walkietalkie.activate": "Encender/Apagar"
+}

@@ -10,17 +10,15 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
-public class WalkieTalkieItem extends Item {
+import java.util.Objects;
 
-    public int getRange() {
-        return RANGE;
-    }
+public class WalkieTalkieItem extends Item {
 
     private final int RANGE;
 
-    public static final String NBT_KEY_CANAL = "walkietalkie.canal";
-    public static final String NBT_KEY_MUTE = "walkietalkie.mute";
-    public static final String NBT_KEY_ACTIVATE = "walkietalkie.activate";
+    private static final String NBT_KEY_CANAL = "walkietalkie.canal";
+    private static final String NBT_KEY_MUTE = "walkietalkie.mute";
+    private static final String NBT_KEY_ACTIVATE = "walkietalkie.activate";
 
 
     public WalkieTalkieItem(Settings settings, int range) {
@@ -60,6 +58,41 @@ public class WalkieTalkieItem extends Item {
             stack.setNbt(nbtCompound);
         }
 
+    }
+
+    public static int getCanal(ItemStack stack) {
+        return Objects.requireNonNull(stack.getNbt()).getInt(NBT_KEY_CANAL);
+    }
+
+    public static int getRange(ItemStack stack) {
+        if (stack.getItem() instanceof WalkieTalkieItem item) {
+            return item.getRange();
+        }
+        return -1;
+    }
+
+    private int getRange() {
+        return RANGE;
+    }
+
+    public static boolean isActivate(ItemStack stack) {
+        return Objects.requireNonNull(stack.getNbt()).getBoolean(NBT_KEY_ACTIVATE);
+    }
+
+    public static boolean isMute(ItemStack stack) {
+        return Objects.requireNonNull(stack.getNbt()).getBoolean(NBT_KEY_MUTE);
+    }
+
+    public static void setCanal(ItemStack stack, int canal) {
+        stack.getNbt().putInt(NBT_KEY_ACTIVATE, canal);
+    }
+
+    public static void setActivate(ItemStack stack, boolean activate) {
+        stack.getNbt().putBoolean(NBT_KEY_ACTIVATE, activate);
+    }
+
+    public static void setMute(ItemStack stack, boolean mute) {
+        stack.getNbt().putBoolean(NBT_KEY_ACTIVATE, mute);
     }
 
 

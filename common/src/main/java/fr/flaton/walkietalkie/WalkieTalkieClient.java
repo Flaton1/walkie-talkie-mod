@@ -16,7 +16,7 @@ public class WalkieTalkieClient {
             if (!stack.hasNbt()) {
                 return 0;
             }
-            return stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE) ? 1.0f : 0.0f;
+            return WalkieTalkieItem.isActivate(stack) ? 1.0f : 0.0f;
         }));
     }
 }

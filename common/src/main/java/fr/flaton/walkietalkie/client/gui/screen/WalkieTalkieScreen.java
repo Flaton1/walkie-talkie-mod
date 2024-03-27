@@ -50,10 +50,10 @@ public class WalkieTalkieScreen extends Screen {
         this.guiLeft = (this.width - xSize) / 2;
         this.guiTop = (this.height - ySize) / 2;
 
-        mute = new ToggleImageButton(guiLeft + 6, guiTop + ySize - 6 - 20, MUTE_TEXTURE, button -> sendUpdateWalkieTalkie(2, false), stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_MUTE));
+        mute = new ToggleImageButton(guiLeft + 6, guiTop + ySize - 6 - 20, MUTE_TEXTURE, button -> sendUpdateWalkieTalkie(2, false), WalkieTalkieItem.isMute(stack));
         this.addDrawableChild(mute);
 
-        activate = new ToggleImageButton(guiLeft + 28, guiTop + ySize - 26, ACTIVATE_TEXTURE, button -> sendUpdateWalkieTalkie(0, false), stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE));
+        activate = new ToggleImageButton(guiLeft + 28, guiTop + ySize - 26, ACTIVATE_TEXTURE, button -> sendUpdateWalkieTalkie(0, false), WalkieTalkieItem.isActivate(stack));
         this.addDrawableChild(activate);
 
 
@@ -61,7 +61,7 @@ public class WalkieTalkieScreen extends Screen {
 
         this.addDrawableChild(ButtonWidget.builder(Text.literal("<"), button -> sendUpdateWalkieTalkie(1, false)).dimensions(this.width / 2 - 10 - 40, guiTop + 20, 20, 20).build());
 
-        canal = Text.literal(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
+        canal = Text.literal(String.valueOf(WalkieTalkieItem.getCanal(stack)));
 
     }
 
@@ -91,9 +91,9 @@ public class WalkieTalkieScreen extends Screen {
     }
 
     public void updateButtons(ItemStack stack) {
-        mute.setState(stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_MUTE));
-        activate.setState(stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE));
-        canal = Text.literal(String.valueOf(stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL)));
+        mute.setState(WalkieTalkieItem.isMute(stack));
+        activate.setState(WalkieTalkieItem.isActivate(stack));
+        canal = Text.literal(String.valueOf(WalkieTalkieItem.getCanal(stack)));
     }
 
     public static WalkieTalkieScreen getInstance() {

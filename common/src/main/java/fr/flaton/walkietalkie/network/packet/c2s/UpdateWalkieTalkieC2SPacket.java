@@ -22,9 +22,9 @@ public class UpdateWalkieTalkieC2SPacket {
         int index = packetByteBuf.readInt();
         boolean status = packetByteBuf.readBoolean();
 
-        boolean activate = stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE);
-        boolean mute = stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_MUTE);
-        int canal = stack.getNbt().getInt(WalkieTalkieItem.NBT_KEY_CANAL);
+        boolean activate = WalkieTalkieItem.isActivate(stack);
+        boolean mute = WalkieTalkieItem.isMute(stack);
+        int canal = WalkieTalkieItem.getCanal(stack);
 
         switch (index) {
             case 0 -> activate = !activate;
@@ -38,9 +38,9 @@ public class UpdateWalkieTalkieC2SPacket {
             case 2 -> mute = !mute;
         }
 
-        stack.getNbt().putBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE, activate);
-        stack.getNbt().putBoolean(WalkieTalkieItem.NBT_KEY_MUTE, mute);
-        stack.getNbt().putInt(WalkieTalkieItem.NBT_KEY_CANAL, canal);
+        WalkieTalkieItem.setActivate(stack, activate);
+        WalkieTalkieItem.setMute(stack, mute);
+        WalkieTalkieItem.setCanal(stack, canal);
 
         PacketByteBuf packet = new PacketByteBuf(Unpooled.buffer());
         packet.writeItemStack(stack);

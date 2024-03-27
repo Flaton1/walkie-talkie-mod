@@ -1,7 +1,6 @@
 package fr.flaton.walkietalkie.block.entity;
 
 import de.maxhenkel.voicechat.api.Position;
-import de.maxhenkel.voicechat.api.VoicechatServerApi;
 import de.maxhenkel.voicechat.api.audiochannel.LocationalAudioChannel;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import fr.flaton.walkietalkie.Util;
@@ -131,11 +130,11 @@ public class SpeakerBlockEntity extends BlockEntity implements NamedScreenHandle
         return list;
     }
 
-    public void playSound(VoicechatServerApi api, MicrophonePacketEvent event) {
-        Position pos = api.createPosition(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ());
+    public void playSound(MicrophonePacketEvent event) {
+        Position pos = WalkieTalkieVoiceChatPlugin.voiceChatAPI.createPosition(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ());
 
         if (this.channel == null) {
-            this.channel = api.createLocationalAudioChannel(this.channelId, api.fromServerLevel(this.world), pos);
+            this.channel = WalkieTalkieVoiceChatPlugin.voiceChatAPI.createLocationalAudioChannel(this.channelId, WalkieTalkieVoiceChatPlugin.voiceChatAPI.fromServerLevel(this.world), pos);
             if (this.channel == null) {
                 return;
             }

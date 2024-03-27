@@ -72,11 +72,12 @@ public class Util {
         int range = 0;
 
         for (ItemStack stack : itemStacks) {
-            if (stack.getItem() instanceof WalkieTalkieItem walkieTalkieItem) {
-                if (walkieTalkieItem.getRange() > range) {
-                    itemStack = stack;
-                    range = walkieTalkieItem.getRange();
-                }
+
+            int rng = WalkieTalkieItem.getRange(stack);
+
+            if (rng > range) {
+                itemStack = stack;
+                range = rng;
             }
         }
 
@@ -85,7 +86,7 @@ public class Util {
 
     public static @Nullable ItemStack getWalkieTalkieActivated(PlayerEntity player) {
         ItemStack stack = getOptimalWalkieTalkieRange(player);
-        if (stack != null && stack.getNbt().getBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE)) {
+        if (stack != null && WalkieTalkieItem.isActivate(stack)) {
             return stack;
         }
         return null;

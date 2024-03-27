@@ -15,6 +15,7 @@ subprojects {
         mappings "net.fabricmc:yarn:${rootProject.yarn_mappings}:v2"
 
         implementation "de.maxhenkel.voicechat:voicechat-api:${rootProject.voicechat_api_version}"
+        implementation 'uk.me.berndporr:iirj:1.7'
     }
 
     processResources {

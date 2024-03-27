@@ -72,7 +72,8 @@ public class Util {
         int range = 0;
 
         for (ItemStack stack : itemStacks) {
-            if (stack.getItem() instanceof WalkieTalkieItem walkieTalkieItem) {
+            if (stack.getItem() instanceof WalkieTalkieItem) {
+                WalkieTalkieItem walkieTalkieItem = (WalkieTalkieItem) stack.getItem();
                 if (walkieTalkieItem.getRange() > range) {
                     itemStack = stack;
                     range = walkieTalkieItem.getRange();

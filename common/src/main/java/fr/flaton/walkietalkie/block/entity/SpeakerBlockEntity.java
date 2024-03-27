@@ -48,20 +48,23 @@ public class SpeakerBlockEntity extends BlockEntity implements NamedScreenHandle
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {
-                return switch (index) {
-                    case 0 -> SpeakerBlockEntity.this.activated ? 1 : 0;
-                    case 1 -> SpeakerBlockEntity.this.canal;
-                    default -> 0;
-                };
+                switch (index) {
+                    case 0:
+                        return SpeakerBlockEntity.this.activated ? 1 : 0;
+                    case 1:
+                        return SpeakerBlockEntity.this.canal;
+                    default:
+                        return 0;
+                }
             }
 
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> SpeakerBlockEntity.this.activated = value == 1;
-                    case 1 -> SpeakerBlockEntity.this.canal = value;
-                    default -> {
-                    }
+                    case 0:
+                        SpeakerBlockEntity.this.activated = value == 1;
+                    case 1:
+                        SpeakerBlockEntity.this.canal = value;
                 }
             }
 

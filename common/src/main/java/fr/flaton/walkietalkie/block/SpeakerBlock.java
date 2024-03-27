@@ -35,7 +35,8 @@ public class SpeakerBlock extends BlockWithEntity implements BlockEntityProvider
         if (world.isClient) {
             return ActionResult.SUCCESS;
         } else {
-            if (world.getBlockEntity(pos) instanceof SpeakerBlockEntity blockEntity) {
+            if (world.getBlockEntity(pos) instanceof SpeakerBlockEntity) {
+                SpeakerBlockEntity blockEntity = (SpeakerBlockEntity) world.getBlockEntity(pos);
                 player.openHandledScreen(blockEntity);
             }
         }

@@ -83,9 +83,11 @@ public class WalkieTalkieVoiceChatPlugin implements VoicechatPlugin {
             return;
         }
 
-        if (!(senderConnection.getPlayer().getPlayer() instanceof PlayerEntity senderPlayer)) {
+        if (!(senderConnection.getPlayer().getPlayer() instanceof PlayerEntity)) {
             return;
         }
+
+        PlayerEntity senderPlayer = (PlayerEntity) senderConnection.getPlayer().getPlayer();
 
         ItemStack senderItemStack = Util.getWalkieTalkieInHand(senderPlayer);
 

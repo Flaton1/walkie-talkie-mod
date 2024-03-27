@@ -27,15 +27,19 @@ public class UpdateWalkieTalkieC2SPacket {
         int canal = stack.getTag().getInt(WalkieTalkieItem.NBT_KEY_CANAL);
 
         switch (index) {
-            case 0 -> activate = !activate;
-            case 1 -> {
+            case 0:
+                activate = !activate;
+                break;
+            case 1:
                 if (status) {
                     canal = Util.loop(canal + 1, 1, ModConfig.maxCanal);
                 } else {
                     canal = Util.loop(canal - 1, 1, ModConfig.maxCanal);
                 }
-            }
-            case 2 -> mute = !mute;
+                break;
+            case 2:
+                mute = !mute;
+                break;
         }
 
         stack.getTag().putBoolean(WalkieTalkieItem.NBT_KEY_ACTIVATE, activate);

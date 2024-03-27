@@ -22,20 +22,23 @@ public class UpdateSpeakerC2SPacket {
             return;
         }
 
-        if (screenHandler instanceof SpeakerScreenHandler speakerScreenHandler) {
+        if (screenHandler instanceof SpeakerScreenHandler) {
+            SpeakerScreenHandler speakerScreenHandler = (SpeakerScreenHandler) screenHandler;
 
             boolean activate = speakerScreenHandler.isActivate();
             int canal = speakerScreenHandler.getCanal();
 
             switch (index) {
-                case 0 -> activate = !activate;
-                case 1 -> {
+                case 0:
+                    activate = !activate;
+                    break;
+                case 1:
                     if (status) {
                         canal = Util.loop(canal + 1, 1, ModConfig.maxCanal);
                     } else {
                         canal = Util.loop(canal - 1, 1, ModConfig.maxCanal);
                     }
-                }
+                    break;
             }
             speakerScreenHandler.setPropertyDelegate(activate , canal);
         }
